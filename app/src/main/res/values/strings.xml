@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">KClothing</string>
+    <string name="search">Search .... </string>
+    <string name="navigation_drawer_open">KClothing</string>
+    <string name="navigation_drawer_close">KClothing</string>
+    <string name="Rs">\u20B9</string>
+</resources>

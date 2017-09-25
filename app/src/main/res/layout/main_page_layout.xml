@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_gray"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/_2sdp"
+    android:paddingLeft="@dimen/_4sdp"
+    android:paddingRight="@dimen/_4sdp"
+    android:paddingTop="@dimen/_2sdp">
+
+    <ScrollView
+        android:id="@+id/mainScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/catergoriesReacyclerViewMainPage"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp"
+                    android:background="@android:color/white">
+
+                </android.support.v7.widget.RecyclerView>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:background="@android:color/white"
+                android:padding="@dimen/_5sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_200sdp">
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/imageSliderMainPage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </android.support.v4.view.ViewPager>
+
+                    <LinearLayout
+                        android:id="@+id/viewPagerCountDots"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="@dimen/_2sdp"
+                        android:gravity="center"
+                        android:orientation="horizontal" />
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:padding="@dimen/_5sdp">
+
+                <LinearLayout
+                    android:id="@+id/eventsViewMainPage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/trunkshows" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|top"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_5sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center|start"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:id="@+id/nextShowMainPage"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center|start"
+                                android:text="Next Show"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <TextView
+                                android:id="@+id/nextAllMainPage"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="All Shows"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_15sdp"
+                                android:src="@drawable/rightarrow" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/eventTitleMainPage"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_1sdp"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:textColor="@color/black" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:gravity="center|start"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_gravity="start|center"
+                                android:src="@drawable/shows" />
+
+                            <TextView
+                                android:id="@+id/eventDateTitleMainPage"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:gravity="center|start"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_15sdp"
+                                android:src="@drawable/location" />
+
+                            <TextView
+                                android:id="@+id/eventLocationTitleMainPage"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/newArrivalsMainLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:background="@color/background_gray"
+                android:gravity="center|start"
+                android:padding="@dimen/_3sdp"
+                android:text="NEW ARRIVALS"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/newArrivalsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_gray"></android.support.v7.widget.RecyclerView>
+            </android.support.v7.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/dressesMainLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:background="@color/background_gray"
+                android:gravity="center|start"
+                android:padding="@dimen/_3sdp"
+                android:text="DRESSES"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/dressesRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_gray"></android.support.v7.widget.RecyclerView>
+            </android.support.v7.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/tunicMainLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:background="@color/background_gray"
+                android:gravity="center|start"
+                android:padding="@dimen/_3sdp"
+                android:text="TUNIC"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/tunicRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_gray"></android.support.v7.widget.RecyclerView>
+            </android.support.v7.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/jacketsMainLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:background="@color/background_gray"
+                android:gravity="center|start"
+                android:padding="@dimen/_3sdp"
+                android:text="JACKETS"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/jacketsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_gray"></android.support.v7.widget.RecyclerView>
+            </android.support.v7.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/pantsMainLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:background="@color/background_gray"
+                android:gravity="center|start"
+                android:padding="@dimen/_3sdp"
+                android:text="PANTS"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/pantsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_gray"></android.support.v7.widget.RecyclerView>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

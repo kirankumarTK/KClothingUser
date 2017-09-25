@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/_2sdp"
+    android:layout_marginRight="@dimen/_2sdp"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/standardSize"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/radio_button_s"
+        android:gravity="center"
+        android:text="S" />
+</RelativeLayout>
