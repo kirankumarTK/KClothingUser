@@ -41,7 +41,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/black1"></View>
+            android:background="@color/light_grey"></View>
 
         <TextView
             android:id="@+id/sortPopular"
@@ -56,7 +56,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/black1"></View>
+            android:background="@color/light_grey"></View>
 
         <TextView
             android:id="@+id/sortLowToHigh"
@@ -71,7 +71,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/black1"></View>
+            android:background="@color/light_grey"></View>
 
         <TextView
             android:id="@+id/sortHighToLow"
@@ -86,7 +86,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/black1"></View>
+            android:background="@color/light_grey"></View>
 
         <TextView
             android:id="@+id/sortDate"
@@ -102,7 +102,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/black1"
+            android:background="@color/light_grey"
             android:visibility="gone"></View>
     </LinearLayout>
 </android.support.v7.widget.CardView>
