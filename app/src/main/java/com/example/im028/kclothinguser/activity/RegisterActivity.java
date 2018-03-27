@@ -11,7 +11,7 @@ import android.widget.ProgressBar;
 
 import com.example.im028.kclothinguser.Interface.VolleyResponseListerner;
 import com.example.im028.kclothinguser.R;
-import com.example.im028.kclothinguser.utlity.Constant.CommonMethod;
+import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.utlity.Constant.ConstantValues;
 import com.example.im028.kclothinguser.utlity.sharedPreferance.Session;
 import com.example.im028.kclothinguser.utlity.webservice.WebServices;

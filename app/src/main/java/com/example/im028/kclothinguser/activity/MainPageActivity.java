@@ -20,7 +20,7 @@ import com.example.im028.kclothinguser.common.CommonActivity;
 import com.example.im028.kclothinguser.model.DetailCatergories;
 import com.example.im028.kclothinguser.model.Events;
 import com.example.im028.kclothinguser.model.Slider_Categories;
-import com.example.im028.kclothinguser.utlity.Constant.CommonMethod;
+import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.utlity.Constant.ConstantValues;
 import com.example.im028.kclothinguser.utlity.webservice.WebServices;
 import com.google.gson.Gson;
@@ -95,7 +95,6 @@ public class MainPageActivity extends CommonActivity {
     private ArrayList<DetailCatergories> pantsCatergoriesArrayList = new ArrayList<>();
     private ArrayList<Events> eventsArrayList = new ArrayList<>();
     private Slider_Categories catergories;
-    private int imageSliderArray[] = {R.drawable.dresses, R.drawable.jackets, R.drawable.pants, R.drawable.tops};
     int currentPage = 0;
     Timer timer;
     private ImageView[] dots;
@@ -265,7 +264,7 @@ public class MainPageActivity extends CommonActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        imageSlider.setAdapter(new ImageSliderAdapter(getApplicationContext(), slider));
+             imageSlider.setAdapter(new ImageSliderAdapter(getApplicationContext(), slider));
         dotsCount = slider.size();
         dots = new ImageView[dotsCount];
 

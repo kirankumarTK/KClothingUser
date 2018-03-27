@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.example.im028.kclothinguser.Interface.OnLoadMoreListener;
 import com.example.im028.kclothinguser.R;
-import com.example.im028.kclothinguser.activity.TrunckShowsActvity;
 import com.example.im028.kclothinguser.model.Events;
 
 import java.util.ArrayList;

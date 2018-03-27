@@ -1,4 +1,4 @@
-package com.example.im028.kclothinguser.utlity.Constant;
+package com.example.im028.kclothinguser.common;
 
 import android.content.Context;
 import android.content.Intent;

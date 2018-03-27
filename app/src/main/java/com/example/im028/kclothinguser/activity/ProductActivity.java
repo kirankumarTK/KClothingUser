@@ -17,7 +17,7 @@ import com.example.im028.kclothinguser.adapter.RecyclerViewAdapter.ProductsRecyc
 import com.example.im028.kclothinguser.common.CommonActivity;
 import com.example.im028.kclothinguser.dialog.SortActivity;
 import com.example.im028.kclothinguser.model.DetailCatergories;
-import com.example.im028.kclothinguser.utlity.Constant.CommonMethod;
+import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.utlity.Constant.ConstantValues;
 import com.example.im028.kclothinguser.utlity.webservice.WebServices;
 import com.google.gson.Gson;

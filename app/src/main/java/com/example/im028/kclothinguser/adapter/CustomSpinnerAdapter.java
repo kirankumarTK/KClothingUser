@@ -44,22 +44,23 @@ public class CustomSpinnerAdapter extends BaseAdapter implements SpinnerAdapter 
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         TextView txt = new TextView(activity);
-        txt.setPadding(16, 16, 16, 16);
+        txt.setPadding(5, 5, 5, 5);
         txt.setTextSize(18);
         txt.setGravity(Gravity.CENTER_VERTICAL);
-        String t= String.valueOf(asr.get(position));
+        String t = String.valueOf(asr.get(position));
         txt.setText(t);
         txt.setTextColor(Color.parseColor("#000000"));
         return txt;
     }
 
+    @Override
     public View getView(int i, View view, ViewGroup viewgroup) {
         TextView txt = new TextView(activity);
         txt.setGravity(Gravity.CENTER);
-        txt.setPadding(16, 16, 16, 16);
+        txt.setPadding(5, 5, 5, 5);
         txt.setTextSize(16);
         txt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.drop_down, 0);
-        String t= String.valueOf(asr.get(i));
+        String t = String.valueOf(asr.get(i));
         txt.setText(t);
         txt.setTextColor(Color.parseColor("#000000"));
         return txt;

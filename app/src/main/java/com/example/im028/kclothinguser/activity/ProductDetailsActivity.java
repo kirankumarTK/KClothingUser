@@ -22,7 +22,7 @@ import com.example.im028.kclothinguser.model.Custom_Size;
 import com.example.im028.kclothinguser.model.Gallery;
 import com.example.im028.kclothinguser.model.ProductDetails;
 import com.example.im028.kclothinguser.model.StandardSize;
-import com.example.im028.kclothinguser.utlity.Constant.CommonMethod;
+import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.utlity.Constant.ConstantValues;
 import com.example.im028.kclothinguser.utlity.webservice.WebServices;
 import com.google.gson.Gson;

@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.im028.kclothinguser.R;
-import com.example.im028.kclothinguser.utlity.Constant.CommonMethod;
+import com.example.im028.kclothinguser.common.CommonMethod;
 
 public class SplashActivity extends AppCompatActivity {
 

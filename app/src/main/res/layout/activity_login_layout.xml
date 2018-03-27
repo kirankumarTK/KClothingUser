@@ -18,51 +18,65 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/_15sdp"
-        android:layout_marginRight="@dimen/_15sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_7sdp"
         android:gravity="center_vertical"
         android:orientation="vertical">
 
-        <android.support.design.widget.TextInputLayout
-            style="@style/textinputtext"
-            android:layout_marginTop="@dimen/_5sdp">
+        <!--<android.support.design.widget.TextInputLayout-->
+        <!--style="@style/textinputtext"-->
+        <!--android:layout_marginTop="@dimen/_5sdp">-->
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/userNameEditextLogin"
-                style="@style/editTextStyle"
-                android:hint="User Name"
-                android:singleLine="true"
-                android:text="rahulE@gmail.com" />
-        </android.support.design.widget.TextInputLayout>
+        <!--<android.support.design.widget.TextInputEditText-->
+        <!--android:id="@+id/userNameEditextLogin"-->
+        <!--style="@style/editTextStyle"-->
+        <!--android:hint="User Name"-->
+        <!--android:singleLine="true"-->
+        <!--android:text="rahulE@gmail.com" />-->
+        <!--</android.support.design.widget.TextInputLayout>-->
 
-        <android.support.design.widget.TextInputLayout
-            style="@style/textinputtext"
-            android:layout_marginTop="@dimen/_5sdp">
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/passwordEditextLogin"
-                style="@style/editTextStyle"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:singleLine="true"
-                android:text="12345678-" />
-        </android.support.design.widget.TextInputLayout>
+        <!--<android.support.design.widget.TextInputLayout-->
+        <!--style="@style/textinputtext"-->
+        <!--android:layout_marginTop="@dimen/_5sdp">-->
 
-        <LinearLayout
+        <!--<android.support.design.widget.TextInputEditText-->
+        <!--android:id="@+id/passwordEditextLogin"-->
+        <!--style="@style/editTextStyle"-->
+        <!--android:hint="Password"-->
+        <!--android:inputType="textPassword"-->
+        <!--android:singleLine="true"-->
+        <!--android:text="12345678-" />-->
+        <!--</android.support.design.widget.TextInputLayout>-->
+
+        <EditText
+            style="@style/editTextStyle"
+            android:hint="Email Address" />
+
+        <EditText
+            style="@style/editTextStyle"
+            android:hint="Password"
+            android:inputType="textPassword" />
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="@dimen/_20sdp"-->
+        <!--android:gravity="center">-->
+
+        <Button
+            android:id="@+id/loginButtonLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_20sdp"
-            android:gravity="center">
-
-            <Button
-                android:id="@+id/loginButtonLogin"
-                android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:background="@color/colorAccent"
-                android:text="LOGIN"
-                android:textColor="@android:color/white" />
-        </LinearLayout>
+            android:background="@color/button_background"
+            android:text="LOGIN"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
+        <!--</LinearLayout>-->
 
         <TextView
             android:id="@+id/forgotPasswordTextview"
@@ -70,24 +84,111 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp"
             android:gravity="center"
-            android:padding="@dimen/_5sdp"
             android:text="Forgot password ?"
+            android:textColor="@color/light_grey"
             android:textSize="@dimen/_13sdp"
             android:textStyle="bold" />
 
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/newUserTextview"
+    <LinearLayout
+        android:id="@+id/bottomLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center"
-        android:padding="@dimen/_5sdp"
-        android:text="New User ?"
-        android:textSize="@dimen/_13sdp"
-        android:textStyle="bold" />
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/newUserTextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:text="New to Kaveri?"
+            android:textSize="@dimen/_13sdp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/signUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:text="Signup"
+            android:textColor="@color/light_red"
+            android:textSize="@dimen/_13sdp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:text="now"
+            android:textSize="@dimen/_13sdp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottomLayout"
+        android:layout_margin="@dimen/_20sdp"
+        android:orientation="horizontal"
+
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:layout_weight="1"
+            android:background="@drawable/rect_background"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:padding="@dimen/_10sdp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Facebook" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_weight="1"
+            android:background="@drawable/rect_background"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:padding="@dimen/_10sdp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gmail" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
     <ProgressBar
         android:id="@+id/progressBarLogin"

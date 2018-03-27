@@ -14,7 +14,6 @@ import android.widget.ProgressBar;
 
 import com.example.im028.kclothinguser.R;
 import com.example.im028.kclothinguser.dialog.SearchActivity;
-import com.example.im028.kclothinguser.utlity.Constant.CommonMethod;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 

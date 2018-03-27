@@ -3,7 +3,6 @@ package com.example.im028.kclothinguser.activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ProgressBar;
 
 import com.example.im028.kclothinguser.Interface.OnLoadMoreListener;
 import com.example.im028.kclothinguser.Interface.VolleyResponseListerner;
@@ -11,7 +10,7 @@ import com.example.im028.kclothinguser.R;
 import com.example.im028.kclothinguser.adapter.RecyclerViewAdapter.TrunckShowsRecyclerViewAdapter;
 import com.example.im028.kclothinguser.common.CommonActivity;
 import com.example.im028.kclothinguser.model.Events;
-import com.example.im028.kclothinguser.utlity.Constant.CommonMethod;
+import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.utlity.Constant.ConstantValues;
 import com.example.im028.kclothinguser.utlity.webservice.WebServices;
 import com.google.gson.Gson;

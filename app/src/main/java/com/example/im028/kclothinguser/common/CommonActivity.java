@@ -23,7 +23,6 @@ import com.example.im028.kclothinguser.activity.ProductActivity;
 import com.example.im028.kclothinguser.activity.TrunckShowsActvity;
 import com.example.im028.kclothinguser.adapter.NavigationAdapter.NavigationDrawerBaseAdapter;
 import com.example.im028.kclothinguser.dialog.SearchActivity;
-import com.example.im028.kclothinguser.utlity.Constant.CommonMethod;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 

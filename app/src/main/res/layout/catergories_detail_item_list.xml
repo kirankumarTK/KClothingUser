@@ -28,6 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_2sdp"
+                android:lineSpacingMultiplier="0.8"
                 android:ems="1"
                 android:maxLines="2"
                 android:text=""
