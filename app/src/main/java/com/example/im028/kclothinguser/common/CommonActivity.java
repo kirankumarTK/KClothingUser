@@ -107,7 +107,7 @@ public class CommonActivity extends AppCompatActivity {
 
 
                         default:
-                            CommonMethod.showSnackbar(listView, "Coming Soon");
+                            CommonMethod.showSnackbar(listView, "Coming Soon",CommonActivity.this);
                     }
                     if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                         drawerLayout.closeDrawer(GravityCompat.START);

@@ -99,4 +99,8 @@ public class WebServices {
         volleyClass.volleyPostData(url, jsonObject, listerner);
     }
 
+    public void getHomePage(String url, final VolleyResponseListerner listerner) {
+        volleyClass.volleyPostData(url, new JSONObject(), listerner);
+    }
+
 }

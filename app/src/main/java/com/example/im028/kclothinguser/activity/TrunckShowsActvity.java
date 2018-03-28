@@ -9,8 +9,8 @@ import com.example.im028.kclothinguser.Interface.VolleyResponseListerner;
 import com.example.im028.kclothinguser.R;
 import com.example.im028.kclothinguser.adapter.RecyclerViewAdapter.TrunckShowsRecyclerViewAdapter;
 import com.example.im028.kclothinguser.common.CommonActivity;
-import com.example.im028.kclothinguser.model.Events;
 import com.example.im028.kclothinguser.common.CommonMethod;
+import com.example.im028.kclothinguser.model.Events;
 import com.example.im028.kclothinguser.utlity.Constant.ConstantValues;
 import com.example.im028.kclothinguser.utlity.webservice.WebServices;
 import com.google.gson.Gson;
@@ -73,14 +73,14 @@ public class TrunckShowsActvity extends CommonActivity {
                         eventsArrayList.add(new Gson().fromJson(response.getJSONArray("data").getJSONObject(i).toString(), Events.class));
                     trunckShowsRecyclerViewAdapter.notifyDataSetChanged();
                 } else {
-                    CommonMethod.showSnackbar(trunckShowsRecyclerView, response.getString("resultmessage"));
+                    CommonMethod.showSnackbar(trunckShowsRecyclerView, response.getString("resultmessage"), TrunckShowsActvity.this);
                 }
             }
 
             @Override
             public void onError(String message, String title) {
                 CommonMethod.showLogError(TAG, message.toString());
-                CommonMethod.showSnackbar(trunckShowsRecyclerView, message.toString());
+                CommonMethod.showSnackbar(trunckShowsRecyclerView, message.toString(), TrunckShowsActvity.this);
 
             }
         });

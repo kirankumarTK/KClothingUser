@@ -106,7 +106,7 @@ public class ProductActivity extends CommonActivity {
                                 productsArrayList.add(new Gson().fromJson(response.getJSONArray("data").getJSONObject(i).toString(), DetailCatergories.class));
                             productsRecyclerViewAdapter.notifyDataSetChanged();
                         } else {
-                            CommonMethod.showSnackbar(productRecyclerView, response.getString("resultmessage"));
+                            CommonMethod.showSnackbar(productRecyclerView, response.getString("resultmessage"),ProductActivity.this);
                             productProgress.setVisibility(View.GONE);
                             productRecyclerView.setVisibility(View.VISIBLE);
                         }
@@ -115,7 +115,7 @@ public class ProductActivity extends CommonActivity {
                     @Override
                     public void onError(String message, String title) {
                         CommonMethod.showLogError(TAG, message.toString());
-                        CommonMethod.showSnackbar(productProgress, message.toString());
+                        CommonMethod.showSnackbar(productProgress, message.toString(),ProductActivity.this);
                         productProgress.setVisibility(View.GONE);
                         productRecyclerView.setVisibility(View.VISIBLE);
                     }

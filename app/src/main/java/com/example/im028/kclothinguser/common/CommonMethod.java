@@ -1,12 +1,16 @@
 package com.example.im028.kclothinguser.common;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -16,10 +20,49 @@ import java.util.ArrayList;
 
 public class CommonMethod {
 
-    public static void showSnackbar(View view, String message) {
-        Snackbar snackbar = Snackbar
-                .make(view, message, Snackbar.LENGTH_LONG);
-        snackbar.show();
+
+    public static void clearAllPreviousActivity(Context context, Class<?> c) {
+        Intent i = new Intent(context, c);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(i);
+    }
+
+    public static void changeActivity(Context context, Class<?> c) {
+        Intent i = new Intent(context, c);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(i);
+    }
+
+
+    public static void showSnackbar(View view, String message, Activity activity) {
+        try {
+            hideKeyboard(activity);
+            Snackbar snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG);
+            snackbar.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void showSnackbar(View view, JSONObject message, Activity activity) {
+        try {
+            hideKeyboard(activity);
+            Snackbar snackbar = Snackbar.make(view, message.optString("resultmessage"), Snackbar.LENGTH_LONG);
+            snackbar.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        View view = activity.getCurrentFocus();
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     public static String getText(TextInputEditText view) {
@@ -45,12 +88,6 @@ public class CommonMethod {
         Log.e(TAG, message);
     }
 
-    public static void changeActivity(Context context, Class<?> c) {
-        Intent i = new Intent(context, c);
-        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        context.startActivity(i);
-    }
 
     public static void changeActivityWithParamsObject(Context context, Class<?> c, ArrayList arrayList) {
         Intent i = new Intent(context, c);

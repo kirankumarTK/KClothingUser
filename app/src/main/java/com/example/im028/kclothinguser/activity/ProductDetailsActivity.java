@@ -143,7 +143,7 @@ public class ProductDetailsActivity extends BackCommonActivity {
                         }
                     }
                 } else
-                    CommonMethod.showSnackbar(standardSizeRecylerView, response.getString("resultmessage"));
+                    CommonMethod.showSnackbar(standardSizeRecylerView, response.getString("resultmessage"),ProductDetailsActivity.this);
 
             }
 
@@ -151,7 +151,7 @@ public class ProductDetailsActivity extends BackCommonActivity {
             public void onError(String message, String title) {
                 hideCommonProgressBar();
                 CommonMethod.showLogError(TAG, message.toString());
-                CommonMethod.showSnackbar(standardSizeRecylerView, message.toString());
+                CommonMethod.showSnackbar(standardSizeRecylerView, message.toString(),ProductDetailsActivity.this);
             }
         });
 

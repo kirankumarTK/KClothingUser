@@ -17,10 +17,10 @@ import com.example.im028.kclothinguser.adapter.RecyclerViewAdapter.CatergoriesRe
 import com.example.im028.kclothinguser.adapter.RecyclerViewAdapter.DetailCatergoriesRecyclerViewAdapter;
 import com.example.im028.kclothinguser.adapter.ViewPageAdapter.ImageSliderAdapter;
 import com.example.im028.kclothinguser.common.CommonActivity;
+import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.model.DetailCatergories;
 import com.example.im028.kclothinguser.model.Events;
 import com.example.im028.kclothinguser.model.Slider_Categories;
-import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.utlity.Constant.ConstantValues;
 import com.example.im028.kclothinguser.utlity.webservice.WebServices;
 import com.google.gson.Gson;
@@ -130,7 +130,7 @@ public class MainPageActivity extends CommonActivity {
                 } else {
                     hideCommonProgressBar();
                     mainScrollView.setVisibility(View.VISIBLE);
-                    CommonMethod.showSnackbar(mainScrollView, response.getString("resultmessage"));
+                    CommonMethod.showSnackbar(mainScrollView, response.getString("resultmessage"), MainPageActivity.this);
                 }
             }
 
@@ -139,7 +139,7 @@ public class MainPageActivity extends CommonActivity {
                 hideCommonProgressBar();
                 mainScrollView.setVisibility(View.VISIBLE);
                 CommonMethod.showLogError(TAG, message.toString());
-                CommonMethod.showSnackbar(mainScrollView, message.toString());
+                CommonMethod.showSnackbar(mainScrollView, message.toString(), MainPageActivity.this);
 
             }
         });
@@ -228,7 +228,7 @@ public class MainPageActivity extends CommonActivity {
                     CommonMethod.setTextTexView(eventDateTitle, response.getJSONArray("data").getJSONObject(0).getString("event_startdate"));
                     CommonMethod.setTextTexView(eventLocationTitle, response.getJSONArray("data").getJSONObject(0).getString("event_location"));
                 } else {
-                    CommonMethod.showSnackbar(mainScrollView, response.getString("resultmessage"));
+                    CommonMethod.showSnackbar(mainScrollView, response.getString("resultmessage"), MainPageActivity.this);
                 }
             }
 
@@ -237,7 +237,7 @@ public class MainPageActivity extends CommonActivity {
                 hideCommonProgressBar();
                 mainScrollView.setVisibility(View.VISIBLE);
                 CommonMethod.showLogError(TAG, message.toString());
-                CommonMethod.showSnackbar(mainScrollView, message.toString());
+                CommonMethod.showSnackbar(mainScrollView, message.toString(), MainPageActivity.this);
 
             }
         });
@@ -264,7 +264,7 @@ public class MainPageActivity extends CommonActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-             imageSlider.setAdapter(new ImageSliderAdapter(getApplicationContext(), slider));
+        imageSlider.setAdapter(new ImageSliderAdapter(getApplicationContext(), slider));
         dotsCount = slider.size();
         dots = new ImageView[dotsCount];
 

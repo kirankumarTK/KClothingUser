@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.example.im028.kclothinguser.R;
 import com.example.im028.kclothinguser.activity.ProductActivity;
-import com.example.im028.kclothinguser.model.Slider_Categories;
 import com.example.im028.kclothinguser.common.CommonMethod;
+import com.example.im028.kclothinguser.model.Slider_Categories;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

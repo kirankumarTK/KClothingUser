@@ -13,6 +13,7 @@ public class ConstantValues {
     public static final String PRODUCTS = BASE_URL + "users/product_list/";
     public static final String PRODUCTS_DETAILS = BASE_URL + "users/get_product_details_api/";
     public static final String GET_CATEGORY = BASE_URL + "users/displaysliderandcategory";
+    public static final String HOME = BASE_URL + "users/homepage";
 
-    public static final String custom_size="custom_size";
+    public static final String custom_size = "custom_size";
 }

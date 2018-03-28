@@ -59,9 +59,9 @@ public class RegisterActivity extends AppCompatActivity {
             if (CommonMethod.checkEmpty(password))
                 callRegiterApi();
             else
-                CommonMethod.showSnackbar(firstName, "Enter Password");
+                CommonMethod.showSnackbar(firstName, "Enter Password",RegisterActivity.this);
         } else
-            CommonMethod.showSnackbar(firstName, "Enter Email ID");
+            CommonMethod.showSnackbar(firstName, "Enter Email ID",RegisterActivity.this);
 //            } else
 //                CommonMethod.showSnackbar(firstName, "Enter Last Name");
 //        } else
@@ -86,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     response.getJSONObject("data").getString("last_name"));
                             finish();
                         } else {
-                            CommonMethod.showSnackbar(firstName, response.getString("resultmessage"));
+                            CommonMethod.showSnackbar(firstName, response.getString("resultmessage"),RegisterActivity.this);
                         }
                     }
 
@@ -94,8 +94,8 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onError(String message, String title) {
                         progressBarRegister.setVisibility(View.VISIBLE);
                         register.setEnabled(false);
-                        CommonMethod.showLogError(TAG, message.toString());
-                        CommonMethod.showSnackbar(firstName, message.toString());
+                        CommonMethod.showLogError(TAG, message);
+                        CommonMethod.showSnackbar(firstName, message,RegisterActivity.this);
                     }
                 });
     }
