@@ -45,11 +45,9 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
     ImageView catergoryImageView;
     @BindView(R.id.productListRecyclerView)
     RecyclerView productListRecyclerView;
-    @BindView(R.id.mainScrollView)
-    NestedScrollView mainScrollView;
     ArrayList<Slider_Categories> categoryLists;
     ArrayList<DetailCatergories> productList = new ArrayList<>();
-    private int limit = 10;
+    private int limit = 20;
     private int paged = 1;
     private DetailCatergoriesRecyclerViewAdapter detailCatergoriesRecyclerViewAdapter;
     Gson gson = new Gson();
@@ -66,6 +64,8 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
         productListRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         detailCatergoriesRecyclerViewAdapter = new DetailCatergoriesRecyclerViewAdapter(this, productList, this);
         productListRecyclerView.setAdapter(detailCatergoriesRecyclerViewAdapter);
+        productListRecyclerView.setNestedScrollingEnabled(false);
+        catergoryRecyclerViewMainPage.setNestedScrollingEnabled(false);
         setContent(true);
 
     }
@@ -75,7 +75,7 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
             @Override
             public void onResponse(JSONObject response) throws JSONException {
                 if (response.getString("resultcode").equalsIgnoreCase("200")) {
-                    loadMoreStatus = response.getJSONObject("resultmessage").getString("productstatus");
+//                    loadMoreStatus = response.getJSONObject("resultmessage").getString("productstatus");
                     hideCommonProgressBar();
                     categoryLists = new ArrayList<>();
 
@@ -94,22 +94,20 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
                     for (int i = 0; i < productArray.length(); i++) {
                         productList.add(gson.fromJson(productArray.getJSONObject(i).toString(), DetailCatergories.class));
                     }
-                    detailCatergoriesRecyclerViewAdapter.notifyDataSetChanged();
+                    detailCatergoriesRecyclerViewAdapter.notifyItemInserted(productList.size()-1);
                     loadMoreProgress.setVisibility(View.GONE);
 
                 } else {
                     hideCommonProgressBar();
-                    mainScrollView.setVisibility(View.VISIBLE);
-                    CommonMethod.showSnackbar(mainScrollView, response.getString("resultmessage"), ProductCategoryActivity.this);
+                    CommonMethod.showSnackbar(catergoryImageView, response.getString("resultmessage"), ProductCategoryActivity.this);
                 }
             }
 
             @Override
             public void onError(String message, String title) {
                 hideCommonProgressBar();
-                mainScrollView.setVisibility(View.VISIBLE);
                 CommonMethod.showLogError(TAG, message.toString());
-                CommonMethod.showSnackbar(mainScrollView, message.toString(), ProductCategoryActivity.this);
+                CommonMethod.showSnackbar(catergoryImageView, message.toString(), ProductCategoryActivity.this);
             }
         });
     }
@@ -132,10 +130,10 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
 
     @Override
     public void onLoadMore() {
-        if (!loadMoreStatus.equalsIgnoreCase("over")) {
+//        if (!loadMoreStatus.equalsIgnoreCase("over")) {
             setContent(false);
-            loadMoreProgress.setVisibility(View.VISIBLE);
+//            loadMoreProgress.setVisibility(View.VISIBLE);
             paged++;
-        }
+//        }
     }
 }

@@ -10,7 +10,6 @@
     android:paddingTop="@dimen/_2sdp">
 
     <android.support.v4.widget.NestedScrollView
-        android:id="@+id/mainScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -28,6 +27,7 @@
                 android:id="@+id/catergoryRecyclerViewMainPage"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_100sdp"
+                android:nestedScrollingEnabled="false"
                 android:layout_marginBottom="@dimen/_5sdp">
 
             </android.support.v7.widget.RecyclerView>

@@ -48,7 +48,7 @@ public class DetailCatergoriesRecyclerViewAdapter extends RecyclerView.Adapter<D
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, final int position) {
-        if (detailCatergories.size()<(position+10))
+        if (detailCatergories.size()<(position+15))
             onLoadMoreListener.onLoadMore();
         try {
             Picasso.with(context)

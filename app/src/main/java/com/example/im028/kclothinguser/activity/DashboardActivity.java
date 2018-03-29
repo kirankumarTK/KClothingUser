@@ -54,6 +54,7 @@ public class DashboardActivity extends CommonActivity {
         ButterKnife.bind(this);
         callWebservices();
         recylerView.setLayoutManager(new LinearLayoutManager(this));
+        recylerView.setNestedScrollingEnabled(false);
     }
 
     private void callWebservices() {
