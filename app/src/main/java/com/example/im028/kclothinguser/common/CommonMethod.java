@@ -20,20 +20,6 @@ import java.util.ArrayList;
 
 public class CommonMethod {
 
-
-    public static void clearAllPreviousActivity(Context context, Class<?> c) {
-        Intent i = new Intent(context, c);
-        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(i);
-    }
-
-    public static void changeActivity(Context context, Class<?> c) {
-        Intent i = new Intent(context, c);
-        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(i);
-    }
-
-
     public static void showSnackbar(View view, String message, Activity activity) {
         try {
             hideKeyboard(activity);
@@ -88,6 +74,12 @@ public class CommonMethod {
         Log.e(TAG, message);
     }
 
+    public static void changeActivity(Context context, Class<?> c) {
+        Intent i = new Intent(context, c);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        context.startActivity(i);
+    }
 
     public static void changeActivityWithParamsObject(Context context, Class<?> c, ArrayList arrayList) {
         Intent i = new Intent(context, c);

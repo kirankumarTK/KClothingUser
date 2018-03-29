@@ -7,3 +7,5 @@ package com.example.im028.kclothinguser.Interface;
 public interface OnLoadMoreListener {
     void onLoadMore();
 }
+
+

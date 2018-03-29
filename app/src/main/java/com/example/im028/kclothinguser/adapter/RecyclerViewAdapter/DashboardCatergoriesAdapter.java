@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.im028.kclothinguser.R;
+import com.example.im028.kclothinguser.activity.ProductCategoryActivity;
+import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.model.DashBoardModel;
 import com.squareup.picasso.Picasso;
 
@@ -33,11 +35,19 @@ public class DashboardCatergoriesAdapter extends RecyclerView.Adapter<DashboardC
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         Picasso.with(context)
                 .load(arrayList.get(position).getThumbnail())
                 .fit()
                 .into(holder.imageView);
+
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CommonMethod.changeActivityWithParamsText(context,ProductCategoryActivity.class,arrayList.get(position).getName(),"");
+
+            }
+        });
     }
 
     @Override

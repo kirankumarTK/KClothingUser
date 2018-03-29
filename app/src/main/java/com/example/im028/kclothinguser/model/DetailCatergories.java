@@ -2,29 +2,37 @@ package com.example.im028.kclothinguser.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 /**
  * Created by im028 on 28/6/17.
  */
 
 public class DetailCatergories {
     @SerializedName("product_id")
-    public int product_id;
+    public int product_id=0;
     @SerializedName("product_name")
-    public String product_name;
+    public String product_name="";
     @SerializedName("product_content")
-    public String product_content;
+    public String product_content="";
     @SerializedName("currency")
-    public String currency;
+    public String currency="";
     @SerializedName("price")
-    public String price;
+    public String price="";
+    @SerializedName("medium_image")
+    public String medium_image="";
     @SerializedName("original_image")
-    public String original_image;
+    public String original_image="";
     @SerializedName("thumb_image")
-    public String thumb_image;
+    public String thumb_image="";
     @SerializedName("stock_status")
-    public String stock_status;
+    public String stock_status="";
+
+    public String getMedium_image() {
+        return medium_image;
+    }
+
+    public void setMedium_image(String medium_image) {
+        this.medium_image = medium_image;
+    }
 
     public int getProduct_id() {
         return product_id;

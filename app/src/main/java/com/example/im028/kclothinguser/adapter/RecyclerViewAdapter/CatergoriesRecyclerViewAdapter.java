@@ -7,11 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.im028.kclothinguser.R;
-import com.example.im028.kclothinguser.activity.ProductActivity;
+import com.example.im028.kclothinguser.activity.ProductCategoryActivity;
 import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.model.Slider_Categories;
 import com.squareup.picasso.Picasso;
@@ -28,7 +27,9 @@ import butterknife.ButterKnife;
 public class CatergoriesRecyclerViewAdapter extends RecyclerView.Adapter<CatergoriesRecyclerViewAdapter.CustomViewHolder> {
 
     private Context context;
-    private List<Slider_Categories> catergoriesArrayList;
+        private List<Slider_Categories> catergoriesArrayList;
+//    private List<CategoryList> catergoriesArrayList;
+
 
     public CatergoriesRecyclerViewAdapter(Context context, List<Slider_Categories> catergoriesArrayList) {
         this.context = context;
@@ -56,10 +57,12 @@ public class CatergoriesRecyclerViewAdapter extends RecyclerView.Adapter<Catergo
             e.printStackTrace();
         }
         holder.title.setText(catergoriesArrayList.get(position).getName());
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CommonMethod.changeActivityWithParamsText(context, ProductActivity.class, String.valueOf(catergoriesArrayList.get(position).getId()), "");
+//                CommonMethod.changeActivityWithParamsText(context, ProductActivity.class, String.valueOf(catergoriesArrayList.get(position).getId()), "");
+                CommonMethod.changeActivityWithParamsText(context, ProductCategoryActivity.class, String.valueOf(catergoriesArrayList.get(position).getName()), "");
+
             }
         });
 
@@ -80,9 +83,6 @@ public class CatergoriesRecyclerViewAdapter extends RecyclerView.Adapter<Catergo
         @Nullable
         @BindView(R.id.catergoriesTitleTextView)
         TextView title;
-        @Nullable
-        @BindView(R.id.catergoreisMainLayout)
-        RelativeLayout relativeLayout;
 
         public CustomViewHolder(View itemView) {
             super(itemView);

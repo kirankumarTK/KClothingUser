@@ -13,8 +13,6 @@ import android.widget.TextView;
 
 import com.example.im028.kclothinguser.Interface.VolleyResponseListerner;
 import com.example.im028.kclothinguser.R;
-import com.example.im028.kclothinguser.adapter.RecyclerViewAdapter.CatergoriesRecyclerViewAdapter;
-import com.example.im028.kclothinguser.adapter.RecyclerViewAdapter.DetailCatergoriesRecyclerViewAdapter;
 import com.example.im028.kclothinguser.adapter.ViewPageAdapter.ImageSliderAdapter;
 import com.example.im028.kclothinguser.common.CommonActivity;
 import com.example.im028.kclothinguser.common.CommonMethod;
@@ -208,7 +206,7 @@ public class MainPageActivity extends CommonActivity {
         detailCatergories.setThumb_image("View More");
         arrayList.add(detailCatergories);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainPageActivity.this, LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(new DetailCatergoriesRecyclerViewAdapter(MainPageActivity.this, arrayList));
+//        recyclerView.setAdapter(new DetailCatergoriesRecyclerViewAdapter(MainPageActivity.this, arrayList,recyclerView));
         hideCommonProgressBar();
         mainScrollView.setVisibility(View.VISIBLE);
 
@@ -252,7 +250,7 @@ public class MainPageActivity extends CommonActivity {
                 e.printStackTrace();
             }
         catergoriesRecyclerView.setLayoutManager(new LinearLayoutManager(MainPageActivity.this, LinearLayoutManager.HORIZONTAL, false));
-        catergoriesRecyclerView.setAdapter(new CatergoriesRecyclerViewAdapter(MainPageActivity.this, catergoriesArrayList));
+//        catergoriesRecyclerView.setAdapter(new CatergoriesRecyclerViewAdapter(MainPageActivity.this, catergoriesArrayList));
 
     }
 

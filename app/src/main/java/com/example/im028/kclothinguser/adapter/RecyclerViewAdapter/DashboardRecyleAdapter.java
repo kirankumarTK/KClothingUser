@@ -32,12 +32,13 @@ public class DashboardRecyleAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (arrayList.get(position).getType().equalsIgnoreCase("Catergory")) {
             Catergories catergories = (Catergories) holder;
             catergories.catergoreImageView.setBackgroundResource(R.drawable.dresses);
             catergories.catergoreRecyclerView.setLayoutManager(new GridLayoutManager(context, 2));
             catergories.catergoreRecyclerView.setAdapter(new DashboardCatergoriesAdapter(context, arrayList.get(position).getCategorylist()));
+
         }
     }
 

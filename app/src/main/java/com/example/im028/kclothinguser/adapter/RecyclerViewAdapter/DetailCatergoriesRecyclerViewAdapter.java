@@ -9,10 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.im028.kclothinguser.Interface.OnLoadMoreListener;
 import com.example.im028.kclothinguser.R;
 import com.example.im028.kclothinguser.activity.ProductDetailsActivity;
-import com.example.im028.kclothinguser.model.DetailCatergories;
 import com.example.im028.kclothinguser.common.CommonMethod;
+import com.example.im028.kclothinguser.model.DetailCatergories;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -25,14 +26,19 @@ import butterknife.ButterKnife;
  */
 
 public class DetailCatergoriesRecyclerViewAdapter extends RecyclerView.Adapter<DetailCatergoriesRecyclerViewAdapter.CustomViewHolder> {
-    private Context context;
+    public Context context;
     private ArrayList<DetailCatergories> detailCatergories;
+
+    public OnLoadMoreListener onLoadMoreListener;
 //    private String category_id;
 
-    public DetailCatergoriesRecyclerViewAdapter(Context context, ArrayList<DetailCatergories> detailCatergories) {
+    public DetailCatergoriesRecyclerViewAdapter(Context context, ArrayList<DetailCatergories> detailCatergories, OnLoadMoreListener onLoadMoreListener) {
         this.context = context;
         this.detailCatergories = detailCatergories;
+        this.onLoadMoreListener = onLoadMoreListener;
 //        this.category_id = category_id;
+
+//
     }
 
     @Override
@@ -42,35 +48,29 @@ public class DetailCatergoriesRecyclerViewAdapter extends RecyclerView.Adapter<D
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, final int position) {
-        if (!detailCatergories.get(position).getThumb_image().equals("View More")) {
-            try {
-                Picasso.with(context)
-                        .load(detailCatergories.get(position).getOriginal_image())
-                        .placeholder(R.drawable.logo)
-                        .fit()
-                        .into(holder.catergoreisProductsImageView);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            holder.catergoreisProductsDescriptionTextView.setText(detailCatergories.get(position).getProduct_name());
-            holder.catergoreisProductsPriceTextView.setText(context.getResources().getString(R.string.Rs) + detailCatergories.get(position).getPrice());
-            holder.catergoreisProductsImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    CommonMethod.changeActivityWithParamsText(context, ProductDetailsActivity.class,detailCatergories.get(position).getProduct_id()+"","");
-                }
-            });
-        } else {
-            holder.catergoreisProductsImageView.setImageResource(R.drawable.view_more);
-            holder.catergoreisProductsImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-//                    CommonMethod.changeActivityWithParamsText(context, ProductActivity.class, category_id, "");
-                }
-            });
+        if (detailCatergories.size()<(position+10))
+            onLoadMoreListener.onLoadMore();
+        try {
+            Picasso.with(context)
+                    .load(detailCatergories.get(position).getMedium_image())
+                    .placeholder(R.drawable.logo)
+                    .fit()
+                    .into(holder.catergoreisProductsImageView);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        holder.catergoreisProductsDescriptionTextView.setText(detailCatergories.get(position).getProduct_name());
+        holder.catergoreisProductsPriceTextView.setText(context.getResources().getString(R.string.Rs) + detailCatergories.get(position).getPrice() + " (incl. of tax)");
+        holder.catergoreisProductsImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CommonMethod.changeActivityWithParamsText(context, ProductDetailsActivity.class, detailCatergories.get(position).getProduct_id() + "", "");
+            }
+        });
+
     }
+
 
     @Override
     public int getItemCount() {
