@@ -12,13 +12,12 @@
         <ImageView
             android:id="@+id/catergoreImageView"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_80sdp" />
+            android:layout_height="@dimen/_80sdp"
+            android:layout_marginBottom="@dimen/_5sdp" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/catergoreRecyclerView"
-            android:layout_marginTop="@dimen/_5sdp"
             android:nestedScrollingEnabled="false"
-            android:layout_marginBottom="@dimen/_5sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
     </LinearLayout>

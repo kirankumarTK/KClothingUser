@@ -7,10 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.im028.kclothinguser.R;
-import com.example.im028.kclothinguser.activity.ProductCategoryActivity;
-import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.model.DashBoardModel;
 import com.squareup.picasso.Picasso;
 
@@ -19,37 +18,28 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DashboardCatergoriesAdapter extends RecyclerView.Adapter<DashboardCatergoriesAdapter.ViewHolder> {
+public class DashboardFeaturedAdapter extends RecyclerView.Adapter<DashboardFeaturedAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<DashBoardModel.CategorylistEntity> arrayList;
-    private int layout;
+    private ArrayList<DashBoardModel.FeaturedProducts> arrayList;
 
-    public DashboardCatergoriesAdapter(Context context, ArrayList<DashBoardModel.CategorylistEntity> arrayList, int layout) {
+    public DashboardFeaturedAdapter(Context context, ArrayList<DashBoardModel.FeaturedProducts> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
-        this.layout = layout;
-
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(layout, parent, false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.list_item_feature_view, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         Picasso.with(context)
-                .load(arrayList.get(position).getThumbnail())
+                .load(arrayList.get(position).getImage())
                 .fit()
                 .into(holder.imageView);
-
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CommonMethod.changeActivityWithParamsText(context,ProductCategoryActivity.class,arrayList.get(position).getName(),"");
-
-            }
-        });
+//        holder.name.setText(arrayList.get(position).getProduct_name());
+        holder.price.setText("\u20B9 " + arrayList.get(position).getPrice());
     }
 
     @Override
@@ -59,8 +49,14 @@ public class DashboardCatergoriesAdapter extends RecyclerView.Adapter<DashboardC
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @Nullable
-        @BindView(R.id.imageView)
+        @BindView(R.id.feature_imageView)
         ImageView imageView;
+        @Nullable
+        @BindView(R.id.feature_name)
+        TextView name;
+        @Nullable
+        @BindView(R.id.feature_price)
+        TextView price;
 
         public ViewHolder(View itemView) {
             super(itemView);
