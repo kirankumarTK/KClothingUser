@@ -39,6 +39,7 @@ public class DashboardActivity extends CommonActivity {
     LinearLayout viewPagerCountDots;
     private ArrayList<DashBoardModel> arrayList = new ArrayList<>();
     private ArrayList<DashBoardModel.CategorylistEntity> categorylist = new ArrayList<>();
+    private ArrayList<DashBoardModel.FeaturedProducts> featuredProducts = new ArrayList<>();
     private DashBoardModel dashBoardModel = new DashBoardModel();
     private ArrayList<String> slider = new ArrayList();
     int currentPage = 0;
@@ -72,14 +73,55 @@ public class DashboardActivity extends CommonActivity {
                         categoryModel.setThumbnail(response.optJSONObject("data").optJSONArray("categorylist").optJSONObject(i).optString("thumbnail"));
                         categorylist.add(categoryModel);
                     }
-                    DashBoardModel.CategorylistEntity categoryModel = new DashBoardModel.CategorylistEntity();
-                    categoryModel.setId(1);
-                    categoryModel.setName("KIRAN");
-                    categoryModel.setThumbnail("http://project986.in/kclothing/wp-content/uploads/2016/11/slider-single-1.jpg");
-                    categorylist.add(categoryModel);
+
                     dashBoardModel.setType("Catergory");
                     dashBoardModel.setCategorylist(categorylist);
+                    featuredProducts = new ArrayList<>();
+                    dashBoardModel.setFeaturedProductsArrayList(featuredProducts);
                     arrayList.add(dashBoardModel);
+
+                    featuredProducts = new ArrayList<>();
+                    categorylist = new ArrayList<>();
+                    dashBoardModel = new DashBoardModel();
+                    for (int i = 0; i < response.optJSONObject("data").optJSONArray("categorylist").length(); i++) {
+                        DashBoardModel.CategorylistEntity categoryModel = new DashBoardModel.CategorylistEntity();
+                        categoryModel.setId(response.optJSONObject("data").optJSONArray("categorylist").optJSONObject(i).optInt("id"));
+                        categoryModel.setName(response.optJSONObject("data").optJSONArray("categorylist").optJSONObject(i).optString("name"));
+                        categoryModel.setThumbnail(response.optJSONObject("data").optJSONArray("categorylist").optJSONObject(i).optString("thumbnail"));
+                        categorylist.add(categoryModel);
+                    }
+//                    DashBoardModel.CategorylistEntity categoryModel1 = new DashBoardModel.CategorylistEntity();
+//                    categoryModel1.setId(1);
+//                    categoryModel1.setName("");
+//                    categoryModel1.setThumbnail("http://project986.in/kclothing/wp-content/uploads/2016/11/slider-single-1.jpg");
+//
+//                    categorylist.add(categoryModel1);
+
+                    dashBoardModel.setType("New Collection");
+                    dashBoardModel.setCategorylist(categorylist);
+                    dashBoardModel.setFeaturedProductsArrayList(featuredProducts);
+                    arrayList.add(dashBoardModel);
+
+                    featuredProducts = new ArrayList<>();
+                    categorylist = new ArrayList<>();
+                    dashBoardModel = new DashBoardModel();
+                    for (int i = 0; i < response.optJSONObject("data").optJSONArray("featuredproducts").length(); i++) {
+                        DashBoardModel.FeaturedProducts featuredModel = new DashBoardModel.FeaturedProducts();
+                        featuredModel.setId(response.optJSONObject("data").optJSONArray("featuredproducts").optJSONObject(i).optInt("product_id"));
+                        featuredModel.setProduct_name(response.optJSONObject("data").optJSONArray("featuredproducts").optJSONObject(i).optString("product_name"));
+                        featuredModel.setPrice(response.optJSONObject("data").optJSONArray("featuredproducts").optJSONObject(i).optString("price"));
+                        featuredModel.setStock_status(response.optJSONObject("data").optJSONArray("featuredproducts").optJSONObject(i).optString("stock_status"));
+                        featuredModel.setImage(response.optJSONObject("data").optJSONArray("featuredproducts").optJSONObject(i).optString("medium_image"));
+                        featuredProducts.add(featuredModel);
+                    }
+
+
+                    dashBoardModel.setType("Featured Products");
+                    dashBoardModel.setFeaturedProductsArrayList(featuredProducts);
+                    dashBoardModel.setCategorylist(categorylist);
+                    arrayList.add(dashBoardModel);
+
+
                     recylerView.setAdapter(new DashboardRecyleAdapter(DashboardActivity.this, arrayList));
                 } else
                     CommonMethod.showSnackbar(imageSlider, response, DashboardActivity.this);
