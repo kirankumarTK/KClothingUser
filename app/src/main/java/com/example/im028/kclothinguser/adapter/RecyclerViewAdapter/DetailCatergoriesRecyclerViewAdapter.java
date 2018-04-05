@@ -81,14 +81,12 @@ public class DetailCatergoriesRecyclerViewAdapter extends RecyclerView.Adapter {
                 Picasso.with(context)
                         .load(detailCatergories.get(position).getOriginal_image())
                         .placeholder(R.drawable.logo)
-                        .fit()
                         .into(customViewHolder.catergoreisProductsImageView);
             } else {
                 try {
                     Picasso.with(context)
                             .load(detailCatergories.get(position).getMedium_image())
                             .placeholder(R.drawable.logo)
-                            .fit()
                             .into(customViewHolder.catergoreisProductsImageView);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -96,7 +94,7 @@ public class DetailCatergoriesRecyclerViewAdapter extends RecyclerView.Adapter {
             }
 
             customViewHolder.catergoreisProductsDescriptionTextView.setText(detailCatergories.get(position).getProduct_name());
-            customViewHolder.catergoreisProductsPriceTextView.setText(context.getResources().getString(R.string.Rs) + detailCatergories.get(position).getPrice() + " (incl. of tax)");
+            customViewHolder.catergoreisProductsPriceTextView.setText(context.getResources().getString(R.string.Rs) + detailCatergories.get(position).getPrice());
             customViewHolder.catergoreisProductsImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

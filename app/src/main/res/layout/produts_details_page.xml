@@ -332,7 +332,7 @@
                         android:textSize="@dimen/_10sdp" />
                 </LinearLayout>
 
-                <TextView
+                <EditText
                     android:id="@+id/specialInstruction"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"

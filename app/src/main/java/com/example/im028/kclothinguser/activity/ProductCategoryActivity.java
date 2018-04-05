@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.example.im028.kclothinguser.Interface.OnLoadMoreListener;
 import com.example.im028.kclothinguser.Interface.VolleyResponseListerner;
@@ -41,7 +42,6 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
     ProgressBar loadMoreProgress;
     @BindView(R.id.catergoryRecyclerViewMainPage)
     RecyclerView catergoryRecyclerViewMainPage;
-
     @BindView(R.id.productListRecyclerView)
     RecyclerView productListRecyclerView;
     @BindView(R.id.mainScrollView)
@@ -55,12 +55,18 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
     ViewPager imageSlider;
     @BindView(R.id.viewPagerCountDots)
     LinearLayout viewPagerCountDots;
+    @BindView(R.id.sliderLayout)
+    RelativeLayout sliderLayout;
+
+
     private String TAG = ProductCategoryActivity.class.getSimpleName();
     private int limit = 20;
     private int paged = 1;
     private DetailCatergoriesRecyclerViewAdapter detailCatergoriesRecyclerViewAdapter;
     private int dotCount;
     private ImageView dots[];
+    private ArrayList<String> arrayList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +76,7 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
 
         category = getIntent().getStringExtra("text");
 
-        setCommonProgressBar();
+        setCommonProgressBar(8);
         manager = new GridLayoutManager(this, 2);
         productListRecyclerView.setLayoutManager(manager);
         detailCatergoriesRecyclerViewAdapter = new DetailCatergoriesRecyclerViewAdapter(this, productList, mainScrollView, "", this);
@@ -103,16 +109,11 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
         WebServices.getInstance(this, TAG).getProductCategoryList(ConstantValues.PRODUCT_CATEGORY_LIST, category, page, limit, Session.getInstance(ProductCategoryActivity.this, TAG).getApp_id(), new VolleyResponseListerner() {
             @Override
             public void onResponse(JSONObject response) throws JSONException {
-
+                hideCommonProgressBar();
+                sliderLayout.setVisibility(View.VISIBLE);
                 if (response.getString("resultcode").equalsIgnoreCase("200")) {
                     hideCommonProgressBar();
                     categoryLists = new ArrayList<>();
-
-//                    if (paged >= 2 && productList.size() > 0) {
-//                        productList.remove(productList.size() - 1);
-//                        detailCatergoriesRecyclerViewAdapter.notifyItemRemoved(productList.size());
-//                        detailCatergoriesRecyclerViewAdapter.setLoaded();
-//                    }
 
                     if (updateCategory) {
                         JSONArray jsonArray = response.getJSONObject("data").getJSONArray("categorylist");
@@ -123,14 +124,19 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
                         setCategories(categoryLists);
 
                     }
-                    if (page == 1)
+                    if (page == 1) {
+
+                        // setting imageslider data
+                        arrayList.clear();
                         setCategoryImage(response.getJSONObject("data").getJSONArray("catImage"));
 
+
+                    }
                     JSONArray productArray = response.getJSONObject("data").getJSONArray("productlist");
                     for (int i = 0; i < productArray.length(); i++) {
                         productList.add(gson.fromJson(productArray.getJSONObject(i).toString(), DetailCatergories.class));
                     }
-//                    detailCatergoriesRecyclerViewAdapter.notifyDataSetChanged();
+
                     detailCatergoriesRecyclerViewAdapter.notifyItemInserted(productList.size() - 1);
                     loadMoreProgress.setVisibility(View.GONE);
 
@@ -157,7 +163,7 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
 //        Picasso.with(this).load(imgUrl).placeholder(R.drawable.logo).fit().into(catergoryImageView);
 
     private void setCategoryImage(JSONArray jsonArray) {
-        ArrayList<String> arrayList = new ArrayList<>();
+
         for (int i = 0; i < jsonArray.length(); i++) {
             try {
                 arrayList.add(jsonArray.get(i).toString());
@@ -206,6 +212,10 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
         productList.clear();
         this.category = category;
         detailCatergoriesRecyclerViewAdapter.notifyDataSetChanged();
+        setCommonProgressBar(0);
+        sliderLayout.setVisibility(View.GONE);
         setContent(false, category, paged, limit);
     }
+
+
 }

@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -87,7 +88,7 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
     @BindView(R.id.whishlist)
     TextView whishlist;
     @BindView(R.id.specialInstruction)
-    TextView specialInstruction;
+    EditText specialInstruction;
     @BindView(R.id.customSize)
     Button customSize;
     @BindView(R.id.fabric)
@@ -119,6 +120,7 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
     private int StandardSizePosition = 0;
     private ImageView[] dots;
     private int dotCount;
+    private ArrayList<String> arrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -158,7 +160,11 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
                 hideCommonProgressBar();
                 if (response.getString("resultcode").equalsIgnoreCase("200")) {
                     productDetailses.add(new Gson().fromJson(response.getJSONObject("data").toString(), ProductDetails.class));
+
+                    // setting imageslider data
+                    arrayList.clear();
                     setUpGalleryImage(response.getJSONObject("data").getJSONArray("gallery"));
+
 
                     for (int s = 0; s < response.getJSONObject("data").getJSONArray("sizes").length(); s++) {
                         StandardSize standardSize = new StandardSize();
@@ -229,7 +235,7 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
     }
 
     private void setUpGalleryImage(JSONArray jsonArray) {
-        ArrayList<String> arrayList = new ArrayList<>();
+
         for (int i = 0; i < jsonArray.length(); i++) {
             try {
                 arrayList.add(jsonArray.get(i).toString());
@@ -309,4 +315,6 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
     public void onCatogries(String catergory) {
 
     }
+
+
 }

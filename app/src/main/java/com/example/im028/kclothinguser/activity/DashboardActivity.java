@@ -38,8 +38,7 @@ public class DashboardActivity extends CommonActivity {
     RecyclerView recylerView;
     @BindView(R.id.viewPagerCountDots)
     LinearLayout viewPagerCountDots;
-    int currentPage = 0;
-    Timer timer;
+
     private ArrayList<DashBoardModel> arrayList = new ArrayList<>();
     private ArrayList<DashBoardModel.CategorylistEntity> categorylist = new ArrayList<>();
     private ArrayList<DashBoardModel.FeaturedProducts> featuredProducts = new ArrayList<>();
@@ -47,6 +46,7 @@ public class DashboardActivity extends CommonActivity {
     private ArrayList<String> slider = new ArrayList();
     private ImageView[] dots;
     private int dotsCount;
+    private int currentPage = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,14 +61,20 @@ public class DashboardActivity extends CommonActivity {
 
 
     private void callWebservices() {
-        setCommonProgressBar();
+        setCommonProgressBar(8);
         WebServices.getInstance(getApplicationContext(), TAG).getHomePage(ConstantValues.HOME, Session.getInstance(DashboardActivity.this, TAG).getApp_id(), new VolleyResponseListerner() {
             @Override
             public void onResponse(JSONObject response) throws JSONException {
                 hideCommonProgressBar();
                 if (response.optString("resultcode").equalsIgnoreCase("200")) {
+                    // setting imageslider data
                     setUiPageViewController(response.optJSONObject("data").optJSONArray("homepageslider"));
-                    setImageSlider();
+
+                    // calling auto image slide
+                    setImageSlider(slider, imageSlider, dots, dotsCount);
+
+                    // setting date for recycler view
+                    //catergories
                     arrayList.clear();
                     for (int i = 0; i < response.optJSONObject("data").optJSONArray("categorylist").length(); i++) {
                         DashBoardModel.CategorylistEntity categoryModel = new DashBoardModel.CategorylistEntity();
@@ -84,6 +90,7 @@ public class DashboardActivity extends CommonActivity {
                     dashBoardModel.setFeaturedProductsArrayList(featuredProducts);
                     arrayList.add(dashBoardModel);
 
+                    // new collection
                     featuredProducts = new ArrayList<>();
                     categorylist = new ArrayList<>();
                     dashBoardModel = new DashBoardModel();
@@ -94,18 +101,14 @@ public class DashboardActivity extends CommonActivity {
                         categoryModel.setThumbnail(response.optJSONObject("data").optJSONArray("categorylist").optJSONObject(i).optString("thumbnail"));
                         categorylist.add(categoryModel);
                     }
-//                    DashBoardModel.CategorylistEntity categoryModel1 = new DashBoardModel.CategorylistEntity();
-//                    categoryModel1.setId(1);
-//                    categoryModel1.setName("");
-//                    categoryModel1.setThumbnail("http://project986.in/kclothing/wp-content/uploads/2016/11/slider-single-1.jpg");
-//
-//                    categorylist.add(categoryModel1);
+
 
                     dashBoardModel.setType("New Collection");
                     dashBoardModel.setCategorylist(categorylist);
                     dashBoardModel.setFeaturedProductsArrayList(featuredProducts);
                     arrayList.add(dashBoardModel);
 
+                    // featured products
                     featuredProducts = new ArrayList<>();
                     categorylist = new ArrayList<>();
                     dashBoardModel = new DashBoardModel();
@@ -165,7 +168,8 @@ public class DashboardActivity extends CommonActivity {
         dots[0].setImageResource(R.drawable.viewpager_indicator_dot_selected);
     }
 
-    private void setImageSlider() {
+    public void setImageSlider(final ArrayList<String> slider, final ViewPager imageSlider, final ImageView[] dots, final int dotsCount) {
+        currentPage = 0;
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
@@ -179,7 +183,7 @@ public class DashboardActivity extends CommonActivity {
             }
         };
 
-        timer = new Timer(); // This will create a new Thread
+        Timer timer = new Timer(); // This will create a new Thread
         timer.schedule(new TimerTask() { // task to be scheduled
 
             @Override

@@ -148,9 +148,9 @@ public class CommonActivity extends AppCompatActivity {
         frameLayout.addView(activityView);
     }
 
-    public void setCommonProgressBar() {
+    public void setCommonProgressBar(int frameVisible) {
         commonProgressBar.setVisibility(View.VISIBLE);
-        frameLayout.setVisibility(View.GONE);
+        frameLayout.setVisibility(frameVisible);
     }
 
     public void hideCommonProgressBar() {

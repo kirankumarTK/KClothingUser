@@ -41,15 +41,15 @@ public class CustomSizeRecyclerViewAdapter extends RecyclerView.Adapter<CustomSi
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         holder.customSizeLable.setText(custom_sizes.get(position).getLabel());
         CustomSpinnerAdapter customSpinnerAdapter = new CustomSpinnerAdapter(context, custom_sizes.get(position).getValues());
         holder.customSizeSpinner.setAdapter(customSpinnerAdapter);
         holder.customSizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                custom_size_value.put(custom_sizes.get(position).getName(), Integer.valueOf(parent.getItemAtPosition(position).toString()));
+            public void onItemSelected(AdapterView<?> parent, View view, int position1, long id) {
+                custom_size_value.put(custom_sizes.get(position).getName(), Integer.valueOf(parent.getItemAtPosition(position1).toString()));
             }
 
             @Override
