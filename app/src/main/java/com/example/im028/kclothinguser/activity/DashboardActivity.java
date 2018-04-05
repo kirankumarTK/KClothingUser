@@ -56,6 +56,7 @@ public class DashboardActivity extends CommonActivity {
 
         callWebservices();
         recylerView.setLayoutManager(new LinearLayoutManager(this));
+        recylerView.setNestedScrollingEnabled(false);
     }
 
 

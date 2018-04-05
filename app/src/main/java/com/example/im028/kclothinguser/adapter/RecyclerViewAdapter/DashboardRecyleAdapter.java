@@ -51,17 +51,20 @@ public class DashboardRecyleAdapter extends RecyclerView.Adapter {
                 Catergories catergories = (Catergories) holder;
                 catergories.catergoreImageView.setBackgroundResource(R.drawable.dresses);
                 catergories.catergoreRecyclerView.setLayoutManager(new GridLayoutManager(context, 2));
+                catergories.catergoreRecyclerView.setNestedScrollingEnabled(false);
                 catergories.catergoreRecyclerView.setAdapter(new DashboardCatergoriesAdapter(context, arrayList.get(position).getCategorylist(), R.layout.list_item_dashboard_imageview));
                 break;
             case "New Collection":
                 Collection collection = (Collection) holder;
                 collection.collectionRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+                collection.collectionRecyclerView.setNestedScrollingEnabled(false);
                 collection.collectionRecyclerView.setAdapter(new DashboardCatergoriesAdapter(context, arrayList.get(position).getCategorylist(), R.layout.list_item_dashboard_imagview_width_large));
                 break;
             case "Featured Products":
                 Feature feature = (Feature) holder;
                 feature.feature_title.setText(arrayList.get(position).getType());
                 feature.festureRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+                feature.festureRecyclerView.setNestedScrollingEnabled(false);
                 feature.festureRecyclerView.setAdapter(new DashboardFeaturedAdapter(context, arrayList.get(position).getFeaturedProductsArrayList()));
                 break;
 

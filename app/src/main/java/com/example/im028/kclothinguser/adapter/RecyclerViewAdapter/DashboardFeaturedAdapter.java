@@ -36,9 +36,8 @@ public class DashboardFeaturedAdapter extends RecyclerView.Adapter<DashboardFeat
     public void onBindViewHolder(ViewHolder holder, int position) {
         Picasso.with(context)
                 .load(arrayList.get(position).getImage())
-                .fit()
                 .into(holder.imageView);
-//        holder.name.setText(arrayList.get(position).getProduct_name());
+        holder.name.setText(arrayList.get(position).getProduct_name());
         holder.price.setText("\u20B9 " + arrayList.get(position).getPrice());
     }
 
