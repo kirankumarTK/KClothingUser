@@ -44,15 +44,18 @@ public class DetailCatergoriesRecyclerViewAdapter extends RecyclerView.Adapter {
         this.tag = tag;
 
         if (!tag.equalsIgnoreCase("similarProduct")) {
-            nestedScrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-                if (v.getChildAt(v.getChildCount() - 1) != null) {
-                    if ((scrollY >= (v.getChildAt(v.getChildCount() - 1).getMeasuredHeight() - v.getMeasuredHeight())) &&
-                            scrollY > oldScrollY) {
-                        //code to fetch more data for endless scrolling
-                        if (onLoadMoreListener != null) {
-                            onLoadMoreListener.onLoadMore();
-                        }
+            nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+                @Override
+                public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                    if (v.getChildAt(v.getChildCount() - 1) != null) {
+                        if ((scrollY >= (v.getChildAt(v.getChildCount() - 1).getMeasuredHeight() - v.getMeasuredHeight())) &&
+                                scrollY > oldScrollY) {
+                            //code to fetch more data for endless scrolling
+                            if (onLoadMoreListener != null) {
+                                onLoadMoreListener.onLoadMore();
+                            }
 //                        isLoading = true;
+                        }
                     }
                 }
             });
