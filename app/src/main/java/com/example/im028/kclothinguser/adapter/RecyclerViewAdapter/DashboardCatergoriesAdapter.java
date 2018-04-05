@@ -46,7 +46,7 @@ public class DashboardCatergoriesAdapter extends RecyclerView.Adapter<DashboardC
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CommonMethod.changeActivityWithParamsText(context,ProductCategoryActivity.class,arrayList.get(position).getName(),"");
+                CommonMethod.changeActivityWithParamsText(context, ProductCategoryActivity.class, arrayList.get(position).getName(), "");
 
             }
         });

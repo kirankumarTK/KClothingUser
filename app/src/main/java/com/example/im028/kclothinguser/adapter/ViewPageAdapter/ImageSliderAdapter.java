@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.im028.kclothinguser.R;
-import com.example.im028.kclothinguser.model.Slider_Categories;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

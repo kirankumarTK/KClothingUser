@@ -55,7 +55,7 @@ public class CustomSizeActivity extends AppCompatActivity {
         customRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         for (int i = 0; i < custom_sizes.size(); i++)
             custom_size_map.put(custom_sizes.get(i).getName(), custom_sizes.get(i).getValues().get(0));
-        customSizeRecyclerViewAdapter = new CustomSizeRecyclerViewAdapter(this, custom_sizes,custom_size_map);
+        customSizeRecyclerViewAdapter = new CustomSizeRecyclerViewAdapter(this, custom_sizes, custom_size_map);
         customRecyclerView.setAdapter(customSizeRecyclerViewAdapter);
     }
 

@@ -37,7 +37,6 @@ public class SortActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-
     }
 
     @OnClick({R.id.sortNewProducts, R.id.sortPopular, R.id.sortLowToHigh, R.id.sortHighToLow, R.id.sortDate})

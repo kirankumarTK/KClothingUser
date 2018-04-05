@@ -25,22 +25,22 @@
             android:orientation="vertical">
 
             <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:weightSum="2">-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:weightSum="2">-->
 
-                <TextView
-                    android:id="@+id/catergoreisProductsDescriptionTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_2sdp"
-                    android:ems="1"
-                    android:lineSpacingMultiplier="0.8"
-                    android:maxLines="2"
-                    android:text=""
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp" />
+            <TextView
+                android:id="@+id/catergoreisProductsDescriptionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:ems="1"
+                android:lineSpacingMultiplier="0.8"
+                android:maxLines="2"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp" />
 
 
             <!--</LinearLayout>-->
@@ -64,8 +64,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/_2sdp"
             android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/_2sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:src="@drawable/wishlist" />
 

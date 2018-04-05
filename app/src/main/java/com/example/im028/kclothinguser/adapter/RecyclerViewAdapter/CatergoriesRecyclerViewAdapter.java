@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.im028.kclothinguser.Interface.OnLoadMoreListener;
 import com.example.im028.kclothinguser.R;
-import com.example.im028.kclothinguser.activity.ProductCategoryActivity;
 import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.model.Slider_Categories;
 import com.squareup.picasso.Picasso;
@@ -27,14 +27,15 @@ import butterknife.ButterKnife;
 public class CatergoriesRecyclerViewAdapter extends RecyclerView.Adapter<CatergoriesRecyclerViewAdapter.CustomViewHolder> {
 
     private Context context;
-        private List<Slider_Categories> catergoriesArrayList;
-//    private List<CategoryList> catergoriesArrayList;
+    private List<Slider_Categories> catergoriesArrayList;
+    //    private List<CategoryList> catergoriesArrayList;
+    private OnLoadMoreListener listener;
 
-
-    public CatergoriesRecyclerViewAdapter(Context context, List<Slider_Categories> catergoriesArrayList) {
+    public CatergoriesRecyclerViewAdapter(Context context, List<Slider_Categories> catergoriesArrayList, OnLoadMoreListener listener) {
         this.context = context;
         this.catergoriesArrayList = catergoriesArrayList;
         CommonMethod.showLogError("TEST", catergoriesArrayList.toString());
+        this.listener = listener;
     }
 
 
@@ -60,8 +61,7 @@ public class CatergoriesRecyclerViewAdapter extends RecyclerView.Adapter<Catergo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                CommonMethod.changeActivityWithParamsText(context, ProductActivity.class, String.valueOf(catergoriesArrayList.get(position).getId()), "");
-                CommonMethod.changeActivityWithParamsText(context, ProductCategoryActivity.class, String.valueOf(catergoriesArrayList.get(position).getName()), "");
+                listener.onCatogries(catergoriesArrayList.get(position).getName());
 
             }
         });

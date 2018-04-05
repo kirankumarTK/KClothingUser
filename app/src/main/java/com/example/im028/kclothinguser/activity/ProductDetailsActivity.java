@@ -4,30 +4,37 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.im028.kclothinguser.Interface.OnItemClickListener;
+import com.example.im028.kclothinguser.Interface.OnLoadMoreListener;
 import com.example.im028.kclothinguser.Interface.VolleyResponseListerner;
 import com.example.im028.kclothinguser.R;
+import com.example.im028.kclothinguser.adapter.RecyclerViewAdapter.DetailCatergoriesRecyclerViewAdapter;
 import com.example.im028.kclothinguser.adapter.RecyclerViewAdapter.StandardSizeRecyclerViewAdapter;
+import com.example.im028.kclothinguser.adapter.ViewPageAdapter.ImageSliderAdapter;
 import com.example.im028.kclothinguser.common.BackCommonActivity;
+import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.dialog.CustomSizeActivity;
 import com.example.im028.kclothinguser.dialog.SizeChartActivity;
 import com.example.im028.kclothinguser.model.Custom_Size;
-import com.example.im028.kclothinguser.model.Gallery;
+import com.example.im028.kclothinguser.model.DetailCatergories;
 import com.example.im028.kclothinguser.model.ProductDetails;
 import com.example.im028.kclothinguser.model.StandardSize;
-import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.utlity.Constant.ConstantValues;
+import com.example.im028.kclothinguser.utlity.sharedPreferance.Session;
 import com.example.im028.kclothinguser.utlity.webservice.WebServices;
 import com.google.gson.Gson;
-import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,9 +50,8 @@ import butterknife.OnClick;
  * Created by im028 on 3/7/17.
  */
 
-public class ProductDetailsActivity extends BackCommonActivity {
-    @BindView(R.id.productDetailImageView)
-    ImageView productDetailImageView;
+public class ProductDetailsActivity extends BackCommonActivity implements OnLoadMoreListener {
+
     @BindView(R.id.productDetailNameTextView)
     TextView productDetailNameTextView;
     @BindView(R.id.productDetailPriceTextView)
@@ -60,18 +66,48 @@ public class ProductDetailsActivity extends BackCommonActivity {
     RecyclerView standardSizeRecylerView;
     @BindView(R.id.productDetailsSizeChart)
     LinearLayout productDetailsSizeChart;
-    @BindView(R.id.productDetailCustomSizeLayout)
-    LinearLayout productDetailCustomSizeLayout;
-    @BindView(R.id.productDetailProductsLayout)
-    LinearLayout productDetailProductsLayout;
     @BindView(R.id.productDetailRelatedProducts)
     RecyclerView productDetailRelatedProducts;
     @BindView(R.id.bottomLayout)
     LinearLayout bottomLayout;
+    @BindView(R.id.galleryViewPager)
+    ViewPager galleryViewPager;
+    @BindView(R.id.viewPagerCountDots)
+    LinearLayout viewPagerCountDots;
+    @BindView(R.id.washCare)
+    TextView washCare;
+    @BindView(R.id.shipsIn)
+    TextView shipsIn;
+    @BindView(R.id.transitTime)
+    TextView transitTime;
+    @BindView(R.id.share)
+    TextView share;
+    @BindView(R.id.similar)
+    TextView similar;
+    @BindView(R.id.whishlist)
+    TextView whishlist;
+    @BindView(R.id.specialInstruction)
+    TextView specialInstruction;
+    @BindView(R.id.customSize)
+    Button customSize;
+    @BindView(R.id.fabric)
+    TextView fabric;
+    @BindView(R.id.color)
+    TextView color;
+    @BindView(R.id.others)
+    TextView others;
+    @BindView(R.id.others1)
+    TextView others1;
+    @BindView(R.id.others2)
+    TextView others2;
+    @BindView(R.id.others3)
+    TextView others3;
+    @BindView(R.id.description)
+    TextView description;
 
     private ArrayList<StandardSize> standardSizeArrayList = new ArrayList<>();
     private ArrayList<Custom_Size> custom_sizeArrayList = new ArrayList<>();
-    private ArrayList<Gallery> galleryArrayList = new ArrayList<>();
+    private ArrayList<DetailCatergories> detailCategoriesArrayList = new ArrayList<>();
     private ArrayList<ProductDetails> productDetailses = new ArrayList<>();
     private StandardSize standardSize = new StandardSize();
     private String TAG = ProductDetailsActivity.class.getSimpleName();
@@ -81,6 +117,8 @@ public class ProductDetailsActivity extends BackCommonActivity {
     private Map<String, Integer> custom_size_map = new HashMap<>();
     private String sizeType = "standeredchecked";
     private int StandardSizePosition = 0;
+    private ImageView[] dots;
+    private int dotCount;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,61 +127,94 @@ public class ProductDetailsActivity extends BackCommonActivity {
         ButterKnife.bind(this);
         setCommonProgressBar();
         getProductDetails(getIntent().getStringExtra("text"));
+
+        galleryViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                for (int i = 0; i < dotCount; i++) {
+                    dots[i].setImageResource(R.drawable.viewpager_indicator_dot_unselected);
+                }
+                dots[position].setImageResource(R.drawable.viewpager_indicator_dot_selected);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
 
     private void getProductDetails(String product_Id) {
 
-        WebServices.getInstance(this, TAG).getProductsDetails(ConstantValues.PRODUCTS_DETAILS, product_Id, new VolleyResponseListerner() {
+        WebServices.getInstance(this, TAG).getProductsDetails(ConstantValues.PRODUCTS_DETAILS, product_Id, Session.getInstance(ProductDetailsActivity.this, TAG).getApp_id(), new VolleyResponseListerner() {
             @Override
             public void onResponse(JSONObject response) throws JSONException {
                 hideCommonProgressBar();
                 if (response.getString("resultcode").equalsIgnoreCase("200")) {
-                    for (int i = 0; i < response.getJSONArray("data").length(); i++) {
-                        productDetailses.add(new Gson().fromJson(response.getJSONArray("data").getJSONObject(i).toString(), ProductDetails.class));
-                        for (int s = 0; s < response.getJSONArray("data").getJSONObject(i).getJSONArray("sizes").length(); s++) {
-                            StandardSize standardSize = new StandardSize();
-                            standardSize.setSelected(false);
-                            standardSize.setSize((String) response.getJSONArray("data").getJSONObject(i).getJSONArray("sizes").get(s));
-                            standardSizeArrayList.add(standardSize);
-                        }
-                        standardSizeRecylerView.setLayoutManager(new LinearLayoutManager(ProductDetailsActivity.this, LinearLayoutManager.HORIZONTAL, false));
-                        standardSizeRecyclerViewAdapter = new StandardSizeRecyclerViewAdapter(ProductDetailsActivity.this, standardSizeArrayList, new OnItemClickListener() {
-                            @Override
-                            public void onItemClick(ArrayList<StandardSize> size, int position) {
-                                standardSize = size.get(position);
-                                sizeType = "standeredchecked";
-                                StandardSizePosition=position;
+                    productDetailses.add(new Gson().fromJson(response.getJSONObject("data").toString(), ProductDetails.class));
+                    setUpGalleryImage(response.getJSONObject("data").getJSONArray("gallery"));
 
-                            }
-                        });
-                        standardSizeRecylerView.setAdapter(standardSizeRecyclerViewAdapter);
-
-                        for (int c = 0; c < response.getJSONArray("data").getJSONObject(i).getJSONArray("custom_sizes").length(); c++) {
-                            Custom_Size custom_size = new Custom_Size();
-                            custom_size.setLabel(response.getJSONArray("data").getJSONObject(i).getJSONArray("custom_sizes").getJSONObject(c).getString("label"));
-                            custom_size.setName(response.getJSONArray("data").getJSONObject(i).getJSONArray("custom_sizes").getJSONObject(c).getString("name"));
-                            ArrayList customSizeArray = new ArrayList();
-                            for (int c1 = 0; c1 < response.getJSONArray("data").getJSONObject(i).getJSONArray("custom_sizes").getJSONObject(c).getJSONArray("values").length(); c1++) {
-                                customSizeArray.add(response.getJSONArray("data").getJSONObject(i).getJSONArray("custom_sizes").getJSONObject(c).getJSONArray("values").get(c1));
-                            }
-                            custom_size.setValues(customSizeArray);
-                            custom_sizeArrayList.add(custom_size);
-                        }
-
-                        productDetailNameTextView.setText(productDetailses.get(0).getProduct_name());
-                        productDetailPriceTextView.setText(productDetailses.get(0).getPrice());
-                        try {
-                            Picasso.with(getApplicationContext())
-                                    .load(productDetailses.get(0).getOriginal_image())
-                                    .placeholder(R.drawable.logo)
-                                    .into(productDetailImageView);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                    for (int s = 0; s < response.getJSONObject("data").getJSONArray("sizes").length(); s++) {
+                        StandardSize standardSize = new StandardSize();
+                        standardSize.setSelected(false);
+                        standardSize.setSize((String) response.getJSONObject("data").getJSONArray("sizes").get(s));
+                        standardSizeArrayList.add(standardSize);
                     }
+                    standardSizeRecylerView.setLayoutManager(new LinearLayoutManager(ProductDetailsActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                    standardSizeRecyclerViewAdapter = new StandardSizeRecyclerViewAdapter(ProductDetailsActivity.this, standardSizeArrayList, new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(ArrayList<StandardSize> size, int position) {
+                            standardSize = size.get(position);
+                            sizeType = "standeredchecked";
+                            StandardSizePosition = position;
+
+                        }
+                    });
+                    standardSizeRecylerView.setAdapter(standardSizeRecyclerViewAdapter);
+
+                    for (int c = 0; c < response.getJSONObject("data").getJSONArray("custom_size").length(); c++) {
+                        Custom_Size custom_size = new Custom_Size();
+                        custom_size.setLabel(response.getJSONObject("data").getJSONArray("custom_size").getJSONObject(c).getString("label"));
+                        custom_size.setName(response.getJSONObject("data").getJSONArray("custom_size").getJSONObject(c).getString("name"));
+                        ArrayList customSizeArray = new ArrayList();
+                        for (int c1 = 0; c1 < response.getJSONObject("data").getJSONArray("custom_size").getJSONObject(c).getJSONArray("values").length(); c1++) {
+                            customSizeArray.add(response.getJSONObject("data").getJSONArray("custom_size").getJSONObject(c).getJSONArray("values").get(c1));
+                        }
+                        custom_size.setValues(customSizeArray);
+                        custom_sizeArrayList.add(custom_size);
+                    }
+
+                    productDetailNameTextView.setText(productDetailses.get(0).getProduct_name());
+                    productDetailPriceTextView.setText(getResources().getString(R.string.Rs) + productDetailses.get(0).getPrice() + " (incl. of tax)");
+
+                    washCare.setText("Wash Care : " + productDetailses.get(0).getWash_Care());
+                    shipsIn.setText("Ships In : " + productDetailses.get(0).getShips_In());
+                    transitTime.setText("Transit Time : " + productDetailses.get(0).getTransit_Time());
+                    description.setText(productDetailses.get(0).getProduct_content());
+                    fabric.setText("Fabric : " + productDetailses.get(0).getFabric());
+                    color.setText("Color : " + productDetailses.get(0).getColour());
+                    others.setText(productDetailses.get(0).getOthers());
+                    others1.setText(productDetailses.get(0).getOthers1());
+                    others2.setText(productDetailses.get(0).getOthers2());
+                    others3.setText(productDetailses.get(0).getOthers3());
+
+                    for (int i = 0; i < response.getJSONObject("data").getJSONArray("relatedproduct").length(); i++) {
+                        detailCategoriesArrayList.add(new Gson().fromJson(response.getJSONObject("data").getJSONArray("relatedproduct").getJSONObject(i).toString(), DetailCatergories.class));
+                    }
+
+                    productDetailRelatedProducts.setLayoutManager(new GridLayoutManager(ProductDetailsActivity.this, 2));
+                    productDetailRelatedProducts.setNestedScrollingEnabled(false);
+                    productDetailRelatedProducts.setAdapter(new DetailCatergoriesRecyclerViewAdapter(ProductDetailsActivity.this, detailCategoriesArrayList, null, "similarProduct", ProductDetailsActivity.this));
+
+
                 } else
-                    CommonMethod.showSnackbar(standardSizeRecylerView, response.getString("resultmessage"),ProductDetailsActivity.this);
+                    CommonMethod.showSnackbar(standardSizeRecylerView, response.getString("resultmessage"), ProductDetailsActivity.this);
 
             }
 
@@ -151,17 +222,42 @@ public class ProductDetailsActivity extends BackCommonActivity {
             public void onError(String message, String title) {
                 hideCommonProgressBar();
                 CommonMethod.showLogError(TAG, message.toString());
-                CommonMethod.showSnackbar(standardSizeRecylerView, message.toString(),ProductDetailsActivity.this);
+                CommonMethod.showSnackbar(standardSizeRecylerView, message.toString(), ProductDetailsActivity.this);
             }
         });
 
     }
 
-    @OnClick({R.id.productDetailImageView, R.id.productDetailDecrementImageView, R.id.produvtDetailQuantityTextView, R.id.productDetailIncrementImageView, R.id.productDetailsSizeChart, R.id.productDetailCustomSizeLayout, R.id.productDetailProductsLayout})
+    private void setUpGalleryImage(JSONArray jsonArray) {
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            try {
+                arrayList.add(jsonArray.get(i).toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        galleryViewPager.setAdapter(new ImageSliderAdapter(ProductDetailsActivity.this, arrayList));
+        dotCount = arrayList.size();
+        dots = new ImageView[dotCount];
+
+        for (int i = 0; i < dotCount; i++) {
+            dots[i] = new ImageView(this);
+            dots[i].setImageResource(R.drawable.viewpager_indicator_dot_unselected);
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(4, 0, 4, 0);
+
+            viewPagerCountDots.addView(dots[i], params);
+        }
+        dots[0].setImageResource(R.drawable.viewpager_indicator_dot_selected);
+
+    }
+
+    @OnClick({R.id.customSize, R.id.productDetailDecrementImageView, R.id.produvtDetailQuantityTextView, R.id.productDetailIncrementImageView, R.id.productDetailsSizeChart})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.productDetailImageView:
-                break;
             case R.id.productDetailDecrementImageView:
                 if (quantity != 1)
                     --quantity;
@@ -176,11 +272,10 @@ public class ProductDetailsActivity extends BackCommonActivity {
             case R.id.productDetailsSizeChart:
                 CommonMethod.changeActivity(ProductDetailsActivity.this, SizeChartActivity.class);
                 break;
-            case R.id.productDetailCustomSizeLayout:
+            case R.id.customSize:
                 startActivityForResult(new Intent(getApplicationContext(), CustomSizeActivity.class).putExtra("custom", custom_sizeArrayList), CUSTOM);
                 break;
-            case R.id.productDetailProductsLayout:
-                break;
+
         }
     }
 
@@ -202,5 +297,16 @@ public class ProductDetailsActivity extends BackCommonActivity {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    @Override
+    public void onLoadMore() {
+
+    }
+
+    @Override
+    public void onCatogries(String catergory) {
+
     }
 }

@@ -1,6 +1,5 @@
 package com.example.im028.kclothinguser.utlity.webservice;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -22,7 +21,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.im028.kclothinguser.Interface.VolleyResponseListerner;
 import com.example.im028.kclothinguser.utlity.AppManager.MyApp;
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,8 +28,6 @@ import org.json.JSONObject;
  * Created by IM0033 on 8/2/2016.
  */
 public class VolleyClass {
-    private Context context;
-    private String TAG = "";
     // private PrefManager prefManager;
     String networkErrorMessage = "Network error – please try again.";
     String poorNetwork = "Your data connection is too slow – please try again when you have a better network connection";
@@ -39,13 +35,14 @@ public class VolleyClass {
     String authorizationFailed = "Authorization failed – please try again.";
     String serverNotResponding = "Server not responding – please try again.";
     String parseError = "Data not received from server – please check your network connection.";
-
     String networkErrorTitle = "Network error";
     String poorNetworkTitle = "Poor Network Connection";
     String timeoutTitle = "Network Error";
     String authorizationFailedTitle = "Network Error";
     String serverNotRespondingTitle = "Server Error";
     String parseErrorTitle = "Network Error";
+    private Context context;
+    private String TAG = "";
 
     public VolleyClass(Context context, String tag) {
         this.context = context;
@@ -58,7 +55,7 @@ public class VolleyClass {
         Log.d(TAG, "volleyPostData  data - " + jsonObject.toString());
         if (isOnLline()) {
             RequestQueue queue = Volley.newRequestQueue(context);
-            JsonObjectRequest jsonRequest = new JsonObjectRequest (Request.Method.POST,
+            JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST,
                     url, jsonObject,
                     new Response.Listener<JSONObject>() {
                         @Override

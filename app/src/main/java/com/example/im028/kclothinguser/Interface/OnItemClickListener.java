@@ -9,6 +9,6 @@ import java.util.ArrayList;
  */
 
 public interface OnItemClickListener {
-    void onItemClick(ArrayList<StandardSize> size,int position);
+    void onItemClick(ArrayList<StandardSize> size, int position);
 
 }

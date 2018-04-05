@@ -12,8 +12,8 @@
         android:layout_marginBottom="@dimen/_4sdp"
         android:gravity="center"
         android:text=""
-        android:textSize="@dimen/_9sdp"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:textSize="@dimen/_9sdp" />
 
     <Spinner
         android:id="@+id/customSizeSpinner"

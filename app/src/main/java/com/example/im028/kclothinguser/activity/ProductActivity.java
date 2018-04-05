@@ -15,9 +15,9 @@ import com.example.im028.kclothinguser.Interface.VolleyResponseListerner;
 import com.example.im028.kclothinguser.R;
 import com.example.im028.kclothinguser.adapter.RecyclerViewAdapter.ProductsRecyclerViewAdapter;
 import com.example.im028.kclothinguser.common.CommonActivity;
+import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.dialog.SortActivity;
 import com.example.im028.kclothinguser.model.DetailCatergories;
-import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.utlity.Constant.ConstantValues;
 import com.example.im028.kclothinguser.utlity.webservice.WebServices;
 import com.google.gson.Gson;
@@ -84,6 +84,11 @@ public class ProductActivity extends CommonActivity {
                 getProducts(paged, CatergoryID, search, orderBy);
 
             }
+
+            @Override
+            public void onCatogries(String catergory) {
+
+            }
         });
 
 
@@ -106,7 +111,7 @@ public class ProductActivity extends CommonActivity {
                                 productsArrayList.add(new Gson().fromJson(response.getJSONArray("data").getJSONObject(i).toString(), DetailCatergories.class));
                             productsRecyclerViewAdapter.notifyDataSetChanged();
                         } else {
-                            CommonMethod.showSnackbar(productRecyclerView, response.getString("resultmessage"),ProductActivity.this);
+                            CommonMethod.showSnackbar(productRecyclerView, response.getString("resultmessage"), ProductActivity.this);
                             productProgress.setVisibility(View.GONE);
                             productRecyclerView.setVisibility(View.VISIBLE);
                         }
@@ -115,7 +120,7 @@ public class ProductActivity extends CommonActivity {
                     @Override
                     public void onError(String message, String title) {
                         CommonMethod.showLogError(TAG, message.toString());
-                        CommonMethod.showSnackbar(productProgress, message.toString(),ProductActivity.this);
+                        CommonMethod.showSnackbar(productProgress, message.toString(), ProductActivity.this);
                         productProgress.setVisibility(View.GONE);
                         productRecyclerView.setVisibility(View.VISIBLE);
                     }

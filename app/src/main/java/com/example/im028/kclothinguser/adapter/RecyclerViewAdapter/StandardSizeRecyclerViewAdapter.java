@@ -55,11 +55,11 @@ public class StandardSizeRecyclerViewAdapter extends RecyclerView.Adapter<Standa
                     standardSizeArrayList.get(position).setSelected(true);
                     standardSizeArrayList.get(perviousSelected).setSelected(false);
                     perviousSelected = position;
-                    listener.onItemClick(standardSizeArrayList,position);
+                    listener.onItemClick(standardSizeArrayList, position);
                 } else if (position == 0) {
                     standardSizeArrayList.get(position).setSelected(true);
                     perviousSelected = position;
-                    listener.onItemClick(standardSizeArrayList,position);
+                    listener.onItemClick(standardSizeArrayList, position);
                 }
                 notifyDataSetChanged();
 

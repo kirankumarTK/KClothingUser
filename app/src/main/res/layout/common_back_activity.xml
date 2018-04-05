@@ -99,9 +99,9 @@
                     android:id="@+id/commonProgressBar"
                     android:layout_width="@dimen/_45sdp"
                     android:layout_height="@dimen/_45sdp"
-                    android:visibility="gone"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true" />
+                    android:layout_centerVertical="true"
+                    android:visibility="gone" />
 
                 <FrameLayout
                     android:id="@+id/bcakcommonActivityFrameLayout"

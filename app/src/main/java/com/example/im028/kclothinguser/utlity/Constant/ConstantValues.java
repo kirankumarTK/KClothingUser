@@ -6,15 +6,17 @@ package com.example.im028.kclothinguser.utlity.Constant;
 
 public class ConstantValues {
 
+    public static final String custom_size = "custom_size";
     protected static final String BASE_URL = "http://project986.in/kclothing/api/";
     public static final String Login = BASE_URL + "users/login/";
     public static final String REGISTER = BASE_URL + "users/register/";
     public static final String EVENT = BASE_URL + "users/event_list/";
     public static final String PRODUCTS = BASE_URL + "users/product_list/";
-    public static final String PRODUCTS_DETAILS = BASE_URL + "users/get_product_details_api/";
+    //    public static final String PRODUCTS_DETAILS = BASE_URL + "users/get_product_details_api/";
     public static final String GET_CATEGORY = BASE_URL + "users/displaysliderandcategory";
+    public static final String PRODUCTS_DETAILS = BASE_URL + "users/gets_product_details";
+    public static final String HOME = BASE_URL + "users/homepage";
+    public static final String PRODUCT_CATEGORY_LIST = BASE_URL + "users/product_category_list";
 
-    public static final String custom_size="custom_size";
-    public static final String HOME = BASE_URL+"users/homepage";
-    public static final String PRODUCT_CATEGORY_LIST =BASE_URL+"users/product_category_list" ;
+    public static final String APP_ID = BASE_URL + "users/loadappid";
 }

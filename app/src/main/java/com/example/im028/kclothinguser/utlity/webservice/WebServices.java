@@ -13,20 +13,20 @@ import org.json.JSONObject;
 
 public class WebServices {
 
-    private VolleyClass volleyClass;
     private static WebServices webServices;
+    private VolleyClass volleyClass;
 
+
+    private WebServices(Context context, String TAG) {
+
+        volleyClass = new VolleyClass(context, TAG);
+    }
 
     public static WebServices getInstance(Context context, String TAG) {
         if (webServices == null) {
             webServices = new WebServices(context, TAG);
         }
         return webServices;
-    }
-
-    private WebServices(Context context, String TAG) {
-
-        volleyClass = new VolleyClass(context, TAG);
     }
 
     public void login(String url, String username, String password, final VolleyResponseListerner listerner) {
@@ -41,7 +41,7 @@ public class WebServices {
         volleyClass.volleyPostData(url, jsonObject, listerner);
     }
 
-    public void register(String url, String firstname, String lastname, String email, String password, final VolleyResponseListerner listerner) {
+    public void register(String url, String firstname, String lastname, String email, String password, String appId, final VolleyResponseListerner listerner) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("firstname", firstname);
@@ -83,7 +83,17 @@ public class WebServices {
         volleyClass.volleyPostData(url, jsonObject, listerner);
     }
 
-    public void getProductCategoryList(String url, String category_name,int paged, int limit, final VolleyResponseListerner listerner) {
+    public void sendAppId(String url, String appId, VolleyResponseListerner listerner) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("appid", appId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        volleyClass.volleyPostData(url, jsonObject, listerner);
+    }
+
+    public void getProductCategoryList(String url, String category_name, int paged, int limit, String appId, final VolleyResponseListerner listerner) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("paged", paged);
@@ -97,7 +107,7 @@ public class WebServices {
         volleyClass.volleyPostData(url, jsonObject, listerner);
     }
 
-    public void getProductsDetails(String url, String productID, final VolleyResponseListerner listerner) {
+    public void getProductsDetails(String url, String productID, String appId, final VolleyResponseListerner listerner) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("product_id", productID);
@@ -113,7 +123,7 @@ public class WebServices {
         volleyClass.volleyPostData(url, jsonObject, listerner);
     }
 
-    public void getHomePage(String url, final VolleyResponseListerner listerner) {
+    public void getHomePage(String url, String appId, final VolleyResponseListerner listerner) {
         volleyClass.volleyPostData(url, new JSONObject(), listerner);
     }
 

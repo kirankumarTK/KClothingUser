@@ -18,9 +18,9 @@ import com.example.im028.kclothinguser.model.DashBoardModel;
 import java.util.ArrayList;
 
 public class DashboardRecyleAdapter extends RecyclerView.Adapter {
+    private final int CATERGORY = 1, COLLECTION = 2, FEATURE = 3;
     private Context context;
     private ArrayList<DashBoardModel> arrayList;
-    private final int CATERGORY = 1, COLLECTION = 2, FEATURE = 3;
 
     public DashboardRecyleAdapter(Context context, ArrayList<DashBoardModel> arrayList) {
         this.context = context;

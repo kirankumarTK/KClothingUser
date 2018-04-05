@@ -18,9 +18,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.example.im028.kclothinguser.R;
-import com.example.im028.kclothinguser.activity.MainPageActivity;
+import com.example.im028.kclothinguser.activity.DashboardActivity;
 import com.example.im028.kclothinguser.activity.ProductActivity;
-import com.example.im028.kclothinguser.activity.TrunckShowsActvity;
 import com.example.im028.kclothinguser.adapter.NavigationAdapter.NavigationDrawerBaseAdapter;
 import com.example.im028.kclothinguser.dialog.SearchActivity;
 
@@ -32,14 +31,13 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  */
 public class CommonActivity extends AppCompatActivity {
     private static String TAG = "CommonActivity";
-
+    public ListView listView;
+    public NavigationDrawerBaseAdapter navigationDrawerBaseAdapter;
+    protected DrawerLayout drawerLayout;
     DrawerLayout commonActivityDrawerLayout;
     private Toolbar toolbar;
-    protected DrawerLayout drawerLayout;
-    public ListView listView;
     private FrameLayout frameLayout;
     private ActionBarDrawerToggle toggle;
-    public NavigationDrawerBaseAdapter navigationDrawerBaseAdapter;
     private View headerView;
     private ImageView search;
     private String catergories = "";
@@ -96,18 +94,16 @@ public class CommonActivity extends AppCompatActivity {
                 if (i != 0) {
                     switch (navigationDrawerBaseAdapter.getItem(i).toString()) {
                         case "Home":
-                            CommonMethod.changeActivity(CommonActivity.this, MainPageActivity.class);
+                            CommonMethod.changeActivity(CommonActivity.this, DashboardActivity.class);
                             break;
-                        case "Travelling Trunk":
-                            CommonMethod.changeActivity(CommonActivity.this, TrunckShowsActvity.class);
-                            break;
+
                         case "Shop":
                             CommonMethod.changeActivity(CommonActivity.this, ProductActivity.class);
                             break;
 
 
                         default:
-                            CommonMethod.showSnackbar(listView, "Coming Soon",CommonActivity.this);
+                            CommonMethod.showSnackbar(listView, "Coming Soon", CommonActivity.this);
                     }
                     if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                         drawerLayout.closeDrawer(GravityCompat.START);

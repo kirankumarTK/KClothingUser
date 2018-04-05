@@ -59,9 +59,9 @@ public class RegisterActivity extends AppCompatActivity {
             if (CommonMethod.checkEmpty(password))
                 callRegiterApi();
             else
-                CommonMethod.showSnackbar(firstName, "Enter Password",RegisterActivity.this);
+                CommonMethod.showSnackbar(firstName, "Enter Password", RegisterActivity.this);
         } else
-            CommonMethod.showSnackbar(firstName, "Enter Email ID",RegisterActivity.this);
+            CommonMethod.showSnackbar(firstName, "Enter Email ID", RegisterActivity.this);
 //            } else
 //                CommonMethod.showSnackbar(firstName, "Enter Last Name");
 //        } else
@@ -73,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
         progressBarRegister.setVisibility(View.VISIBLE);
         register.setEnabled(false);
         WebServices.getInstance(this, TAG).register(ConstantValues.REGISTER, CommonMethod.getText(firstName),
-                CommonMethod.getText(lastName), CommonMethod.getText(email), CommonMethod.getText(password),
+                CommonMethod.getText(lastName), CommonMethod.getText(email), CommonMethod.getText(password), Session.getInstance(RegisterActivity.this, TAG).getApp_id(),
                 new VolleyResponseListerner() {
                     @Override
                     public void onResponse(JSONObject response) throws JSONException {
@@ -86,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     response.getJSONObject("data").getString("last_name"));
                             finish();
                         } else {
-                            CommonMethod.showSnackbar(firstName, response.getString("resultmessage"),RegisterActivity.this);
+                            CommonMethod.showSnackbar(firstName, response.getString("resultmessage"), RegisterActivity.this);
                         }
                     }
 
@@ -95,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
                         progressBarRegister.setVisibility(View.VISIBLE);
                         register.setEnabled(false);
                         CommonMethod.showLogError(TAG, message);
-                        CommonMethod.showSnackbar(firstName, message,RegisterActivity.this);
+                        CommonMethod.showSnackbar(firstName, message, RegisterActivity.this);
                     }
                 });
     }

@@ -16,6 +16,7 @@ import com.example.im028.kclothinguser.common.CommonActivity;
 import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.model.DashBoardModel;
 import com.example.im028.kclothinguser.utlity.Constant.ConstantValues;
+import com.example.im028.kclothinguser.utlity.sharedPreferance.Session;
 import com.example.im028.kclothinguser.utlity.webservice.WebServices;
 
 import org.json.JSONArray;
@@ -37,13 +38,13 @@ public class DashboardActivity extends CommonActivity {
     RecyclerView recylerView;
     @BindView(R.id.viewPagerCountDots)
     LinearLayout viewPagerCountDots;
+    int currentPage = 0;
+    Timer timer;
     private ArrayList<DashBoardModel> arrayList = new ArrayList<>();
     private ArrayList<DashBoardModel.CategorylistEntity> categorylist = new ArrayList<>();
     private ArrayList<DashBoardModel.FeaturedProducts> featuredProducts = new ArrayList<>();
     private DashBoardModel dashBoardModel = new DashBoardModel();
     private ArrayList<String> slider = new ArrayList();
-    int currentPage = 0;
-    Timer timer;
     private ImageView[] dots;
     private int dotsCount;
 
@@ -52,13 +53,15 @@ public class DashboardActivity extends CommonActivity {
         super.onCreate(savedInstanceState);
         setView(R.layout.activity_dashboard);
         ButterKnife.bind(this);
+
         callWebservices();
         recylerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
+
     private void callWebservices() {
         setCommonProgressBar();
-        WebServices.getInstance(getApplicationContext(), TAG).getHomePage(ConstantValues.HOME, new VolleyResponseListerner() {
+        WebServices.getInstance(getApplicationContext(), TAG).getHomePage(ConstantValues.HOME, Session.getInstance(DashboardActivity.this, TAG).getApp_id(), new VolleyResponseListerner() {
             @Override
             public void onResponse(JSONObject response) throws JSONException {
                 hideCommonProgressBar();
@@ -204,6 +207,7 @@ public class DashboardActivity extends CommonActivity {
 
             }
         });
+
     }
 
 }

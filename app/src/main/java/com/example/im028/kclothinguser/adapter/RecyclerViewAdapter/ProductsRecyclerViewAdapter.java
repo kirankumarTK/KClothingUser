@@ -26,13 +26,13 @@ import butterknife.ButterKnife;
  */
 
 public class ProductsRecyclerViewAdapter extends RecyclerView.Adapter {
+    private final int VIEW_TYPE_ITEM = 0;
+    private final int VIEW_TYPE_LOADING = 1;
     private Context context;
     private ArrayList<DetailCatergories> detailCatergoriesArrayList;
     private boolean isLoading;
     private int visibleThreshold = 5;
     private int lastVisibleItem, totalItemCount;
-    private final int VIEW_TYPE_ITEM = 0;
-    private final int VIEW_TYPE_LOADING = 1;
     private OnLoadMoreListener onLoadMoreListener;
 
     public ProductsRecyclerViewAdapter(Context context, ArrayList<DetailCatergories> detailCatergoriesArrayList, RecyclerView recyclerView) {
