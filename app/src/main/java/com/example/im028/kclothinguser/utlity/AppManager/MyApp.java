@@ -1,11 +1,13 @@
 package com.example.im028.kclothinguser.utlity.AppManager;
 
+import android.content.Intent;
 import android.support.multidex.MultiDexApplication;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.example.im028.kclothinguser.R;
+import com.example.im028.kclothinguser.utlity.GCM.RegistrationIntentService;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -34,6 +36,7 @@ public class MyApp extends MultiDexApplication {
                 .setFontAttrId(R.attr.fontPath)
                 .build());
         sInstanse = this;
+        startService(new Intent(this, RegistrationIntentService.class));
     }
 
     public RequestQueue getnRequestQueue() {
