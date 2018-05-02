@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ExpandableListView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navList"
+    android:layout_width="270dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+
+    android:background="@color/colorPrimary"
+    android:divider="@color/light_grey"
+    android:dividerHeight="0dp"
+    android:groupIndicator="@null"
+    tools:listitem="@layout/drawerlistitem">
+
+</ExpandableListView>
+

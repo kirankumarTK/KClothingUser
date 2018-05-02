@@ -51,6 +51,9 @@ public class Session {
     public String getApp_id() {
         return pref.getString(app_id, "");
     }
+    public String getFirst_name() {
+        return pref.getString(first_name, "");
+    }
 
     public void logout() {
         editor.clear();

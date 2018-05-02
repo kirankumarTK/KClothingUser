@@ -1,10 +1,14 @@
 package com.example.im028.kclothinguser.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -14,6 +18,7 @@ import com.example.im028.kclothinguser.adapter.RecyclerViewAdapter.DashboardRecy
 import com.example.im028.kclothinguser.adapter.ViewPageAdapter.ImageSliderAdapter;
 import com.example.im028.kclothinguser.common.CommonActivity;
 import com.example.im028.kclothinguser.common.CommonMethod;
+import com.example.im028.kclothinguser.common.CommonNavignationDrawer;
 import com.example.im028.kclothinguser.model.DashBoardModel;
 import com.example.im028.kclothinguser.utlity.Constant.ConstantValues;
 import com.example.im028.kclothinguser.utlity.sharedPreferance.Session;
@@ -30,7 +35,7 @@ import java.util.TimerTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DashboardActivity extends CommonActivity {
+public class DashboardActivity extends CommonNavignationDrawer {
     private static final String TAG = DashboardActivity.class.getSimpleName();
     @BindView(R.id.imageSliderDashboard)
     ViewPager imageSlider;
@@ -51,7 +56,13 @@ public class DashboardActivity extends CommonActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setView(R.layout.activity_dashboard);
+//        setView(R.layout.activity_dashboard);
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.frame_container);
+        // inflate the custom activity layout
+        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View activityView = layoutInflater.inflate(R.layout.activity_dashboard, null, false);
+        // add the custom layout of this activity to frame layout.
+        frameLayout.addView(activityView);
         ButterKnife.bind(this);
 
         callWebservices();
@@ -61,11 +72,11 @@ public class DashboardActivity extends CommonActivity {
 
 
     private void callWebservices() {
-        setCommonProgressBar(8);
+//        setCommonProgressBar(8);
         WebServices.getInstance(getApplicationContext(), TAG).getHomePage(ConstantValues.HOME, Session.getInstance(DashboardActivity.this, TAG).getApp_id(), new VolleyResponseListerner() {
             @Override
             public void onResponse(JSONObject response) throws JSONException {
-                hideCommonProgressBar();
+//                hideCommonProgressBar();
                 if (response.optString("resultcode").equalsIgnoreCase("200")) {
                     // setting imageslider data
                     setUiPageViewController(response.optJSONObject("data").optJSONArray("homepageslider"));
@@ -136,7 +147,7 @@ public class DashboardActivity extends CommonActivity {
 
             @Override
             public void onError(String message, String title) {
-                hideCommonProgressBar();
+//                hideCommonProgressBar();
                 CommonMethod.showSnackbar(imageSlider, message, DashboardActivity.this);
             }
         });

@@ -199,7 +199,7 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
                     }
 
                     productDetailNameTextView.setText(productDetailses.get(0).getProduct_name());
-                    productDetailPriceTextView.setText(getResources().getString(R.string.Rs) + productDetailses.get(0).getPrice() + " (incl. of tax)");
+                    productDetailPriceTextView.setText(getResources().getString(R.string.Rs) + productDetailses.get(0).getPrice());
 
                     washCare.setText("Wash Care : " + productDetailses.get(0).getWash_Care());
                     shipsIn.setText("Ships In : " + productDetailses.get(0).getShips_In());
