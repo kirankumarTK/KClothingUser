@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -88,7 +87,7 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
     @BindView(R.id.whishlist)
     TextView whishlist;
     @BindView(R.id.specialInstruction)
-    EditText specialInstruction;
+    TextView specialInstruction;
     @BindView(R.id.customSize)
     Button customSize;
     @BindView(R.id.fabric)
@@ -105,6 +104,14 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
     TextView others3;
     @BindView(R.id.description)
     TextView description;
+    @BindView(R.id.addToBag)
+    Button addToBag;
+    @BindView(R.id.buyNow)
+    Button buyNow;
+    @BindView(R.id.customSizeValue)
+    TextView customSizeValue;
+    @BindView(R.id.customValueLayout)
+    LinearLayout customValueLayout;
 
     private ArrayList<StandardSize> standardSizeArrayList = new ArrayList<>();
     private ArrayList<Custom_Size> custom_sizeArrayList = new ArrayList<>();
@@ -120,7 +127,6 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
     private int StandardSizePosition = 0;
     private ImageView[] dots;
     private int dotCount;
-    private ArrayList<String> arrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -160,11 +166,7 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
                 hideCommonProgressBar();
                 if (response.getString("resultcode").equalsIgnoreCase("200")) {
                     productDetailses.add(new Gson().fromJson(response.getJSONObject("data").toString(), ProductDetails.class));
-
-                    // setting imageslider data
-                    arrayList.clear();
                     setUpGalleryImage(response.getJSONObject("data").getJSONArray("gallery"));
-
 
                     for (int s = 0; s < response.getJSONObject("data").getJSONArray("sizes").length(); s++) {
                         StandardSize standardSize = new StandardSize();
@@ -235,7 +237,7 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
     }
 
     private void setUpGalleryImage(JSONArray jsonArray) {
-
+        ArrayList<String> arrayList = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
             try {
                 arrayList.add(jsonArray.get(i).toString());
@@ -261,7 +263,7 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
 
     }
 
-    @OnClick({R.id.customSize, R.id.productDetailDecrementImageView, R.id.produvtDetailQuantityTextView, R.id.productDetailIncrementImageView, R.id.productDetailsSizeChart})
+    @OnClick({R.id.addToBag, R.id.buyNow, R.id.customSize, R.id.productDetailDecrementImageView, R.id.produvtDetailQuantityTextView, R.id.productDetailIncrementImageView, R.id.productDetailsSizeChart})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.productDetailDecrementImageView:
@@ -281,7 +283,11 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
             case R.id.customSize:
                 startActivityForResult(new Intent(getApplicationContext(), CustomSizeActivity.class).putExtra("custom", custom_sizeArrayList), CUSTOM);
                 break;
-
+            case R.id.addToBag:
+                break;
+            case R.id.buyNow:
+                CommonMethod.changeActivity(ProductDetailsActivity.this, ShoppingBagActivity.class);
+                break;
         }
     }
 
@@ -294,12 +300,18 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
                 standardSizeArrayList.get(StandardSizePosition).setSelected(false);
                 standardSizeRecyclerViewAdapter.notifyDataSetChanged();
 
+                customValueLayout.setVisibility(View.VISIBLE);
+                ArrayList  array=new ArrayList();
                 for (Map.Entry<String, Integer> entry : custom_size_map.entrySet()) {
                     String key = entry.getKey();
                     Integer value = entry.getValue();
                     CommonMethod.showLogError(TAG, key + "   " + value);
+                    array.add(key);
+                    if (array.size()!= custom_size_map.size())
+                        customSizeValue.append(key + " : " + value + "\n");
+                    else
+                        customSizeValue.append(key + " : " + value);
                 }
-
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -315,6 +327,5 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
     public void onCatogries(String catergory) {
 
     }
-
 
 }

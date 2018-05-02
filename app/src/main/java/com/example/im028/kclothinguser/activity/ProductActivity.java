@@ -82,7 +82,6 @@ public class ProductActivity extends CommonActivity {
                 CatergoryID = getIntent().getStringExtra("text");
                 search = getIntent().getStringExtra("text1");
                 getProducts(paged, CatergoryID, search, orderBy);
-
             }
 
             @Override
@@ -161,7 +160,6 @@ public class ProductActivity extends CommonActivity {
                     getProducts(paged, CatergoryID, search, "price");
                 if (data.getStringExtra("sort").equalsIgnoreCase("high to low"))
                     getProducts(paged, CatergoryID, search, "price-desc");
-
 
             }
         }

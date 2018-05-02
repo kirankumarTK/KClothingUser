@@ -17,6 +17,10 @@ public class ConstantValues {
     public static final String PRODUCTS_DETAILS = BASE_URL + "users/gets_product_details";
     public static final String HOME = BASE_URL + "users/homepage";
     public static final String PRODUCT_CATEGORY_LIST = BASE_URL + "users/product_category_list";
-
+    public static final String SOCIAL_LOGIN = BASE_URL + "users/social_login/";
     public static final String APP_ID = BASE_URL + "users/loadappid";
+    public static final String UPDATE_ADDRESS = BASE_URL + "users/update_billing_address/";
+    public static final String CHANGE_PASSWD = BASE_URL + "users/change_password/";
+    public static final String GET_BILL_ADDRESS = BASE_URL + "users/get_billing_address/";
+
 }

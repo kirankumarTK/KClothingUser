@@ -127,4 +127,63 @@ public class WebServices {
         volleyClass.volleyPostData(url, new JSONObject(), listerner);
     }
 
+    public void socialLogin(String url, String email, String name, String type, final VolleyResponseListerner listerner) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("email", email);
+            jsonObject.put("name", name);
+            jsonObject.put("type", type);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        volleyClass.volleyPostData(url, jsonObject, listerner);
+    }
+
+
+    public void updateAddress(String url, String userId, String billing_first_name, String billing_last_name, String billing_email,
+                              String billing_phone, String billing_country, String billing_address_1, String billing_address_2,
+                              String billing_city, String billing_state, String billing_postcode, final VolleyResponseListerner listerner) {
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("user_id", userId);
+            jsonObject.put("billing_first_name", billing_first_name);
+            jsonObject.put("billing_last_name", billing_last_name);
+            jsonObject.put("billing_email", billing_email);
+            jsonObject.put("billing_phone", billing_phone);
+            jsonObject.put("billing_country", billing_country);
+            jsonObject.put("billing_address_1", billing_address_1);
+            jsonObject.put("billing_address_2", billing_address_2);
+            jsonObject.put("billing_city", billing_city);
+            jsonObject.put("billing_state", billing_state);
+            jsonObject.put("billing_postcode", billing_postcode);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        volleyClass.volleyPostData(url, jsonObject, listerner);
+    }
+
+    public void getBillingAddress(String url, String userId, final VolleyResponseListerner listerner) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("user_id", userId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        volleyClass.volleyPostData(url, jsonObject, listerner);
+    }
+
+    public void changePasswd(String url, String userId, String current_pass, String new_pass, String confirm_pass, final VolleyResponseListerner listerner) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("user_id", userId);
+            jsonObject.put("current_password", current_pass);
+            jsonObject.put("new_password", new_pass);
+            jsonObject.put("confirm_password", confirm_pass);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        volleyClass.volleyPostData(url,jsonObject,listerner);
+    }
+
 }

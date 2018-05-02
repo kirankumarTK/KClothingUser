@@ -8,6 +8,7 @@ import android.support.design.widget.TextInputEditText;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONObject;
@@ -55,8 +56,19 @@ public class CommonMethod {
         return view.getText().toString();
     }
 
+    public static String getEditTextValue(EditText view){
+        return view.getText().toString();
+    }
+
     public static boolean checkEmpty(TextInputEditText view) {
         if (getText(view).equalsIgnoreCase(""))
+            return false;
+        else
+            return true;
+    }
+
+    public static boolean checkEmptyEditText(EditText view) {
+        if (view.getText().toString().equalsIgnoreCase(""))
             return false;
         else
             return true;

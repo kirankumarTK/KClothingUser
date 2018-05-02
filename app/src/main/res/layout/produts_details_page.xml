@@ -362,9 +362,27 @@
                     android:textAllCaps="false"
                     android:textColor="@android:color/white" />
 
+                <LinearLayout
+                    android:id="@+id/customValueLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/customSizeValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@android:color/black" />
+
+                </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:background="@color/light_grey" />
 
                 <TextView
@@ -463,6 +481,7 @@
         android:weightSum="2">
 
         <Button
+            android:id="@+id/addToBag"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -473,6 +492,7 @@
             android:textColor="@android:color/black" />
 
         <Button
+            android:id="@+id/buyNow"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

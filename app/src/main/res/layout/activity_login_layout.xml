@@ -24,49 +24,22 @@
         android:gravity="center_vertical"
         android:orientation="vertical">
 
-        <!--<android.support.design.widget.TextInputLayout-->
-        <!--style="@style/textinputtext"-->
-        <!--android:layout_marginTop="@dimen/_5sdp">-->
-
-        <!--<android.support.design.widget.TextInputEditText-->
-        <!--android:id="@+id/userNameEditextLogin"-->
-        <!--style="@style/editTextStyle"-->
-        <!--android:hint="User Name"-->
-        <!--android:singleLine="true"-->
-        <!--android:text="rahulE@gmail.com" />-->
-        <!--</android.support.design.widget.TextInputLayout>-->
-
-
-        <!--<android.support.design.widget.TextInputLayout-->
-        <!--style="@style/textinputtext"-->
-        <!--android:layout_marginTop="@dimen/_5sdp">-->
-
-        <!--<android.support.design.widget.TextInputEditText-->
-        <!--android:id="@+id/passwordEditextLogin"-->
-        <!--style="@style/editTextStyle"-->
-        <!--android:hint="Password"-->
-        <!--android:inputType="textPassword"-->
-        <!--android:singleLine="true"-->
-        <!--android:text="12345678-" />-->
-        <!--</android.support.design.widget.TextInputLayout>-->
 
         <EditText
+            android:id="@+id/email"
             style="@style/editTextStyle"
             android:hint="Email Address" />
 
         <EditText
+            android:id="@+id/password"
             style="@style/editTextStyle"
             android:hint="Password"
             android:inputType="textPassword" />
 
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="@dimen/_20sdp"-->
-        <!--android:gravity="center">-->
+
 
         <Button
-            android:id="@+id/loginButtonLogin"
+            android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_5sdp"
@@ -79,7 +52,7 @@
         <!--</LinearLayout>-->
 
         <TextView
-            android:id="@+id/forgotPasswordTextview"
+            android:id="@+id/forgotPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp"
@@ -146,18 +119,21 @@
         android:weightSum="2">
 
         <LinearLayout
+            android:id="@+id/facebook"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/_15sdp"
             android:layout_weight="1"
             android:background="@drawable/rect_background"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:orientation="horizontal"
             android:padding="@dimen/_10sdp">
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingRight="@dimen/_5sdp"
+                android:src="@drawable/facebook"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -167,18 +143,21 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/gmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_weight="1"
             android:background="@drawable/rect_background"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:orientation="horizontal"
             android:padding="@dimen/_10sdp">
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:src="@drawable/gmail"
+                android:paddingRight="@dimen/_5sdp"/>
 
             <TextView
                 android:layout_width="wrap_content"

@@ -19,7 +19,7 @@
             android:layout_centerVertical="true"
             android:gravity="center"
             android:text="How To Measure ?"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <ImageView
@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_margin="@dimen/_5sdp"
-        android:background="@drawable/rectangle_back_ground"
+        android:background="@drawable/rect_bg_2"
         android:gravity="center|start"
         android:hint="Special Instruction"
         android:padding="@dimen/_5sdp" />
@@ -53,5 +53,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
+        android:background="@color/light_red"
         android:text="submit" />
 </LinearLayout>

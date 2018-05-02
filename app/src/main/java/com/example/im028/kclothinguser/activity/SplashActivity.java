@@ -1,6 +1,7 @@
 package com.example.im028.kclothinguser.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 
@@ -22,7 +23,12 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        sendDeviceId();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                sendDeviceId();
+            }
+        }, 3000);
 
     }
 
@@ -35,6 +41,7 @@ public class SplashActivity extends AppCompatActivity {
                 if (response.optString("resultcode").equalsIgnoreCase("200")) {
                     Session.getInstance(SplashActivity.this, TAG).storeAppId(response.getJSONObject("data").getString("appid"));
                     CommonMethod.changeActivityWithParamsText(SplashActivity.this, DashboardActivity.class, "", "");
+                    finish();
                 }
             }
 

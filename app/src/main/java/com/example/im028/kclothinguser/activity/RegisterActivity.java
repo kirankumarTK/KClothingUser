@@ -53,8 +53,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     @OnClick(R.id.registerButtonLogin)
     public void onViewClicked() {
-//        if (CommonMethod.checkEmpty(firstName)) {
-//            if (CommonMethod.checkEmpty(lastName)) {
         if (CommonMethod.checkEmpty(email)) {
             if (CommonMethod.checkEmpty(password))
                 callRegiterApi();
@@ -62,10 +60,6 @@ public class RegisterActivity extends AppCompatActivity {
                 CommonMethod.showSnackbar(firstName, "Enter Password", RegisterActivity.this);
         } else
             CommonMethod.showSnackbar(firstName, "Enter Email ID", RegisterActivity.this);
-//            } else
-//                CommonMethod.showSnackbar(firstName, "Enter Last Name");
-//        } else
-//            CommonMethod.showSnackbar(firstName, "Enter First Name");
 
     }
 

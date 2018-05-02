@@ -77,7 +77,7 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
         category = getIntent().getStringExtra("text");
 
         setCommonProgressBar(8);
-        manager = new GridLayoutManager(this, 2);
+        manager = new GridLayoutManager(this, 1);
         productListRecyclerView.setLayoutManager(manager);
         detailCatergoriesRecyclerViewAdapter = new DetailCatergoriesRecyclerViewAdapter(this, productList, mainScrollView, "", this);
         productListRecyclerView.setAdapter(detailCatergoriesRecyclerViewAdapter);

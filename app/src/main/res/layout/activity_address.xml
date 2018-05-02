@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.im028.kclothinguser.activity.AddressActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/_5sdp">
+
+        <EditText
+            android:id="@+id/firstName"
+            style="@style/editTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="First Name"/>
+
+        <EditText
+            android:id="@+id/lastName"
+            style="@style/editTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Last Name"/>
+
+        <EditText
+            android:id="@+id/companyName"
+            style="@style/editTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Company Name"/>
+
+        <EditText
+            android:id="@+id/email"
+            style="@style/editTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email Address"/>
+        <EditText
+            android:id="@+id/phoneNo"
+            android:layout_width="match_parent"
+            style="@style/editTextStyle"
+            android:layout_height="wrap_content"
+            android:hint="Phone Number"/>
+
+
+        <EditText
+            android:id="@+id/address1"
+            style="@style/editTextStyle" android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Address 1"/>
+
+        <EditText
+            android:id="@+id/address2"
+            style="@style/editTextStyle" android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Address 2"/>
+
+        <EditText
+            android:id="@+id/townCity"
+            style="@style/editTextStyle" android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Town / City"/>
+
+        <EditText
+            android:id="@+id/stateCountry"
+            style="@style/editTextStyle" android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="State / Country"/>
+
+        <EditText
+            android:id="@+id/postcode"
+            style="@style/editTextStyle" android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Postcode / ZIP"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <RadioButton
+                android:id="@+id/homeRadio"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"/>
+
+            <RadioButton
+                android:id="@+id/officeRadio"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Office"/>
+        </RadioGroup>
+
+        <CheckBox
+            android:id="@+id/shipToDiffAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ship to a different address?"
+            android:textAllCaps="true"/>
+
+        <TextView
+            android:id="@+id/placeOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Place order"
+            android:textAllCaps="true"
+            android:gravity="center"
+            android:padding="@dimen/_8sdp"
+            android:background="@color/light_red"/>
+
+    </LinearLayout>
+
+</ScrollView>
