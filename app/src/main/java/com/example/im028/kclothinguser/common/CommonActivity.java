@@ -58,6 +58,7 @@ public class CommonActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.commonActivityDrawerLayout);
         commonProgressBar = (ProgressBar) findViewById(R.id.commonProgressBar);
         listView = (ListView) findViewById(R.id.commonActivityFrameLayoutLeftDrawerListView);
+
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {

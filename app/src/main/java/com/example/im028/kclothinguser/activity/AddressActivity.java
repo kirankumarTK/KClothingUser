@@ -56,7 +56,7 @@ public class AddressActivity extends BackCommonActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setView(R.layout.activity_address);
+        setView(R.layout.activity_address,"Address");
         ButterKnife.bind(this);
 
         if (getIntent().getStringExtra("editAddress") != null) {

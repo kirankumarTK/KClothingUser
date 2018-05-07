@@ -33,7 +33,7 @@ public class DetailCatergoriesRecyclerViewAdapter extends RecyclerView.Adapter {
     public Context context;
     private ArrayList<DetailCatergories> detailCatergories;
     private String tag;
-    private boolean isLoading;
+    private boolean isLoading, flag = true;
     private OnLoadMoreListener onLoadMoreListener;
 
 
@@ -80,13 +80,11 @@ public class DetailCatergoriesRecyclerViewAdapter extends RecyclerView.Adapter {
             if (tag.equalsIgnoreCase("similarProduct")) {
                 Picasso.with(context)
                         .load(detailCatergories.get(position).getOriginal_image())
-                        .placeholder(R.drawable.logo)
                         .into(customViewHolder.catergoreisProductsImageView);
             } else {
                 try {
                     Picasso.with(context)
                             .load(detailCatergories.get(position).getMedium_image())
-                            .placeholder(R.drawable.logo)
                             .into(customViewHolder.catergoreisProductsImageView);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -94,19 +92,32 @@ public class DetailCatergoriesRecyclerViewAdapter extends RecyclerView.Adapter {
             }
 
             customViewHolder.catergoreisProductsDescriptionTextView.setText(detailCatergories.get(position).getProduct_name());
-            customViewHolder.catergoreisProductsPriceTextView.setText(context.getResources().getString(R.string.Rs) + detailCatergories.get(position).getPrice());
+            customViewHolder.catergoreisProductsPriceTextView.setText(context.getResources().getString(R.string.Rs) + detailCatergories.get(position).getPrice() + " (incl of tax)");
             customViewHolder.catergoreisProductsImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     CommonMethod.changeActivityWithParamsText(context, ProductDetailsActivity.class, detailCatergories.get(position).getProduct_id() + "", "");
                 }
             });
+            customViewHolder.wishlistImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (flag){
+                        customViewHolder.wishlistImageView.setImageResource(R.drawable.wishlist);
+                        flag=false;
+                    }else {
+                        customViewHolder.wishlistImageView.setImageResource(R.drawable.wishlist_red);
+                        flag=true;
+                    }
+                }
 
+            });
 
         } else if (holder instanceof LoadingViewHolder) {
             LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
             loadingViewHolder.progressBar.setIndeterminate(true);
         }
+
     }
 
 
@@ -137,6 +148,8 @@ public class DetailCatergoriesRecyclerViewAdapter extends RecyclerView.Adapter {
         @Nullable
         @BindView(R.id.catergoreisProductsImageView)
         ImageView catergoreisProductsImageView;
+        @BindView(R.id.wishlistImageView)
+        ImageView wishlistImageView;
         @Nullable
         @BindView(R.id.catergoreisProductsDescriptionTextView)
         TextView catergoreisProductsDescriptionTextView;

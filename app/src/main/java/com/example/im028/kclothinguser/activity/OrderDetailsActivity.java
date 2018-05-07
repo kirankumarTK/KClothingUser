@@ -42,7 +42,7 @@ public class OrderDetailsActivity extends BackCommonActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setView(R.layout.activity_order_details);
+        setView(R.layout.activity_order_details,"Order Details");
         ButterKnife.bind(this);
     }
 

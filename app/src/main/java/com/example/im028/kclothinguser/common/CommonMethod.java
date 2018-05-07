@@ -1,8 +1,10 @@
 package com.example.im028.kclothinguser.common;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -56,7 +59,7 @@ public class CommonMethod {
         return view.getText().toString();
     }
 
-    public static String getEditTextValue(EditText view){
+    public static String getEditTextValue(EditText view) {
         return view.getText().toString();
     }
 
@@ -107,6 +110,42 @@ public class CommonMethod {
         i.putExtra("text", text);
         i.putExtra("text1", text1);
         context.startActivity(i);
+    }
+
+    public static void googleMap(Context context, String latLang) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(latLang));
+        try {
+            context.startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void call(Context context, String phoneNumber) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + phoneNumber));
+        try {
+            context.startActivity(intent);
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(context, "Their is no call Feature", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void sendMail(Context context, String contentString) {
+        try {
+
+            Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+            emailIntent.setData(Uri.parse("mailto:" + "hello@bykaveri.com"));
+            emailIntent.setType("message/rfc822");
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "KAVERI (K Clothing)");
+            emailIntent.putExtra(Intent.EXTRA_TEXT, contentString);
+            emailIntent.setData(Uri.parse("mailto:" + "hello@bykaveri.com"));
+            emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 

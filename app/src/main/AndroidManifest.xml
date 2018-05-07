@@ -26,20 +26,27 @@
             </intent-filter>
         </activity>
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity
             android:name=".activity.DashboardActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activity.HomePageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
@@ -91,12 +98,20 @@
         <activity android:name=".activity.ShoppingBagActivity" />
         <activity android:name=".activity.AddressActivity" />
         <activity android:name=".activity.OrderDetailsActivity" />
-        <activity android:name=".activity.ForgotPasswdActivity"></activity>
+        <activity android:name=".activity.ForgotPasswdActivity" />
+        <activity
+            android:name=".activity.ProfileUpdate"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".activity.Trunckshow" />
+        <activity android:name=".activity.ContactActivity" />
+        <activity android:name=".activity.OrderActivity" />
+        <activity android:name=".activity.StoreLocatorActivity" />
+        <activity android:name=".Indicator.IndicatorActivity" />
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <category android:name="com.example.gcm" />

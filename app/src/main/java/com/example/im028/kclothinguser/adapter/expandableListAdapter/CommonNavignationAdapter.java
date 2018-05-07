@@ -2,7 +2,6 @@ package com.example.im028.kclothinguser.adapter.expandableListAdapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +11,18 @@ import android.view.animation.AnimationUtils;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.im028.kclothinguser.R;
-import com.example.im028.kclothinguser.activity.DashboardActivity;
+import com.example.im028.kclothinguser.activity.ContactActivity;
+import com.example.im028.kclothinguser.activity.HomePageActivity;
 import com.example.im028.kclothinguser.activity.LoginActivity;
+import com.example.im028.kclothinguser.activity.OrderActivity;
+import com.example.im028.kclothinguser.activity.ProductCategoryActivity;
+import com.example.im028.kclothinguser.activity.ProfileUpdate;
+import com.example.im028.kclothinguser.activity.StoreLocatorActivity;
+import com.example.im028.kclothinguser.activity.Trunckshow;
+import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.model.CommonNavignationHeader;
 import com.example.im028.kclothinguser.utlity.sharedPreferance.Session;
 
@@ -84,13 +91,10 @@ public class CommonNavignationAdapter extends BaseExpandableListAdapter {
         final ImageView drop = (ImageView) convertView.findViewById(R.id.drop);
         TextView txtTitle = (TextView) convertView.findViewById(R.id.title);
         drop.setVisibility(View.GONE);
-        if (commonNavignationHeaders.get(groupPosition).getMenuTitle().equals("Course Booking") || commonNavignationHeaders.get(groupPosition).getMenuTitle().equals("Profile")
-                || commonNavignationHeaders.get(groupPosition).getMenuTitle().equals("Features") || commonNavignationHeaders.get(groupPosition).getMenuTitle().equals("About Us")
-                || commonNavignationHeaders.get(groupPosition).getMenuTitle().equals("Others")) {
+        if (commonNavignationHeaders.get(groupPosition).getMenuTitle().equals("Shop") || commonNavignationHeaders.get(groupPosition).getMenuTitle().equals("My account")) {
             txtTitle.setText(commonNavignationHeaders.get(groupPosition).getMenuTitle());
             drop.setVisibility(View.VISIBLE);
-            drop.setImageResource(R.drawable.dropdown);
-
+            drop.setImageResource(R.drawable.down_arrow);
 
         } else {
             txtTitle.setText(commonNavignationHeaders.get(groupPosition).getMenuTitle());
@@ -139,117 +143,102 @@ public class CommonNavignationAdapter extends BaseExpandableListAdapter {
     private void displayView(String position) {
 
         switch (position) {
-            case "Profile":
+            case "Home":
                 mDrawerLayout.closeDrawers();
-                changeActivity(DashboardActivity.class);
-                break;
-            case "View INDoS Certificate":
-                mDrawerLayout.closeDrawers();
-                changeActivity(DashboardActivity.class);
+                changeActivity(HomePageActivity.class);
                 break;
 
-            case "Registration":
+            case "My order":
                 mDrawerLayout.closeDrawers();
-                changeActivity(DashboardActivity.class);
-//                ProfileEditDataModel.profileEditDataModel.setEdit(false);
+                Intent i = new Intent(context, OrderActivity.class);
+                i.putExtra("title", "My order");
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(i);
                 break;
 
-
-            case "Quick Search":
-                changeActivity(DashboardActivity.class);
+            case "My wishlist":
                 mDrawerLayout.closeDrawers();
-                break;
-            case "Course Details":
-                changeActivity(DashboardActivity.class);
-                mDrawerLayout.closeDrawers();
+                Intent i1 = new Intent(context, OrderActivity.class);
+                i1.putExtra("title", "My wishlist");
+                i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(i1);
                 break;
 
-            case "Discount Package":
-                changeActivity(DashboardActivity.class);
+            case "More about you":
                 mDrawerLayout.closeDrawers();
+                changeActivity(ProfileUpdate.class);
                 break;
 
-            case "Registered course":
-                changeActivity(DashboardActivity.class);
-
+            case "Dresses":
                 mDrawerLayout.closeDrawers();
+                CommonMethod.changeActivityWithParamsText(context, ProductCategoryActivity.class, "dresses", "");
                 break;
 
-            case "Certification verification":
-                changeActivity(DashboardActivity.class);
+            case "Tunics":
                 mDrawerLayout.closeDrawers();
+                CommonMethod.changeActivityWithParamsText(context, ProductCategoryActivity.class, "tunics", "");
                 break;
-            case "Cart":
-                changeActivity(DashboardActivity.class);
+
+            case "Tops":
+                CommonMethod.changeActivityWithParamsText(context, ProductCategoryActivity.class, "tops", "");
                 mDrawerLayout.closeDrawers();
                 break;
 
-            case "My Order":
-                changeActivity(DashboardActivity.class);
+            case "Pants":
+                CommonMethod.changeActivityWithParamsText(context, ProductCategoryActivity.class, "pants", "");
                 mDrawerLayout.closeDrawers();
                 break;
+
+            case "Jackets and Shrugs":
+                CommonMethod.changeActivityWithParamsText(context, ProductCategoryActivity.class, "jackets and shrugs", "");
+                mDrawerLayout.closeDrawers();
+                break;
+
+            case "Shirts":
+                CommonMethod.changeActivityWithParamsText(context, ProductCategoryActivity.class, "shirts", "");
+                mDrawerLayout.closeDrawers();
+                break;
+
+            case "New arrivals":
+               /* changeActivity(HomePageActivity.class);
+                mDrawerLayout.closeDrawers();*/
+                Toast.makeText(context, "Under development", Toast.LENGTH_LONG).show();
+                break;
+
+            case "The Travelling Trunk":
+                changeActivity(Trunckshow.class);
+                mDrawerLayout.closeDrawers();
+                break;
+
+            case "Store locator":
+                changeActivity(StoreLocatorActivity.class);
+                mDrawerLayout.closeDrawers();
+                break;
+
             case "FAQ":
                 // new AsyncTaskAtom(CommonNavignationDrawer.this).execute(ConstantValue.AtomUrl2);
-                changeActivity(DashboardActivity.class);
+                /*changeActivity(HomePageActivity.class);
+                mDrawerLayout.closeDrawers();*/
+                Toast.makeText(context, "Under development", Toast.LENGTH_LONG).show();
+                break;
+
+            case "Contact us":
+                changeActivity(ContactActivity.class);
                 mDrawerLayout.closeDrawers();
                 break;
 
-            case "Change Password":
-                changeActivity(DashboardActivity.class);
-                mDrawerLayout.closeDrawers();
+            case "Returns & Exchange":
+               /* changeActivity(HomePageActivity.class);
+                mDrawerLayout.closeDrawers();*/
+                Toast.makeText(context, "Under development", Toast.LENGTH_LONG).show();
                 break;
 
-            case "Forgot Password":
-                changeActivity(DashboardActivity.class);
-                mDrawerLayout.closeDrawers();
-                break;
-
-            case "Terms and Condition":
-                changeActivity(DashboardActivity.class);
-                mDrawerLayout.closeDrawers();
-                break;
-
-            case "Contact Us":
-                changeActivity(DashboardActivity.class);
-                mDrawerLayout.closeDrawers();
-                break;
-
-            case "Settings":
-                changeActivity(DashboardActivity.class);
-                mDrawerLayout.closeDrawers();
-                break;
-
-            case "Feedback":
-                changeActivity(DashboardActivity.class);
-                mDrawerLayout.closeDrawers();
-                break;
-
-            case "Notifications":
-                changeActivity(DashboardActivity.class);
-                mDrawerLayout.closeDrawers();
-                break;
-            case "About":
-                changeActivity(DashboardActivity.class);
-                mDrawerLayout.closeDrawers();
-                break;
-
-            case "Course Material":
-                changeActivity(DashboardActivity.class);
-                mDrawerLayout.closeDrawers();
-                break;
-            case "Gallery":
-                changeActivity(DashboardActivity.class);
-                mDrawerLayout.closeDrawers();
-                break;
             case "Log Out":
                 Session.getInstance(context, "").logout();
-
-                Intent i = new Intent(context, LoginActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                context.startActivity(i);
+                Intent i2 = new Intent(context, LoginActivity.class);
+                i2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(i2);
                 mDrawerLayout.closeDrawers();
-
                 break;
 
             case "Login":
@@ -257,7 +246,7 @@ public class CommonNavignationAdapter extends BaseExpandableListAdapter {
                 mDrawerLayout.closeDrawers();
                 break;
 
-            case "Write a Review":
+           /* case "Write a Review":
                 try {
                     context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + context.getPackageName())));
 
@@ -277,7 +266,7 @@ public class CommonNavignationAdapter extends BaseExpandableListAdapter {
                 mDrawerLayout.closeDrawers();
                 break;
 
-
+*/
             default:
                 break;
         }

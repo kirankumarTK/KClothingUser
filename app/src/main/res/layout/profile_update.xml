@@ -2,82 +2,142 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="com.example.im028.kclothinguser.activity.AddressActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_5sdp"
+        android:layout_margin="@dimen/_8sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/NameEdittext"
-            style="@style/editTextStyle"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Name" />
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/emailEdittext"
-            style="@style/editTextStyle"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/NameEdittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="First Name"
+                android:inputType="textCapWords"
+                android:maxLines="1"
+                android:textSize="@dimen/_12sdp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email*" />
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/alternativeEmailEdittext"
-            style="@style/editTextStyle"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/emailEdittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email*"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:textSize="@dimen/_12sdp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Alternative Email" />
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/phoneNoEditText"
-            style="@style/editTextStyle"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/alternativeEmailEdittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Alternative email"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:textSize="@dimen/_12sdp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Phone Number" />
+            android:layout_height="wrap_content">
 
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/phoneNoEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone*"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:textSize="@dimen/_12sdp" />
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/addressEdittext"
-            style="@style/editTextStyle"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Address" />
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/birthdayEdittext"
-            style="@style/editTextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Birthday" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/addressEdittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Address"
+                android:inputType="textCapWords"
+                android:maxLines="2"
+                android:textSize="@dimen/_12sdp" />
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/hobbyEdittext"
-            style="@style/editTextStyle"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Hobby" />
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/favoritecolorEdittext"
-            style="@style/editTextStyle"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/birthdayEdittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Birthday"
+                android:inputType="textCapWords"
+                android:maxLines="1"
+                android:textSize="@dimen/_12sdp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="favorite color" />
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/hobbyEdittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Hobby"
+                android:inputType="textCapWords"
+                android:maxLines="1"
+                android:textSize="@dimen/_12sdp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/favoritecolorEdittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Favorite color"
+                android:inputType="textCapWords"
+                android:maxLines="1"
+                android:textSize="@dimen/_12sdp" />
+        </android.support.design.widget.TextInputLayout>
+
 
         <TextView
-            android:id="@+id/postcode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Size measurement" />
+            android:layout_marginTop="@dimen/_10sdp"
+            android:paddingLeft="@dimen/_3sdp"
+            android:text="Size measurement"
+            android:visibility="gone" />
 
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <RadioButton
                 android:id="@+id/XSRadio"
@@ -127,12 +187,17 @@
             android:id="@+id/placeOrder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="#000000"
             android:gravity="center"
             android:padding="@dimen/_8sdp"
             android:text="Update"
-            android:textAllCaps="true"
-            android:textColor="#000000" />
+            android:textAllCaps="false"
+            android:textColor="#ffffff" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_10sdp" />
 
     </LinearLayout>
 

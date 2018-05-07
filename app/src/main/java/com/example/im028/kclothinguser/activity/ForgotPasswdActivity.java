@@ -35,7 +35,7 @@ public class ForgotPasswdActivity extends BackCommonActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setView(R.layout.activity_forgot);
+        setView(R.layout.activity_forgot,"Forgot Password");
         ButterKnife.bind(this);
 
 

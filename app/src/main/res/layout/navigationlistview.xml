@@ -5,10 +5,10 @@
     android:layout_width="270dp"
     android:layout_height="match_parent"
     android:layout_gravity="start"
-
-    android:background="@color/colorPrimary"
-    android:divider="@color/light_grey"
+    android:background="#ffffff"
+    android:divider="@color/background_gray"
     android:dividerHeight="0dp"
+    android:scrollbars="none"
     android:groupIndicator="@null"
     tools:listitem="@layout/drawerlistitem">
 

@@ -508,7 +508,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_10sdp"
-            android:background="@color/medium_green"
+            android:background="@color/black"
             android:gravity="center"
             android:padding="@dimen/_10sdp"
             android:text="place order"

@@ -14,8 +14,8 @@ import com.example.im028.kclothinguser.Interface.OnLoadMoreListener;
 import com.example.im028.kclothinguser.Interface.VolleyResponseListerner;
 import com.example.im028.kclothinguser.R;
 import com.example.im028.kclothinguser.adapter.RecyclerViewAdapter.ProductsRecyclerViewAdapter;
-import com.example.im028.kclothinguser.common.CommonActivity;
 import com.example.im028.kclothinguser.common.CommonMethod;
+import com.example.im028.kclothinguser.common.CommonNavignationDrawer;
 import com.example.im028.kclothinguser.dialog.SortActivity;
 import com.example.im028.kclothinguser.model.DetailCatergories;
 import com.example.im028.kclothinguser.utlity.Constant.ConstantValues;
@@ -35,7 +35,7 @@ import butterknife.OnClick;
  * Created by im028 on 30/6/17.
  */
 
-public class ProductActivity extends CommonActivity {
+public class ProductActivity extends CommonNavignationDrawer{
 
     @BindView(R.id.procductProgress)
     ProgressBar productProgress;

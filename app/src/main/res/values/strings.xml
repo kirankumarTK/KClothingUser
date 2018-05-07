@@ -5,4 +5,11 @@
     <string name="navigation_drawer_close">KClothing</string>
     <string name="Rs">\u20B9</string>
     <string name="action_menu_edit">Edit</string>
+    <string name="mailid"><u>hello@bykaveri.com</u></string>
+    <string name="phone"><u>+91 91762 52814</u></string>
+    <string name="mumbaiphone1"><u>+91 87780 88293</u></string>
+    <string name="mumbaiphone2"><u>+91 22 22672595</u></string>
+    <string name="password"><u>Forgot password ?</u></string>
+
+    <string name="facebook_app_id">240483406527368</string>
 </resources>

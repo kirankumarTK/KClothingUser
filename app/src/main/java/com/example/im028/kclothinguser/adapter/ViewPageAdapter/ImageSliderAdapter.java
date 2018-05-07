@@ -42,7 +42,6 @@ public class ImageSliderAdapter extends PagerAdapter {
         try {
             Picasso.with(mContext)
                     .load(sliderList.get(position))
-                    .placeholder(R.drawable.logo)
                     .fit()
                     .into(imageView);
         } catch (Exception e) {

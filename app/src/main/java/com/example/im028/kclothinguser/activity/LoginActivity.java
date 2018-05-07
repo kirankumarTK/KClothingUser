@@ -4,11 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,9 +51,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
 
     @BindView(R.id.email)
-    EditText email;
+    TextInputEditText email;
     @BindView(R.id.password)
-    EditText password;
+    TextInputEditText password;
     @BindView(R.id.login)
     Button login;
     @BindView(R.id.forgotPassword)
@@ -221,6 +221,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             public void onResponse(JSONObject response) throws JSONException {
                 if (response.optString("resultcode").equalsIgnoreCase("200")) {
                     CommonMethod.showSnackbar(facebook, response.getString("resultmessage"), LoginActivity.this);
+                    CommonMethod.changeActivityWithParamsText(LoginActivity.this, DashboardActivity.class, "", "");
                 }
             }
 
@@ -237,12 +238,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             public void onResponse(JSONObject response) throws JSONException {
                 if (response.optString("resultcode").equalsIgnoreCase("200")) {
                     CommonMethod.showSnackbar(email, response.getString("resultmessage"), LoginActivity.this);
-                }
+                    CommonMethod.changeActivityWithParamsText(LoginActivity.this, DashboardActivity.class, "", "");
+                }else
+                    CommonMethod.showSnackbar(email, response.getString("resultmessage"), LoginActivity.this);
             }
 
             @Override
             public void onError(String message, String title) {
-
+                CommonMethod.showSnackbar(email, message, LoginActivity.this);
             }
         });
     }

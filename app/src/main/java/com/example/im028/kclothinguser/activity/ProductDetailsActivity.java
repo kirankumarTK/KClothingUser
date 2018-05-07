@@ -131,7 +131,7 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setView(R.layout.produts_details_page);
+        setView(R.layout.produts_details_page, "Product Details");
         ButterKnife.bind(this);
         setCommonProgressBar();
         getProductDetails(getIntent().getStringExtra("text"));
@@ -159,11 +159,9 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
 
 
     private void getProductDetails(String product_Id) {
-
         WebServices.getInstance(this, TAG).getProductsDetails(ConstantValues.PRODUCTS_DETAILS, product_Id, Session.getInstance(ProductDetailsActivity.this, TAG).getApp_id(), new VolleyResponseListerner() {
             @Override
             public void onResponse(JSONObject response) throws JSONException {
-                hideCommonProgressBar();
                 if (response.getString("resultcode").equalsIgnoreCase("200")) {
                     productDetailses.add(new Gson().fromJson(response.getJSONObject("data").toString(), ProductDetails.class));
                     setUpGalleryImage(response.getJSONObject("data").getJSONArray("gallery"));
@@ -220,10 +218,11 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
                     productDetailRelatedProducts.setNestedScrollingEnabled(false);
                     productDetailRelatedProducts.setAdapter(new DetailCatergoriesRecyclerViewAdapter(ProductDetailsActivity.this, detailCategoriesArrayList, null, "similarProduct", ProductDetailsActivity.this));
 
-
-                } else
+                    hideCommonProgressBar();
+                } else {
+                    hideCommonProgressBar();
                     CommonMethod.showSnackbar(standardSizeRecylerView, response.getString("resultmessage"), ProductDetailsActivity.this);
-
+                }
             }
 
             @Override
@@ -301,13 +300,13 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
                 standardSizeRecyclerViewAdapter.notifyDataSetChanged();
 
                 customValueLayout.setVisibility(View.VISIBLE);
-                ArrayList  array=new ArrayList();
+                ArrayList array = new ArrayList();
                 for (Map.Entry<String, Integer> entry : custom_size_map.entrySet()) {
                     String key = entry.getKey();
                     Integer value = entry.getValue();
                     CommonMethod.showLogError(TAG, key + "   " + value);
                     array.add(key);
-                    if (array.size()!= custom_size_map.size())
+                    if (array.size() != custom_size_map.size())
                         customSizeValue.append(key + " : " + value + "\n");
                     else
                         customSizeValue.append(key + " : " + value);

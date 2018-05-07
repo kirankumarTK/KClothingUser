@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.example.im028.kclothinguser.Interface.OnLoadMoreListener;
@@ -18,14 +17,15 @@ import com.example.im028.kclothinguser.R;
 import com.example.im028.kclothinguser.adapter.RecyclerViewAdapter.CatergoriesRecyclerViewAdapter;
 import com.example.im028.kclothinguser.adapter.RecyclerViewAdapter.DetailCatergoriesRecyclerViewAdapter;
 import com.example.im028.kclothinguser.adapter.ViewPageAdapter.ImageSliderAdapter;
-import com.example.im028.kclothinguser.common.CommonActivity;
 import com.example.im028.kclothinguser.common.CommonMethod;
+import com.example.im028.kclothinguser.common.CommonNavignationDrawer;
 import com.example.im028.kclothinguser.model.DetailCatergories;
 import com.example.im028.kclothinguser.model.Slider_Categories;
 import com.example.im028.kclothinguser.utlity.Constant.ConstantValues;
 import com.example.im028.kclothinguser.utlity.sharedPreferance.Session;
 import com.example.im028.kclothinguser.utlity.webservice.WebServices;
 import com.google.gson.Gson;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,10 +36,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ProductCategoryActivity extends CommonActivity implements OnLoadMoreListener {
+public class ProductCategoryActivity extends CommonNavignationDrawer implements OnLoadMoreListener {
 
-    @BindView(R.id.loadMoreProgress)
-    ProgressBar loadMoreProgress;
     @BindView(R.id.catergoryRecyclerViewMainPage)
     RecyclerView catergoryRecyclerViewMainPage;
     @BindView(R.id.productListRecyclerView)
@@ -57,6 +55,7 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
     LinearLayout viewPagerCountDots;
     @BindView(R.id.sliderLayout)
     RelativeLayout sliderLayout;
+    AVLoadingIndicatorView loadMoreProgress;
 
 
     private String TAG = ProductCategoryActivity.class.getSimpleName();
@@ -73,9 +72,8 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
         super.onCreate(savedInstanceState);
         setView(R.layout.activity_product_category);
         ButterKnife.bind(this);
-
+        loadMoreProgress= (AVLoadingIndicatorView) findViewById(R.id.loadMoreProgress);
         category = getIntent().getStringExtra("text");
-
         setCommonProgressBar(8);
         manager = new GridLayoutManager(this, 1);
         productListRecyclerView.setLayoutManager(manager);
@@ -84,7 +82,7 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
         productListRecyclerView.setNestedScrollingEnabled(false);
         setContent(true, category, paged, limit);
 
-        imageSlider.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        /*imageSlider.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 for (int i = 0; i < dotCount; i++) {
@@ -102,7 +100,7 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
             public void onPageScrollStateChanged(int state) {
 
             }
-        });
+        });*/
     }
 
     public void setContent(final boolean updateCategory, String category, final int page, int limit) {
@@ -125,12 +123,9 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
 
                     }
                     if (page == 1) {
-
                         // setting imageslider data
                         arrayList.clear();
-                        setCategoryImage(response.getJSONObject("data").getJSONArray("catImage"));
-
-
+//                        setCategoryImage(response.getJSONObject("data").getJSONArray("catImage"));
                     }
                     JSONArray productArray = response.getJSONObject("data").getJSONArray("productlist");
                     for (int i = 0; i < productArray.length(); i++) {
@@ -138,10 +133,12 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
                     }
 
                     detailCatergoriesRecyclerViewAdapter.notifyItemInserted(productList.size() - 1);
+                    loadMoreProgress.hide();
                     loadMoreProgress.setVisibility(View.GONE);
 
                 } else {
                     hideCommonProgressBar();
+                    loadMoreProgress.hide();
                     loadMoreProgress.setVisibility(View.GONE);
                     mainScrollView.setVisibility(View.VISIBLE);
                     CommonMethod.showSnackbar(mainScrollView, response.getString("resultmessage"), ProductCategoryActivity.this);
@@ -150,6 +147,7 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
 
             @Override
             public void onError(String message, String title) {
+                loadMoreProgress.hide();
                 loadMoreProgress.setVisibility(View.GONE);
                 hideCommonProgressBar();
                 mainScrollView.setVisibility(View.VISIBLE);
@@ -171,7 +169,7 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
                 e.printStackTrace();
             }
         }
-
+//raja
         imageSlider.setAdapter(new ImageSliderAdapter(ProductCategoryActivity.this, arrayList));
         dotCount = arrayList.size();
         viewPagerCountDots.removeAllViews();
@@ -191,7 +189,6 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
 
 
     private void setCategories(ArrayList<Slider_Categories> categoryLists) {
-
         catergoryRecyclerViewMainPage.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         catergoryRecyclerViewMainPage.setAdapter(new CatergoriesRecyclerViewAdapter(this, categoryLists, this));
 
@@ -203,6 +200,7 @@ public class ProductCategoryActivity extends CommonActivity implements OnLoadMor
         paged++;
         setContent(false, category, paged, limit);
         loadMoreProgress.setVisibility(View.VISIBLE);
+        loadMoreProgress.show();
 
     }
 

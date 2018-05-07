@@ -24,8 +24,8 @@
                 android:contentInsetLeft="0dp"
                 android:contentInsetRight="0dp"
                 android:contentInsetStart="0dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="0dp"
                 app:contentInsetEnd="0dp"
                 app:contentInsetStart="0dp">
 
@@ -37,51 +37,24 @@
 
                     <ImageView
                         android:id="@+id/backCommonActivityBackImageView"
-                        android:layout_width="50dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/back" />
-
-                    <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_30sdp"
+                        android:layout_height="@dimen/_35sdp"
                         android:layout_gravity="center"
-                        android:src="@drawable/logo" />
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:padding="@dimen/_7sdp"
+                        android:src="@drawable/left_arrow" />
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/backPageTitle"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
-                        android:gravity="center|end"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/backsearchCommonActivity"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_15sdp"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:src="@drawable/search" />
-
-                        <ImageView
-                            android:id="@+id/backbagCommonActivity"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_15sdp"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:src="@drawable/bag" />
-
-                        <ImageView
-                            android:id="@+id/backwhishListCommonActivity"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_15sdp"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:src="@drawable/wishlist" />
-
-                        <ImageView
-                            android:id="@+id/backprofileCommonActivity"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_15sdp"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:src="@drawable/user" />
-                    </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="@dimen/_5sdp"
+                        android:text=""
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14sdp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </android.support.v7.widget.Toolbar>
@@ -89,14 +62,26 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/black"></View>
+                android:background="@color/black"
+                android:visibility="gone" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ProgressBar
+                <com.wang.avi.AVLoadingIndicatorView
                     android:id="@+id/commonProgressBar"
+                    style="@style/AVLoadingIndicatorView.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone"
+                    app:indicatorColor="@color/black"
+                    app:indicatorName="BallScaleRippleMultipleIndicator" />
+
+                <ProgressBar
+                    android:id="@+id/commonProgressBar1234"
                     android:layout_width="@dimen/_45sdp"
                     android:layout_height="@dimen/_45sdp"
                     android:layout_centerHorizontal="true"
@@ -108,8 +93,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </RelativeLayout>
-
-
         </LinearLayout>
 
     </android.support.v4.widget.DrawerLayout>

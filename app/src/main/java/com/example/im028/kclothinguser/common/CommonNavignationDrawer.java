@@ -1,5 +1,6 @@
 package com.example.im028.kclothinguser.common;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -10,18 +11,23 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.im028.kclothinguser.R;
+import com.example.im028.kclothinguser.activity.ProfileUpdate;
 import com.example.im028.kclothinguser.adapter.expandableListAdapter.CommonNavignationAdapter;
+import com.example.im028.kclothinguser.dialog.SearchActivity;
 import com.example.im028.kclothinguser.model.CommonNavignationChild;
 import com.example.im028.kclothinguser.model.CommonNavignationHeader;
 import com.example.im028.kclothinguser.utlity.sharedPreferance.Session;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
 
@@ -30,15 +36,18 @@ public class CommonNavignationDrawer extends AppCompatActivity {
     private ExpandableListView mDrawerList;
     private CommonNavignationAdapter commonNavignationAdapter;
     private ArrayList<CommonNavignationHeader> commonNavignationHeadersList = new ArrayList<>();
-
     int layout;
 
     private View headerView, footer;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private int lastExpandedPosition = -1;
-
+    private ImageView search;
     private TextView username;
+
+    FrameLayout frameLayout;
+    private String catergories = "";
+    private AVLoadingIndicatorView commonProgressBar;
 
     public CommonNavignationDrawer(int layout) {
         this.layout = layout;
@@ -52,10 +61,13 @@ public class CommonNavignationDrawer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_common_navignation_drawer);
-        toolbar = (Toolbar) findViewById(R.id.commonActivityToolbar);
+        toolbar = (Toolbar) findViewById(R.id.commonActivityToolbar1);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        setCatergories("");
+        search = (ImageView) findViewById(R.id.searchCommonActivity);
+        commonProgressBar = (AVLoadingIndicatorView) findViewById(R.id.avi);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ExpandableListView) findViewById(R.id.navList);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
@@ -78,30 +90,8 @@ public class CommonNavignationDrawer extends AppCompatActivity {
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
 
-//        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.app_name, R.string.app_name) {
-//
-//            @Override
-//            public boolean onOptionsItemSelected(MenuItem item) {
-//
-//
-//                if (item != null && item.getItemId() == R.id.btnMyMenu) {
-//                    if (mDrawerLayout.isDrawerOpen(GravityCompat.END/*Gravity.RIGHT*/)) {
-//                        // mDrawerLayout.closeDrawer(Gravity.RIGHT);
-//                        mDrawerLayout.closeDrawer(GravityCompat.END);
-//                    } else {
-//                        //mDrawerLayout.openDrawer(Gravity.RIGHT);
-//                        mDrawerLayout.openDrawer(GravityCompat.END);
-//                    }
-//                    return true;
-//                }
-//
-//                return false;
-//            }
-//
-//        };
 
-
-        mDrawerToggle.setDrawerIndicatorEnabled(false);
+        mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         if (savedInstanceState == null) {
             // on first time display view for first nav item
@@ -110,8 +100,13 @@ public class CommonNavignationDrawer extends AppCompatActivity {
 
         headerView = getLayoutInflater().inflate(R.layout.header_navigation_list_view, null, false);
         username = (TextView) headerView.findViewById(R.id.menuProfileHeaderName);
-
-
+        ImageView profileedit = (ImageView) headerView.findViewById(R.id.profileEdit);
+        profileedit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CommonNavignationDrawer.this, ProfileUpdate.class));
+            }
+        });
         footer = getLayoutInflater().inflate(R.layout.menu_footer, null, false);
         TextView version = (TextView) footer.findViewById(R.id.appversion);
         mDrawerList.addHeaderView(headerView);
@@ -123,9 +118,32 @@ public class CommonNavignationDrawer extends AppCompatActivity {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CommonMethod.changeActivityWithParamsText(CommonNavignationDrawer.this, SearchActivity.class, catergories, "");
+            }
+        });
     }
 
+    public void setView(int layout) {
+        frameLayout = (FrameLayout) findViewById(R.id.frame_container);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(layout, null, false);
+        frameLayout.addView(view);
+    }
+
+    public void setCommonProgressBar(int frameVisible) {
+        commonProgressBar.setVisibility(View.VISIBLE);
+        commonProgressBar.show();
+        frameLayout.setVisibility(frameVisible);
+    }
+
+    public void hideCommonProgressBar() {
+        commonProgressBar.setVisibility(View.GONE);
+        commonProgressBar.hide();
+        frameLayout.setVisibility(View.VISIBLE);
+    }
 
     protected void changeActivity(Class<?> c) {
         Intent i = new Intent(CommonNavignationDrawer.this, c);
@@ -149,33 +167,16 @@ public class CommonNavignationDrawer extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-/*
-        int menuToUse = R.menu.menu_common_navignation_drawer;
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(menuToUse, menu);
-        MenuItem menuItem = menu.findItem(R.id.action_settings);
-        menuItem.setVisible(false);*/
-        return true;
-
-
-        //  getMenuInflater().inflate(R.menu.menu_common_navignation_drawer, menu);
-        //return true;
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         updateMenu();
-        username.setText(Session.getInstance(this,"").getFirst_name());
+//        username.setText(Session.getInstance(this, "").getFirst_name());
     }
 
     private void updateMenu() {
         commonNavignationHeadersList.clear();
 
-        if (Session.getInstance(this,"").getIsLogin()) {
+        if (Session.getInstance(this, "").getIsLogin()) {
 
             setMenu("Log Out");
 
@@ -203,76 +204,102 @@ public class CommonNavignationDrawer extends AppCompatActivity {
 
     }
 
+    public void setCatergories(String catergories) {
+        this.catergories = catergories;
+    }
 
     private void setMenu(String status) {
         CommonNavignationHeader commonNavignationHeader;
 
-
         //heading
         commonNavignationHeader = new CommonNavignationHeader();
-        commonNavignationHeader.setMenuTitle("Profile");
-        commonNavignationHeader.setImage(R.drawable.about);
-
-
-        //child starts here
-        CommonNavignationChild profile;
-        ArrayList<CommonNavignationChild> profileArrayList = new ArrayList<>();
-
-        profile = new CommonNavignationChild();
-        profile.setMenuSubTitle("Profile");
-        profile.setImages(R.drawable.about);
-        profileArrayList.add(profile);
-
-        profile = new CommonNavignationChild();
-        profile.setMenuSubTitle("Registered course");
-        profile.setImages(R.drawable.logo);
-        profileArrayList.add(profile);
-
-        profile = new CommonNavignationChild();
-        profile.setMenuSubTitle("View INDoS Certificate");
-        profile.setImages(R.drawable.logo);
-        profileArrayList.add(profile);
-
-//child end here
-
-        commonNavignationHeader.setCommonNavignationChildren(profileArrayList);
+        commonNavignationHeader.setMenuTitle("Home");
+        commonNavignationHeader.setImage(R.drawable.home);
         commonNavignationHeadersList.add(commonNavignationHeader);
 
+        commonNavignationHeader = new CommonNavignationHeader();
+        commonNavignationHeader.setMenuTitle("My account");
+        commonNavignationHeader.setImage(R.drawable.share);
+
+        //child starts here
+        CommonNavignationChild myAccountChild;
+        ArrayList<CommonNavignationChild> myAccountChildArrayList = new ArrayList<>();
+
+        myAccountChild = new CommonNavignationChild();
+        myAccountChild.setMenuSubTitle("My order");
+        myAccountChild.setImages(R.drawable.share);
+        myAccountChildArrayList.add(myAccountChild);
+
+        myAccountChild = new CommonNavignationChild();
+        myAccountChild.setMenuSubTitle("My wishlist");
+        myAccountChild.setImages(R.drawable.share);
+        myAccountChildArrayList.add(myAccountChild);
+
+        myAccountChild = new CommonNavignationChild();
+        myAccountChild.setMenuSubTitle("More about you");
+        myAccountChild.setImages(R.drawable.share);
+        myAccountChildArrayList.add(myAccountChild);
+
+        commonNavignationHeader.setCommonNavignationChildren(myAccountChildArrayList);
+        commonNavignationHeadersList.add(commonNavignationHeader);
 
         commonNavignationHeader = new CommonNavignationHeader();
-        commonNavignationHeader.setMenuTitle("Course Booking");
-        commonNavignationHeader.setImage(R.drawable.logo);
+        commonNavignationHeader.setMenuTitle("Shop");
+        commonNavignationHeader.setImage(R.drawable.shop);
 
         //child starts here
         CommonNavignationChild commonNavignationChild;
         ArrayList<CommonNavignationChild> commonNavignationChildArrayList = new ArrayList<>();
 
         commonNavignationChild = new CommonNavignationChild();
-        commonNavignationChild.setMenuSubTitle("Quick Search");
-        commonNavignationChild.setImages(R.drawable.logo);
-        commonNavignationChildArrayList.add(commonNavignationChild);
-
-
-        commonNavignationChild = new CommonNavignationChild();
-        commonNavignationChild.setMenuSubTitle("Course Details");
-        commonNavignationChild.setImages(R.drawable.logo);
+        commonNavignationChild.setMenuSubTitle("Dresses");
+        commonNavignationChild.setImages(R.drawable.share);
         commonNavignationChildArrayList.add(commonNavignationChild);
 
         commonNavignationChild = new CommonNavignationChild();
-        commonNavignationChild.setMenuSubTitle("Discount Package");
-        commonNavignationChild.setImages(R.drawable.logo);
-        commonNavignationChildArrayList.add(commonNavignationChild);
-
-
-        commonNavignationChild = new CommonNavignationChild();
-        commonNavignationChild.setMenuSubTitle("Cart");
-        commonNavignationChild.setImages(R.drawable.cart);
+        commonNavignationChild.setMenuSubTitle("Tunics");
+        commonNavignationChild.setImages(R.drawable.share);
         commonNavignationChildArrayList.add(commonNavignationChild);
 
         commonNavignationChild = new CommonNavignationChild();
-        commonNavignationChild.setMenuSubTitle("My Order");
-        commonNavignationChild.setImages(R.drawable.logo);
+        commonNavignationChild.setMenuSubTitle("Tops");
+        commonNavignationChild.setImages(R.drawable.share);
         commonNavignationChildArrayList.add(commonNavignationChild);
+
+        commonNavignationChild = new CommonNavignationChild();
+        commonNavignationChild.setMenuSubTitle("Pants");
+        commonNavignationChild.setImages(R.drawable.share);
+        commonNavignationChildArrayList.add(commonNavignationChild);
+
+        commonNavignationChild = new CommonNavignationChild();
+        commonNavignationChild.setMenuSubTitle("Jackets and Shrugs");
+        commonNavignationChild.setImages(R.drawable.share);
+        commonNavignationChildArrayList.add(commonNavignationChild);
+
+        commonNavignationChild = new CommonNavignationChild();
+        commonNavignationChild.setMenuSubTitle("Shirts");
+        commonNavignationChild.setImages(R.drawable.share);
+        commonNavignationChildArrayList.add(commonNavignationChild);
+
+        /*commonNavignationChild = new CommonNavignationChild();
+        commonNavignationChild.setMenuSubTitle("Ponchos");
+        commonNavignationChild.setImages(R.drawable.share);
+        commonNavignationChildArrayList.add(commonNavignationChild);
+
+        commonNavignationChild = new CommonNavignationChild();
+        commonNavignationChild.setMenuSubTitle("Scarves");
+        commonNavignationChild.setImages(R.drawable.share);
+        commonNavignationChildArrayList.add(commonNavignationChild);
+
+        commonNavignationChild = new CommonNavignationChild();
+        commonNavignationChild.setMenuSubTitle("Jewellery");
+        commonNavignationChild.setImages(R.drawable.share);
+        commonNavignationChildArrayList.add(commonNavignationChild);
+
+        commonNavignationChild = new CommonNavignationChild();
+        commonNavignationChild.setMenuSubTitle("Bags & Belts");
+        commonNavignationChild.setImages(R.drawable.share);
+        commonNavignationChildArrayList.add(commonNavignationChild);*/
 
 
 //child end here
@@ -281,138 +308,51 @@ public class CommonNavignationDrawer extends AppCompatActivity {
         commonNavignationHeadersList.add(commonNavignationHeader);
 
         commonNavignationHeader = new CommonNavignationHeader();
-        commonNavignationHeader.setMenuTitle("Features");
-        commonNavignationHeader.setImage(R.drawable.logo);
-
-        CommonNavignationChild features;
-        ArrayList<CommonNavignationChild> featuresArrayList = new ArrayList<>();
-
-        features = new CommonNavignationChild();
-        features.setMenuSubTitle("Course Material");
-        features.setImages(R.drawable.logo);
-        featuresArrayList.add(features);
-
-
-        features = new CommonNavignationChild();
-        features.setMenuSubTitle("Certification verification");
-        features.setImages(R.drawable.logo);
-        featuresArrayList.add(features);
-
-        commonNavignationHeader.setCommonNavignationChildren(featuresArrayList);
-        commonNavignationHeadersList.add(commonNavignationHeader);
-
-
-        commonNavignationHeader = new CommonNavignationHeader();
-        commonNavignationHeader.setMenuTitle("About Us");
-        commonNavignationHeader.setImage(R.drawable.logo);
-
-        CommonNavignationChild about;
-        ArrayList<CommonNavignationChild> aboutArrayList = new ArrayList<>();
-
-        about = new CommonNavignationChild();
-        about.setMenuSubTitle("About");
-        about.setImages(R.drawable.about);
-        aboutArrayList.add(about);
-
-        about = new CommonNavignationChild();
-        about.setMenuSubTitle("Gallery");
-        about.setImages(R.drawable.logo);
-        aboutArrayList.add(about);
-
-
-        about = new CommonNavignationChild();
-        about.setMenuSubTitle("FAQ");
-        about.setImages(R.drawable.logo);
-        aboutArrayList.add(about);
-
-
-        about = new CommonNavignationChild();
-        about.setMenuSubTitle("Notifications");
-        about.setImages(R.drawable.logo);
-        aboutArrayList.add(about);
-
-        about = new CommonNavignationChild();
-        about.setMenuSubTitle("Terms and Condition");
-        about.setImages(R.drawable.logo);
-        aboutArrayList.add(about);
-
-        commonNavignationHeader.setCommonNavignationChildren(aboutArrayList);
+        commonNavignationHeader.setMenuTitle("New arrivals");
+        commonNavignationHeader.setImage(R.drawable.newarrivals);
         commonNavignationHeadersList.add(commonNavignationHeader);
 
         commonNavignationHeader = new CommonNavignationHeader();
-        commonNavignationHeader.setMenuTitle("Contact Us");
-        commonNavignationHeader.setImage(R.drawable.logo);
-        commonNavignationHeadersList.add(commonNavignationHeader);
-
-
-        commonNavignationHeader = new CommonNavignationHeader();
-        commonNavignationHeader.setMenuTitle("Others");
-        commonNavignationHeader.setImage(R.drawable.logo);
-
-        ArrayList<CommonNavignationChild> commonNavignationChildArrayList1 = new ArrayList<>();
-
-        CommonNavignationChild commonNavignationChild1;
-
-
-        commonNavignationChild1 = new CommonNavignationChild();
-        commonNavignationChild1.setMenuSubTitle("Change Password");
-        commonNavignationChild1.setImages(R.drawable.logo);
-        commonNavignationChildArrayList1.add(commonNavignationChild1);
-
-
-        commonNavignationChild1 = new CommonNavignationChild();
-        commonNavignationChild1.setMenuSubTitle("Forgot Password");
-        commonNavignationChild1.setImages(R.drawable.logo);
-        commonNavignationChildArrayList1.add(commonNavignationChild1);
-
-
-        commonNavignationChild1 = new CommonNavignationChild();
-        commonNavignationChild1.setMenuSubTitle("Feedback");
-        commonNavignationChild1.setImages(R.drawable.logo);
-        commonNavignationChildArrayList1.add(commonNavignationChild1);
-
-
-        commonNavignationHeader.setCommonNavignationChildren(commonNavignationChildArrayList1);
-        commonNavignationHeadersList.add(commonNavignationHeader);
-
-
-        commonNavignationHeader = new CommonNavignationHeader();
-        commonNavignationHeader.setMenuTitle("Settings");
-        commonNavignationHeader.setImage(R.drawable.logo);
+        commonNavignationHeader.setMenuTitle("The Travelling Trunk");
+        commonNavignationHeader.setImage(R.drawable.travelling_trunk);
         commonNavignationHeadersList.add(commonNavignationHeader);
 
         commonNavignationHeader = new CommonNavignationHeader();
-        commonNavignationHeader.setMenuTitle("Write a Review");
-        commonNavignationHeader.setImage(R.drawable.logo);
+        commonNavignationHeader.setMenuTitle("Store locator");
+        commonNavignationHeader.setImage(R.drawable.stores);
         commonNavignationHeadersList.add(commonNavignationHeader);
 
         commonNavignationHeader = new CommonNavignationHeader();
-        commonNavignationHeader.setMenuTitle("Share the App");
-        commonNavignationHeader.setImage(R.drawable.share);
+        commonNavignationHeader.setMenuTitle("FAQs");
+        commonNavignationHeader.setImage(R.drawable.help);
         commonNavignationHeadersList.add(commonNavignationHeader);
 
+        commonNavignationHeader = new CommonNavignationHeader();
+        commonNavignationHeader.setMenuTitle("Contact us");
+        commonNavignationHeader.setImage(R.drawable.phone);
+        commonNavignationHeadersList.add(commonNavignationHeader);
+
+        commonNavignationHeader = new CommonNavignationHeader();
+        commonNavignationHeader.setMenuTitle("Returns & Exchange");
+        commonNavignationHeader.setImage(R.drawable.return1);
+        commonNavignationHeadersList.add(commonNavignationHeader);
 
         commonNavignationHeader = new CommonNavignationHeader();
         commonNavignationHeader.setMenuTitle(status);
-        commonNavignationHeader.setImage(R.drawable.logo);
+        commonNavignationHeader.setImage(R.drawable.logout);
         commonNavignationHeadersList.add(commonNavignationHeader);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-       /* int id = item.getItemId();
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-
-            return true;
-        }*/
-
+    public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {

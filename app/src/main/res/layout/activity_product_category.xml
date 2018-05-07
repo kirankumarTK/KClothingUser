@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
@@ -24,7 +25,8 @@
                 android:id="@+id/catergoryRecyclerViewMainPage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false">
+                android:nestedScrollingEnabled="false"
+                android:visibility="gone">
 
             </android.support.v7.widget.RecyclerView>
 
@@ -33,12 +35,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_200sdp"
                 android:layout_below="@+id/catergoryRecyclerViewMainPage"
-                android:layout_margin="@dimen/_5sdp">
+                android:layout_margin="@dimen/_5sdp"
+                android:visibility="gone">
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/imageSlider"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:visibility="visible">
 
                 </android.support.v4.view.ViewPager>
 
@@ -52,17 +56,13 @@
                     android:gravity="center"
                     android:orientation="horizontal" />
 
-
             </RelativeLayout>
 
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/productListRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/sliderLayout">
-
-            </android.support.v7.widget.RecyclerView>
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
 
         </RelativeLayout>
@@ -70,8 +70,19 @@
 
     </android.support.v4.widget.NestedScrollView>
 
-    <ProgressBar
+    <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/loadMoreProgress"
+        style="@style/AVLoadingIndicatorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        app:indicatorColor="@color/black"
+        app:indicatorName="BallPulseIndicator" />
+
+    <ProgressBar
+        android:id="@+id/loadMoreProgress12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

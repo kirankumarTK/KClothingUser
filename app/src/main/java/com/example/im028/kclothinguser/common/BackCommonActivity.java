@@ -10,10 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.im028.kclothinguser.R;
-import com.example.im028.kclothinguser.dialog.SearchActivity;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -23,33 +23,26 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class BackCommonActivity extends AppCompatActivity {
     private static String TAG = BackCommonActivity.class.getSimpleName();
-
-
     private Toolbar toolbar;
     private FrameLayout frameLayout;
-    private ImageView search, back;
+    private ImageView back;
+    private TextView backPageTitle;
     private String catergories = "";
-    private ProgressBar commonProgressBar;
+    private AVLoadingIndicatorView commonProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.common_back_activity);
         setCatergories("");
-        commonProgressBar = (ProgressBar) findViewById(R.id.commonProgressBar);
+
+        commonProgressBar = (AVLoadingIndicatorView) findViewById(R.id.commonProgressBar);
         toolbar = (Toolbar) findViewById(R.id.backcommonActivityToolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        search = (ImageView) findViewById(R.id.backsearchCommonActivity);
         back = (ImageView) findViewById(R.id.backCommonActivityBackImageView);
-
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CommonMethod.changeActivityWithParamsText(BackCommonActivity.this, SearchActivity.class, catergories, "");
-            }
-        });
+        backPageTitle = (TextView) findViewById(R.id.backPageTitle);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,7 +73,8 @@ public class BackCommonActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    public void setView(int viewLayout) {
+    public void setView(int viewLayout, String title) {
+        backPageTitle.setText(title);
         frameLayout = (FrameLayout) findViewById(R.id.bcakcommonActivityFrameLayout);
         LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View activityView = layoutInflater.inflate(viewLayout, null, false);

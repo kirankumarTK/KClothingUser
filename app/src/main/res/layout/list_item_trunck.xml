@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ramotion.foldingcell.FoldingCell xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:folding-cell="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/folding_cell"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/_5sdp"
+    android:layout_marginRight="@dimen/_10sdp"
+    android:layout_marginTop="@dimen/_5sdp">
+    ​
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cell_content_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:visibility="gone"
+        folding-cell:additionalFlipsCount="2"
+        folding-cell:animationDuration="1000"
+        folding-cell:backSideColor="#fff"
+        folding-cell:cameraHeight="30">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/_5sdp">
+
+            <ImageView
+                android:id="@+id/trunck_image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_120sdp"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg1" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <TextView
+                    android:id="@+id/trunck_date1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="25-26 MAY 2018"
+                    android:textColor="#000"
+                    android:textSize="@dimen/_10sdp" />
+
+                <TextView
+                    android:id="@+id/trunck_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="5:00 to 7:00 PM"
+                    android:textColor="#000"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/trunck_dec1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:gravity="center|start"
+                android:text="Kaveri Summer Festival \nWorld Trade Center \nLondon Building Five , London"
+                android:textColor="#000"
+                android:textSize="@dimen/_14sdp" />
+
+            <TextView
+                android:id="@+id/trunck_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="Location Map"
+                android:textColor="#d3ba81"
+                android:textSize="@dimen/_10sdp" />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    ​
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cell_title_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_70sdp"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.8"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/trunck_year"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="MAY 2018"
+                    android:textColor="#000"
+                    android:textSize="@dimen/_12sdp" />
+
+                <TextView
+                    android:id="@+id/trunck_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#d3ba81"
+                    android:gravity="center"
+                    android:padding="@dimen/_5sdp"
+                    android:text="25-26"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/_14sdp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:background="#d2cfcf" />
+
+            <TextView
+                android:id="@+id/trunck_dec"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.2"
+                android:gravity="center|start"
+                android:text="Kaveri Summer Festival London"
+                android:textColor="#000"
+                android:textSize="@dimen/_14sdp" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    ​
+</com.ramotion.foldingcell.FoldingCell>

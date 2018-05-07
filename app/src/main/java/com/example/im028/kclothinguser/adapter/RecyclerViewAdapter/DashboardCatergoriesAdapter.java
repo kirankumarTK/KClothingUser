@@ -28,7 +28,6 @@ public class DashboardCatergoriesAdapter extends RecyclerView.Adapter<DashboardC
         this.context = context;
         this.arrayList = arrayList;
         this.layout = layout;
-
     }
 
     @Override
