@@ -22,5 +22,6 @@ public class ConstantValues {
     public static final String UPDATE_ADDRESS = BASE_URL + "users/update_billing_address/";
     public static final String CHANGE_PASSWD = BASE_URL + "users/change_password/";
     public static final String GET_BILL_ADDRESS = BASE_URL + "users/get_billing_address/";
+    public static final String NEW_ARRIVALS = BASE_URL + "users/newarrivalproductlist/";
 
 }

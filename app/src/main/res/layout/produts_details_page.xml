@@ -24,7 +24,7 @@
                 <android.support.v4.view.ViewPager
                     android:id="@+id/galleryViewPager"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent" />
 
                 <LinearLayout
                     android:id="@+id/viewPagerCountDots"
@@ -56,13 +56,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="1.4"
                         android:background="@android:color/white"
                         android:gravity="center|start"
                         android:orientation="vertical"
@@ -89,58 +87,6 @@
                             android:textSize="@dimen/_12sdp" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.6"
-                        android:background="#ffffff"
-                        android:gravity="center_vertical|end"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/_2sdp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:text="Qty"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_12sdp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="#f1f1f1"
-                            android:layout_marginLeft="@dimen/_5sdp"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:id="@+id/productDetailDecrementImageView"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="match_parent"
-                                android:gravity="center|bottom"
-                                android:src="@drawable/minus" />
-
-                            <TextView
-                                android:id="@+id/produvtDetailQuantityTextView"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical|center"
-                                android:layout_weight="1"
-                                android:text="1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_15sdp" />
-
-                            <ImageView
-                                android:id="@+id/productDetailIncrementImageView"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:src="@drawable/plus" />
-
-                        </LinearLayout>
-                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -348,6 +294,8 @@
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:background="@drawable/rect_bg_2"
+                    android:gravity="top|start"
+                    android:hint="Special Instruction"
                     android:maxLines="4"
                     android:padding="@dimen/_3sdp" />
 
@@ -375,13 +323,24 @@
                     android:id="@+id/customValueLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone">
+                    android:layout_margin="@dimen/_5sdp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:weightSum="2">
 
                     <TextView
                         android:id="@+id/customSizeValue"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/customSizeValue1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:text=""
                         android:textColor="@android:color/black" />
 
@@ -393,6 +352,59 @@
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:background="@color/light_grey" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="#ffffff"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_2sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="Qty"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="#f1f1f1"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/productDetailDecrementImageView"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center|bottom"
+                            android:src="@drawable/minus" />
+
+                        <TextView
+                            android:id="@+id/produvtDetailQuantityTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|center"
+                            android:text="1"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_15sdp" />
+
+                        <ImageView
+                            android:id="@+id/productDetailIncrementImageView"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:src="@drawable/plus" />
+
+                    </LinearLayout>
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -406,7 +418,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Description"
-                    android:textColor="@color/light_red"
                     android:textSize="@dimen/_10sdp" />
 
                 <TextView

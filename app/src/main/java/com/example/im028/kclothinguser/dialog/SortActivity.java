@@ -17,8 +17,7 @@ import butterknife.OnClick;
  */
 
 public class SortActivity extends AppCompatActivity {
-    @BindView(R.id.sort)
-    TextView sort;
+
     @BindView(R.id.sortNewProducts)
     TextView sortNewProducts;
     @BindView(R.id.sortPopular)

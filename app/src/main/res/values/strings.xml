@@ -10,6 +10,8 @@
     <string name="mumbaiphone1"><u>+91 87780 88293</u></string>
     <string name="mumbaiphone2"><u>+91 22 22672595</u></string>
     <string name="password"><u>Forgot password ?</u></string>
+    <string name="how_to_measure"><u>"How To Measure"</u></string>
+    <string name="custom">Custom tailoring charges will be Rs 500 extra per garment. For hip sizes of 50" and higher, since we are using more fabric, the garment will cost Rs 500 more. All measurements in inches</string>
 
     <string name="facebook_app_id">240483406527368</string>
 </resources>

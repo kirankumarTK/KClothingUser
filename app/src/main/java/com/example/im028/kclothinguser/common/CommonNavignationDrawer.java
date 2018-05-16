@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 import com.example.im028.kclothinguser.R;
 import com.example.im028.kclothinguser.activity.ProfileUpdate;
-import com.example.im028.kclothinguser.adapter.expandableListAdapter.CommonNavignationAdapter;
+import com.example.im028.kclothinguser.adapter.NavigationAdapter.CommonNavignationAdapter;
 import com.example.im028.kclothinguser.dialog.SearchActivity;
 import com.example.im028.kclothinguser.model.CommonNavignationChild;
 import com.example.im028.kclothinguser.model.CommonNavignationHeader;
@@ -107,14 +107,14 @@ public class CommonNavignationDrawer extends AppCompatActivity {
                 startActivity(new Intent(CommonNavignationDrawer.this, ProfileUpdate.class));
             }
         });
-        footer = getLayoutInflater().inflate(R.layout.menu_footer, null, false);
-        TextView version = (TextView) footer.findViewById(R.id.appversion);
+//        footer = getLayoutInflater().inflate(R.layout.menu_footer, null, false);
+//        TextView version = (TextView) footer.findViewById(R.id.appversion);
         mDrawerList.addHeaderView(headerView);
         PackageInfo pInfo = null;
         try {
             pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-            version.setText("Version : " + pInfo.versionName);
-            mDrawerList.addFooterView(footer);
+//            version.setText("Version : " + pInfo.versionName);
+//            mDrawerList.addFooterView(footer);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -332,10 +332,10 @@ public class CommonNavignationDrawer extends AppCompatActivity {
         commonNavignationHeader.setImage(R.drawable.phone);
         commonNavignationHeadersList.add(commonNavignationHeader);
 
-        commonNavignationHeader = new CommonNavignationHeader();
-        commonNavignationHeader.setMenuTitle("Returns & Exchange");
-        commonNavignationHeader.setImage(R.drawable.return1);
-        commonNavignationHeadersList.add(commonNavignationHeader);
+//        commonNavignationHeader = new CommonNavignationHeader();
+//        commonNavignationHeader.setMenuTitle("Returns & Exchange");
+//        commonNavignationHeader.setImage(R.drawable.return1);
+//        commonNavignationHeadersList.add(commonNavignationHeader);
 
         commonNavignationHeader = new CommonNavignationHeader();
         commonNavignationHeader.setMenuTitle(status);

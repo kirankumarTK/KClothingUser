@@ -1,6 +1,7 @@
 package com.example.im028.kclothinguser.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +15,6 @@ import com.ramotion.foldingcell.FoldingCell;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 
 
 /**
@@ -75,6 +75,8 @@ public class TrunckshowAdapter extends RecyclerView.Adapter<TrunckshowAdapter.Vi
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            foldingCell.initialize(100, 1000, Color.WHITE, 2);
+
             foldingCell.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

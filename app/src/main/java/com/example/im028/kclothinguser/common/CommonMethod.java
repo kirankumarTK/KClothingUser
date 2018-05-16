@@ -112,6 +112,12 @@ public class CommonMethod {
         context.startActivity(i);
     }
 
+    public static void clearAllActivity(Context context, Class<?> c) {
+        Intent i = new Intent(context, c);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(i);
+    }
+
     public static void googleMap(Context context, String latLang) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(latLang));

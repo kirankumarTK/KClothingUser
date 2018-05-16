@@ -93,12 +93,14 @@ public class WebServices {
         volleyClass.volleyPostData(url, jsonObject, listerner);
     }
 
-    public void getProductCategoryList(String url, String category_name, int paged, int limit, String appId, final VolleyResponseListerner listerner) {
+    public void getProductCategoryList(String url, String category_name, int paged, int limit, String appId,
+                                       String orderby,final VolleyResponseListerner listerner) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("paged", paged);
             jsonObject.put("limit", limit);
             jsonObject.put("cat_name", category_name);
+            jsonObject.put("orderby", orderby);
 
 
         } catch (JSONException e) {

@@ -73,9 +73,8 @@ public class ProductsRecyclerViewAdapter extends RecyclerView.Adapter {
             UserViewHolder userViewHolder = (UserViewHolder) holder;
             try {
                 Picasso.with(context)
-                        .load(detailCatergoriesArrayList.get(position).getOriginal_image())
+                        .load(detailCatergoriesArrayList.get(position).getMedium_image())
                         .placeholder(R.drawable.logo)
-                        .fit()
                         .into(userViewHolder.catergoreisProductsImageView);
             } catch (Exception e) {
                 e.printStackTrace();

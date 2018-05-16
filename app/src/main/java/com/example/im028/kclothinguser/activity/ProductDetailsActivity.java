@@ -23,7 +23,6 @@ import com.example.im028.kclothinguser.adapter.RecyclerViewAdapter.StandardSizeR
 import com.example.im028.kclothinguser.adapter.ViewPageAdapter.ImageSliderAdapter;
 import com.example.im028.kclothinguser.common.BackCommonActivity;
 import com.example.im028.kclothinguser.common.CommonMethod;
-import com.example.im028.kclothinguser.dialog.CustomSizeActivity;
 import com.example.im028.kclothinguser.dialog.SizeChartActivity;
 import com.example.im028.kclothinguser.model.Custom_Size;
 import com.example.im028.kclothinguser.model.DetailCatergories;
@@ -112,6 +111,8 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
     TextView customSizeValue;
     @BindView(R.id.customValueLayout)
     LinearLayout customValueLayout;
+    @BindView(R.id.customSizeValue1)
+    TextView customSizeValue1;
 
     private ArrayList<StandardSize> standardSizeArrayList = new ArrayList<>();
     private ArrayList<Custom_Size> custom_sizeArrayList = new ArrayList<>();
@@ -301,16 +302,26 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
 
                 customValueLayout.setVisibility(View.VISIBLE);
                 ArrayList array = new ArrayList();
+                customSizeValue.setText("");
+                customSizeValue1.setText("");
                 for (Map.Entry<String, Integer> entry : custom_size_map.entrySet()) {
                     String key = entry.getKey();
                     Integer value = entry.getValue();
                     CommonMethod.showLogError(TAG, key + "   " + value);
                     array.add(key);
-                    if (array.size() != custom_size_map.size())
-                        customSizeValue.append(key + " : " + value + "\n");
-                    else
-                        customSizeValue.append(key + " : " + value);
+
+                    if (array.size() != custom_size_map.size() && array.size() % 2 == 0)
+                        customSizeValue1.append(key.toUpperCase().replace("_", " ") + " : " + value + "\n");
+                    else if (array.size() != custom_size_map.size() && array.size() % 2 != 0)
+                        customSizeValue.append(key.toUpperCase().replace("_", " ")  + " : " + value + "\n");
+                    else {
+                        if (array.size() % 2 != 0)
+                            customSizeValue.append(key.toUpperCase().replace("_", " ")  + " : " + value);
+                        else
+                            customSizeValue1.append(key.toUpperCase().replace("_", " ")  + " : " + value + "\n");
+                    }
                 }
+
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -322,9 +333,5 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
 
     }
 
-    @Override
-    public void onCatogries(String catergory) {
-
-    }
 
 }

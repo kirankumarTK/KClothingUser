@@ -13,35 +13,19 @@
         android:gravity="center|top"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/sort"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="@dimen/_10sdp"
-            android:text="SORT BY"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12sdp" />
+            android:layout_height="wrap_content">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black"></View>
+            <ImageView
+                android:id="@+id/closeDialog"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/close" />
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/sortNewProducts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="@dimen/_10sdp"
-            android:text="New Products"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12sdp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/light_grey"></View>
 
         <TextView
             android:id="@+id/sortPopular"
@@ -59,12 +43,27 @@
             android:background="@color/light_grey"></View>
 
         <TextView
+            android:id="@+id/sortNewProducts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/_10sdp"
+            android:text="New Collection"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_grey"></View>
+
+        <TextView
             android:id="@+id/sortLowToHigh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="@dimen/_10sdp"
-            android:text="low to high"
+            android:text="Price low to high"
             android:textColor="@color/black"
             android:textSize="@dimen/_12sdp" />
 
@@ -79,7 +78,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="@dimen/_10sdp"
-            android:text="high to low"
+            android:text="Price high to low"
             android:textColor="@color/black"
             android:textSize="@dimen/_12sdp" />
 

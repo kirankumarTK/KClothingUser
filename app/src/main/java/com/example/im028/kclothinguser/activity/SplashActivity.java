@@ -30,7 +30,7 @@ public class SplashActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        CommonMethod.changeActivityWithParamsText(SplashActivity.this, HomePageActivity.class, "", "");
+                        CommonMethod.clearAllActivity(SplashActivity.this, HomePageActivity.class);
                     }
                 }, 3000);
             }

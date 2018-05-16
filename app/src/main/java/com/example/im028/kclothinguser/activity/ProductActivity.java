@@ -84,10 +84,7 @@ public class ProductActivity extends CommonNavignationDrawer{
                 getProducts(paged, CatergoryID, search, orderBy);
             }
 
-            @Override
-            public void onCatogries(String catergory) {
 
-            }
         });
 
 

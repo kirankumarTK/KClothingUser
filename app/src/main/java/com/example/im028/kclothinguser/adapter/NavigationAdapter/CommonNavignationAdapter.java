@@ -1,4 +1,4 @@
-package com.example.im028.kclothinguser.adapter.expandableListAdapter;
+package com.example.im028.kclothinguser.adapter.NavigationAdapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -200,9 +200,8 @@ public class CommonNavignationAdapter extends BaseExpandableListAdapter {
                 break;
 
             case "New arrivals":
-               /* changeActivity(HomePageActivity.class);
-                mDrawerLayout.closeDrawers();*/
-                Toast.makeText(context, "Under development", Toast.LENGTH_LONG).show();
+                CommonMethod.changeActivityWithParamsText(context, ProductCategoryActivity.class, "new_arrivals", "");
+                mDrawerLayout.closeDrawers();
                 break;
 
             case "The Travelling Trunk":

@@ -1,4 +1,4 @@
-package com.example.im028.kclothinguser.dialog;
+package com.example.im028.kclothinguser.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -47,8 +47,6 @@ public class CustomSizeActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.custom_size_layout);
-        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         ButterKnife.bind(this);
 
         custom_sizes = (ArrayList<Custom_Size>) getIntent().getSerializableExtra("custom");
@@ -63,7 +61,6 @@ public class CustomSizeActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.custom_size_close_button:
-                setResult(RESULT_OK, new Intent().putExtra(ConstantValues.custom_size, (Serializable) customSizeRecyclerViewAdapter.getCustom_size_value()));
                 finish();
                 break;
             case R.id.custom_size_button:

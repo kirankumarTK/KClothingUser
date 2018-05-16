@@ -40,6 +40,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
+
         Picasso.with(context)
                 .load(arrayList.get(position).getImageurl())
                 .into(holder.imageView);
