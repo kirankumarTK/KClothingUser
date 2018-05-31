@@ -43,7 +43,8 @@ public class CommonNavignationDrawer extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private int lastExpandedPosition = -1;
     private ImageView search;
-    private TextView username;
+    private TextView username,email;
+    private String TAG=CommonNavignationDrawer.class.getSimpleName();
 
     FrameLayout frameLayout;
     private String catergories = "";
@@ -100,6 +101,9 @@ public class CommonNavignationDrawer extends AppCompatActivity {
 
         headerView = getLayoutInflater().inflate(R.layout.header_navigation_list_view, null, false);
         username = (TextView) headerView.findViewById(R.id.menuProfileHeaderName);
+        email= (TextView) headerView.findViewById(R.id.menuProfilemailTextview);
+
+
         ImageView profileedit = (ImageView) headerView.findViewById(R.id.profileEdit);
         profileedit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,7 +174,14 @@ public class CommonNavignationDrawer extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         updateMenu();
-//        username.setText(Session.getInstance(this, "").getFirst_name());
+
+        if(Session.getInstance(CommonNavignationDrawer.this,TAG).getIsLogin()){
+            username.setText(Session.getInstance(CommonNavignationDrawer.this,TAG).getFirst_name());
+            email.setText(Session.getInstance(CommonNavignationDrawer.this,TAG).getUser_email());
+        }else {
+            username.setText("Guest User");
+            email.setText("");
+        }
     }
 
     private void updateMenu() {

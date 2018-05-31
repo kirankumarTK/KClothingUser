@@ -17,6 +17,7 @@ import com.example.im028.kclothinguser.Interface.VolleyResponseListerner;
 import com.example.im028.kclothinguser.R;
 import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.utlity.Constant.ConstantValues;
+import com.example.im028.kclothinguser.utlity.sharedPreferance.Session;
 import com.example.im028.kclothinguser.utlity.webservice.WebServices;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -126,6 +127,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void gmailLogin() {
+        Auth.GoogleSignInApi.signOut(mGoogleApiClient);
         final Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -220,8 +222,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             @Override
             public void onResponse(JSONObject response) throws JSONException {
                 if (response.optString("resultcode").equalsIgnoreCase("200")) {
-                    CommonMethod.showSnackbar(facebook, response.getString("resultmessage"), LoginActivity.this);
-                    CommonMethod.changeActivityWithParamsText(LoginActivity.this, DashboardActivity.class, "", "");
+                    Session.getInstance(LoginActivity.this, TAG).createSession(response.optJSONObject("data").optString("ID"),
+                            response.optJSONObject("data").optString("user_email"), response.optJSONObject("data").optString("first_name"),
+                            response.optJSONObject("data").optString("last_name"),response.optJSONObject("data").optString("token"));
+                    CommonMethod.showSnackbar(facebook, response.optString("resultmessage"), LoginActivity.this);
+
+                    finish();
                 }
             }
 
@@ -237,10 +243,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             @Override
             public void onResponse(JSONObject response) throws JSONException {
                 if (response.optString("resultcode").equalsIgnoreCase("200")) {
-                    CommonMethod.showSnackbar(email, response.getString("resultmessage"), LoginActivity.this);
-                    CommonMethod.changeActivityWithParamsText(LoginActivity.this, DashboardActivity.class, "", "");
+                    Session.getInstance(LoginActivity.this, TAG).createSession(response.optJSONObject("data").optString("ID"),
+                            response.optJSONObject("data").optString("user_email"), response.optJSONObject("data").optString("first_name"),
+                            response.optJSONObject("data").optString("last_name"),response.optJSONObject("data").optString("token"));
+                    CommonMethod.showSnackbar(email, response.optString("resultmessage"), LoginActivity.this);
+
+                    finish();
+
                 }else
-                    CommonMethod.showSnackbar(email, response.getString("resultmessage"), LoginActivity.this);
+                    CommonMethod.showSnackbar(email, response.optString("resultmessage"), LoginActivity.this);
             }
 
             @Override

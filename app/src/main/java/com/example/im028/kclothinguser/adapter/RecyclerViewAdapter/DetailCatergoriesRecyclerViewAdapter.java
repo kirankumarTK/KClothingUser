@@ -8,10 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.im028.kclothinguser.Interface.OnLoadMoreListener;
@@ -38,13 +36,15 @@ public class DetailCatergoriesRecyclerViewAdapter extends RecyclerView.Adapter {
     private String tag;
     private boolean isLoading, flag = true;
     private OnLoadMoreListener onLoadMoreListener;
+    String categoryName;
 
 
-    public DetailCatergoriesRecyclerViewAdapter(Context context, ArrayList<DetailCatergories> detailCatergories, NestedScrollView nestedScrollView, String tag, final OnLoadMoreListener onLoadMoreListener) {
+    public DetailCatergoriesRecyclerViewAdapter(Context context, ArrayList<DetailCatergories> detailCatergories, NestedScrollView nestedScrollView, String tag,String categoryName, final OnLoadMoreListener onLoadMoreListener) {
         this.context = context;
         this.detailCatergories = detailCatergories;
         this.onLoadMoreListener = onLoadMoreListener;
         this.tag = tag;
+        this.categoryName=categoryName;
 
         if (!tag.equalsIgnoreCase("similarProduct")) {
             nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
@@ -99,7 +99,7 @@ public class DetailCatergoriesRecyclerViewAdapter extends RecyclerView.Adapter {
             customViewHolder.catergoreisProductsImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    CommonMethod.changeActivityWithParamsText(context, ProductDetailsActivity.class, detailCatergories.get(position).getProduct_id() + "", "");
+                    CommonMethod.changeActivityWithParamsText(context, ProductDetailsActivity.class, detailCatergories.get(position).getProduct_id() + "", categoryName);
                 }
             });
             customViewHolder.wishlistImageView.setOnClickListener(new View.OnClickListener() {

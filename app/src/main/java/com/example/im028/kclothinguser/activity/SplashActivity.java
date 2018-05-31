@@ -3,7 +3,6 @@ package com.example.im028.kclothinguser.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.example.im028.kclothinguser.R;
@@ -22,19 +21,25 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         splashImage = (ImageView) findViewById(R.id.splashImage);
         animateImage = (GifImageView) findViewById(R.id.animateImage);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                animateImage.setVisibility(View.GONE);
+//                splashImage.setVisibility(View.VISIBLE);
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        CommonMethod.clearAllActivity(SplashActivity.this, HomePageActivity.class);
+//                    }
+//                }, 3000);
+//            }
+//        }, 3000);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                animateImage.setVisibility(View.GONE);
-                splashImage.setVisibility(View.VISIBLE);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        CommonMethod.clearAllActivity(SplashActivity.this, HomePageActivity.class);
-                    }
-                }, 3000);
+                CommonMethod.clearAllActivity(SplashActivity.this, HomePageActivity.class);
             }
-        }, 3000);
+        }, 12000);
 
     }
 

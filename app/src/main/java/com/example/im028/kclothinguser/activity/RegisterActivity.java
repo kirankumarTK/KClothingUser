@@ -75,12 +75,12 @@ public class RegisterActivity extends AppCompatActivity {
                         register.setEnabled(false);
                         CommonMethod.showLog(TAG, response.toString());
                         if (response.getString("resultcode").equalsIgnoreCase("200")) {
-                            Session.getInstance(RegisterActivity.this, TAG).createSession(response.getJSONObject("data").getString("ID"),
-                                    response.getJSONObject("data").getString("user_email"), response.getJSONObject("data").getString("first_name"),
-                                    response.getJSONObject("data").getString("last_name"));
+                            Session.getInstance(RegisterActivity.this, TAG).createSession(response.optJSONObject("data").optString("ID"),
+                                    response.optJSONObject("data").optString("user_email"), response.optJSONObject("data").optString("first_name"),
+                                    response.optJSONObject("data").optString("last_name"),response.optJSONObject("data").optString("token"));
                             finish();
                         } else {
-                            CommonMethod.showSnackbar(firstName, response.getString("resultmessage"), RegisterActivity.this);
+                            CommonMethod.showSnackbar(firstName, response.optString("resultmessage"), RegisterActivity.this);
                         }
                     }
 

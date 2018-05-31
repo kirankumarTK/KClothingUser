@@ -123,11 +123,12 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
     private int quantity = 1;
     private StandardSizeRecyclerViewAdapter standardSizeRecyclerViewAdapter;
     private int CUSTOM = 10;
-    private Map<String, Integer> custom_size_map = new HashMap<>();
+    public Map<String, String> custom_size_map = new HashMap<>();
     private String sizeType = "standeredchecked";
     private int StandardSizePosition = 0;
     private ImageView[] dots;
     private int dotCount;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -217,7 +218,7 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
 
                     productDetailRelatedProducts.setLayoutManager(new GridLayoutManager(ProductDetailsActivity.this, 2));
                     productDetailRelatedProducts.setNestedScrollingEnabled(false);
-                    productDetailRelatedProducts.setAdapter(new DetailCatergoriesRecyclerViewAdapter(ProductDetailsActivity.this, detailCategoriesArrayList, null, "similarProduct", ProductDetailsActivity.this));
+                    productDetailRelatedProducts.setAdapter(new DetailCatergoriesRecyclerViewAdapter(ProductDetailsActivity.this, detailCategoriesArrayList, null, "similarProduct", "",ProductDetailsActivity.this));
 
                     hideCommonProgressBar();
                 } else {
@@ -284,6 +285,18 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
                 startActivityForResult(new Intent(getApplicationContext(), CustomSizeActivity.class).putExtra("custom", custom_sizeArrayList), CUSTOM);
                 break;
             case R.id.addToBag:
+                if (Session.getInstance(this, TAG).getIsLogin()) {
+                    if (sizeType.equalsIgnoreCase("standeredchecked")) {
+                        HashMap<String, String> hashMap = new HashMap<>();
+                        hashMap.put("standardsize", standardSize.getSize());
+                        callAddToCartWebService(getIntent().getStringExtra("text"), Session.getInstance(this, TAG).getUserID(), String.valueOf(quantity), sizeType, hashMap, "test");
+                    } else
+                        callAddToCartWebService(getIntent().getStringExtra("text"), Session.getInstance(this, TAG).getUserID(), String.valueOf(quantity), sizeType, custom_size_map, "test");
+
+                } else {
+                    CommonMethod.changeActivity(this, LoginActivity.class);
+                }
+
                 break;
             case R.id.buyNow:
                 CommonMethod.changeActivity(ProductDetailsActivity.this, ShoppingBagActivity.class);
@@ -291,12 +304,30 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
         }
     }
 
+    private void callAddToCartWebService(String product_id, String userID, String quantity, String sizeType, Map<String, String> size, String test) {
+        WebServices.getInstance(this, TAG).addToBag(ConstantValues.ADD_TO_CART, product_id, userID, quantity, sizeType, size, test,getIntent().getStringExtra("text1"), new VolleyResponseListerner() {
+            @Override
+            public void onResponse(JSONObject response) throws JSONException {
+                if (response.optString("resultcode").equalsIgnoreCase("200")) {
+                    CommonMethod.showSnackbar(addToBag, response.optJSONArray("data").getJSONObject(0).optString("cartmsg"), ProductDetailsActivity.this);
+                } else {
+                    CommonMethod.showSnackbar(addToBag, response.optString("resultmessage"), ProductDetailsActivity.this);
+                }
+            }
+
+            @Override
+            public void onError(String message, String title) {
+
+            }
+        });
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CUSTOM) {
             if (resultCode == Activity.RESULT_OK) {
-                custom_size_map = (Map<String, Integer>) data.getSerializableExtra(ConstantValues.custom_size);
-                sizeType = "custom";
+                custom_size_map = (Map<String, String>) data.getSerializableExtra(ConstantValues.custom_size);
+                sizeType = "customchecked";
                 standardSizeArrayList.get(StandardSizePosition).setSelected(false);
                 standardSizeRecyclerViewAdapter.notifyDataSetChanged();
 
@@ -304,21 +335,21 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
                 ArrayList array = new ArrayList();
                 customSizeValue.setText("");
                 customSizeValue1.setText("");
-                for (Map.Entry<String, Integer> entry : custom_size_map.entrySet()) {
+                for (Map.Entry<String, String> entry : custom_size_map.entrySet()) {
                     String key = entry.getKey();
-                    Integer value = entry.getValue();
+                    String value = entry.getValue();
                     CommonMethod.showLogError(TAG, key + "   " + value);
                     array.add(key);
 
                     if (array.size() != custom_size_map.size() && array.size() % 2 == 0)
                         customSizeValue1.append(key.toUpperCase().replace("_", " ") + " : " + value + "\n");
                     else if (array.size() != custom_size_map.size() && array.size() % 2 != 0)
-                        customSizeValue.append(key.toUpperCase().replace("_", " ")  + " : " + value + "\n");
+                        customSizeValue.append(key.toUpperCase().replace("_", " ") + " : " + value + "\n");
                     else {
                         if (array.size() % 2 != 0)
-                            customSizeValue.append(key.toUpperCase().replace("_", " ")  + " : " + value);
+                            customSizeValue.append(key.toUpperCase().replace("_", " ") + " : " + value);
                         else
-                            customSizeValue1.append(key.toUpperCase().replace("_", " ")  + " : " + value + "\n");
+                            customSizeValue1.append(key.toUpperCase().replace("_", " ") + " : " + value + "\n");
                     }
                 }
 

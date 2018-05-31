@@ -13,6 +13,7 @@ public class Session {
     private static String user_email = "user_email";
     private static String first_name = "first_name";
     private static String last_name = "last_name";
+    private static String token = "token";
     private static String app_id = "app_id";
     private static Session session;
     private String TAG;
@@ -34,12 +35,13 @@ public class Session {
         return session;
     }
 
-    public void createSession(String ID, String user_email, String first_name, String last_name) {
+    public void createSession(String ID, String user_email, String first_name, String last_name, String token) {
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(this.ID, ID);
         editor.putString(this.user_email, user_email);
         editor.putString(this.first_name, first_name);
         editor.putString(this.last_name, last_name);
+        editor.putString(this.token, token);
         editor.commit();
     }
 
@@ -51,8 +53,25 @@ public class Session {
     public String getApp_id() {
         return pref.getString(app_id, "");
     }
+
     public String getFirst_name() {
         return pref.getString(first_name, "");
+    }
+
+    public String getUserID() {
+        return pref.getString(ID, "");
+    }
+
+    public String getUser_email() {
+        return pref.getString(user_email, "");
+    }
+
+    public String getLast_name() {
+        return pref.getString(last_name, "");
+    }
+
+    public String getToken() {
+        return pref.getString(token, "");
     }
 
     public void logout() {

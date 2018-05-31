@@ -1,15 +1,12 @@
 package com.example.im028.kclothinguser.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -41,7 +38,7 @@ public class CustomSizeActivity extends AppCompatActivity {
 
     private ArrayList<Custom_Size> custom_sizes;
     private CustomSizeRecyclerViewAdapter customSizeRecyclerViewAdapter;
-    private Map<String, Integer> custom_size_map = new HashMap<>();
+    private Map<String, String> custom_size_map = new HashMap<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,7 +49,7 @@ public class CustomSizeActivity extends AppCompatActivity {
         custom_sizes = (ArrayList<Custom_Size>) getIntent().getSerializableExtra("custom");
         customRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         for (int i = 0; i < custom_sizes.size(); i++)
-            custom_size_map.put(custom_sizes.get(i).getName(), custom_sizes.get(i).getValues().get(0));
+            custom_size_map.put(custom_sizes.get(i).getName(), custom_sizes.get(i).getValues().get(0).toString());
         customSizeRecyclerViewAdapter = new CustomSizeRecyclerViewAdapter(this, custom_sizes, custom_size_map);
         customRecyclerView.setAdapter(customSizeRecyclerViewAdapter);
     }

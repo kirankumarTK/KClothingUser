@@ -27,9 +27,9 @@ import butterknife.ButterKnife;
 public class CustomSizeRecyclerViewAdapter extends RecyclerView.Adapter<CustomSizeRecyclerViewAdapter.ViewHolder> {
     private Context context;
     private ArrayList<Custom_Size> custom_sizes;
-    private Map<String, Integer> custom_size_value;
+    private Map<String, String> custom_size_value;
 
-    public CustomSizeRecyclerViewAdapter(Context context, ArrayList<Custom_Size> custom_sizes, Map<String, Integer> custom_size_map) {
+    public CustomSizeRecyclerViewAdapter(Context context, ArrayList<Custom_Size> custom_sizes, Map<String, String> custom_size_map) {
         this.context = context;
         this.custom_sizes = custom_sizes;
         this.custom_size_value = custom_size_map;
@@ -50,7 +50,7 @@ public class CustomSizeRecyclerViewAdapter extends RecyclerView.Adapter<CustomSi
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position1, long id) {
 //                custom_size_value.put(custom_sizes.get(position).getName(), Integer.valueOf(parent.getItemAtPosition(position).toString()));
-                custom_size_value.put(custom_sizes.get(position).getName(), Integer.valueOf(parent.getItemAtPosition(position1).toString()));
+                custom_size_value.put(custom_sizes.get(position).getName(), parent.getItemAtPosition(position1).toString());
             }
 
             @Override
@@ -60,7 +60,7 @@ public class CustomSizeRecyclerViewAdapter extends RecyclerView.Adapter<CustomSi
         });
     }
 
-    public Map<String, Integer> getCustom_size_value() {
+    public Map<String, String> getCustom_size_value() {
         return custom_size_value;
     }
 

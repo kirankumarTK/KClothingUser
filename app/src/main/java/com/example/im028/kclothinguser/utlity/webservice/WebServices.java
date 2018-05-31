@@ -7,6 +7,8 @@ import com.example.im028.kclothinguser.Interface.VolleyResponseListerner;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Map;
+
 /**
  * Created by im028 on 27/6/17.
  */
@@ -94,7 +96,7 @@ public class WebServices {
     }
 
     public void getProductCategoryList(String url, String category_name, int paged, int limit, String appId,
-                                       String orderby,final VolleyResponseListerner listerner) {
+                                       String orderby, final VolleyResponseListerner listerner) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("paged", paged);
@@ -185,7 +187,102 @@ public class WebServices {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        volleyClass.volleyPostData(url,jsonObject,listerner);
+        volleyClass.volleyPostData(url, jsonObject, listerner);
     }
 
+    public void addToBag(String url, String product_id, String user_id, String quantity, String sizeType, Map<String, String> size, String special, String cat_name, final VolleyResponseListerner listerner) {
+
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("product_id", product_id);
+            jsonObject.put("user_id", user_id);
+            jsonObject.put("quantity", quantity);
+            jsonObject.put("checksize", sizeType);
+            for (String key : size.keySet()) {
+                jsonObject.put(key, size.get(key));
+            }
+            jsonObject.put("special", special);
+
+            if (sizeType.equalsIgnoreCase("customchecked")) {
+                if (cat_name.equalsIgnoreCase("pants")) {
+                    jsonObject.put("sizechart", 2);
+                } else {
+                    jsonObject.put("sizechart", 1);
+                }
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        volleyClass.volleyPostData(url, jsonObject, listerner);
+
+    }
+
+    public void displayCart(String url, String user_id, final VolleyResponseListerner listerner) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("user_id", user_id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        volleyClass.volleyPostData(url, jsonObject, listerner);
+    }
+
+    public void removeCart(String url, String user_id, String cart_item_key, final VolleyResponseListerner listerner) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("user_id", user_id);
+            jsonObject.put("cart_item_key", cart_item_key);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        volleyClass.volleyPostData(url, jsonObject, listerner);
+    }
+
+
+    public void updateCart(String url, String user_id, String cart_item_key, String quantity, final VolleyResponseListerner listerner) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("user_id", user_id);
+            jsonObject.put("cart_item_key", cart_item_key);
+            jsonObject.put("quantity", quantity);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        volleyClass.volleyPostData(url, jsonObject, listerner);
+    }
+
+
+    public void addWishlist(String url, String user_id, String product_id, final VolleyResponseListerner listerner) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("user_id", user_id);
+            jsonObject.put("product_id", product_id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        volleyClass.volleyPostData(url, jsonObject, listerner);
+    }
+
+    public void getWishlist(String url, String user_id, final VolleyResponseListerner listerner) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("user_id", user_id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        volleyClass.volleyPostData(url, jsonObject, listerner);
+    }
+
+    public void removeWishlist(String url, String user_id, String product_id, final VolleyResponseListerner listerner) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("user_id", user_id);
+            jsonObject.put("product_id", product_id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        volleyClass.volleyPostData(url, jsonObject, listerner);
+    }
 }
