@@ -28,7 +28,6 @@ public class ShoppingBagActivity extends BackCommonActivity {
     String TAG = ShoppingBagActivity.class.getSimpleName();
     ArrayList<CartDetails> cartDetails = new ArrayList<>();
     Gson gson = new Gson();
-    AddToCartAdapter addToCartAdapter;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
