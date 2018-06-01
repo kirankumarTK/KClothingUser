@@ -342,14 +342,14 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
                     array.add(key);
 
                     if (array.size() != custom_size_map.size() && array.size() % 2 == 0)
-                        customSizeValue1.append(key.toUpperCase().replace("_", " ") + " : " + value + "\n");
+                        customSizeValue1.append(key.substring(0, 1).toUpperCase()+ key.substring(1).replace("_", " ") + " : " + value + "\n");
                     else if (array.size() != custom_size_map.size() && array.size() % 2 != 0)
-                        customSizeValue.append(key.toUpperCase().replace("_", " ") + " : " + value + "\n");
+                        customSizeValue.append(key.substring(0, 1).toUpperCase()+ key.substring(1).replace("_", " ") + " : " + value + "\n");
                     else {
                         if (array.size() % 2 != 0)
-                            customSizeValue.append(key.toUpperCase().replace("_", " ") + " : " + value);
+                            customSizeValue.append(key.substring(0, 1).toUpperCase()+ key.substring(1).replace("_", " ") + " : " + value);
                         else
-                            customSizeValue1.append(key.toUpperCase().replace("_", " ") + " : " + value + "\n");
+                            customSizeValue1.append(key.substring(0, 1).toUpperCase()+ key.substring(1).replace("_", " ") + " : " + value + "\n");
                     }
                 }
 

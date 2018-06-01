@@ -25,11 +25,11 @@ public class ConstantValues {
     public static final String NEW_ARRIVALS = BASE_URL + "users/newarrivalproductlist/";
     public static final String ADD_TO_CART = BASE_URL + "users/add_to_cart/";
     public static final String DISPLAY_CART = BASE_URL + "users/display_cart";
-    public static final String REMOVE_CART = "users/delete_single_cart";
-    public static final String UPDATE_CART = "users/update_cart_item";
-    public static final String ADD_WISHLIST = "users/add_wishlist";
-    public static final String GET_WISHLIST = "users/get_wishlists";
-    public static final String REMOVE_WISHLIST = "users/remove_wishlist";
+    public static final String REMOVE_CART = BASE_URL + "users/delete_single_cart";
+    public static final String UPDATE_CART = BASE_URL + "users/update_cart_item";
+    public static final String ADD_WISHLIST = BASE_URL + "users/add_wishlist";
+    public static final String GET_WISHLIST = BASE_URL + "users/get_wishlists";
+    public static final String REMOVE_WISHLIST = BASE_URL + "users/remove_wishlist";
 
 
 }
