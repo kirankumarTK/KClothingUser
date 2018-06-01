@@ -35,7 +35,6 @@
         android:layout_marginTop="@dimen/_5sdp"
         android:fontFamily="serif"
         android:gravity="start"
-        android:text="Raja"
         android:textAppearance="?android:textAppearanceMedium"
         android:textColor="#fff" />
 
@@ -48,7 +47,6 @@
         android:layout_marginLeft="@dimen/_15sdp"
         android:fontFamily="serif"
         android:gravity="start"
-        android:text="raja@gmail.com"
         android:textAppearance="?android:textAppearanceSmall"
         android:textColor="#fff"
         android:textStyle="normal" />

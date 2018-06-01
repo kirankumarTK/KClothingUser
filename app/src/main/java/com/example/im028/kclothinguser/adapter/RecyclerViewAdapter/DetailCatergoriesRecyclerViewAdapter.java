@@ -1,6 +1,6 @@
 package com.example.im028.kclothinguser.adapter.RecyclerViewAdapter;
 
-import android.content.Context;
+import android.app.Activity;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.CardView;
@@ -13,11 +13,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.im028.kclothinguser.Interface.OnLoadMoreListener;
+import com.example.im028.kclothinguser.Interface.VolleyResponseListerner;
 import com.example.im028.kclothinguser.R;
 import com.example.im028.kclothinguser.activity.ProductDetailsActivity;
 import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.model.DetailCatergories;
+import com.example.im028.kclothinguser.utlity.Constant.ConstantValues;
+import com.example.im028.kclothinguser.utlity.sharedPreferance.Session;
+import com.example.im028.kclothinguser.utlity.webservice.WebServices;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -31,20 +38,20 @@ import butterknife.ButterKnife;
 public class DetailCatergoriesRecyclerViewAdapter extends RecyclerView.Adapter {
     private final int VIEW_TYPE_ITEM = 0;
     private final int VIEW_TYPE_LOADING = 1;
-    public Context context;
+    public Activity context;
     private ArrayList<DetailCatergories> detailCatergories;
     private String tag;
     private boolean isLoading, flag = true;
     private OnLoadMoreListener onLoadMoreListener;
-    String categoryName;
+    String categoryName, TAG = DetailCatergoriesRecyclerViewAdapter.class.getSimpleName();
 
 
-    public DetailCatergoriesRecyclerViewAdapter(Context context, ArrayList<DetailCatergories> detailCatergories, NestedScrollView nestedScrollView, String tag,String categoryName, final OnLoadMoreListener onLoadMoreListener) {
+    public DetailCatergoriesRecyclerViewAdapter(Activity context, ArrayList<DetailCatergories> detailCatergories, NestedScrollView nestedScrollView, String tag, String categoryName, final OnLoadMoreListener onLoadMoreListener) {
         this.context = context;
         this.detailCatergories = detailCatergories;
         this.onLoadMoreListener = onLoadMoreListener;
         this.tag = tag;
-        this.categoryName=categoryName;
+        this.categoryName = categoryName;
 
         if (!tag.equalsIgnoreCase("similarProduct")) {
             nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
@@ -105,13 +112,14 @@ public class DetailCatergoriesRecyclerViewAdapter extends RecyclerView.Adapter {
             customViewHolder.wishlistImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (flag){
-                        customViewHolder.wishlistImageView.setImageResource(R.drawable.wishlist);
-                        flag=false;
-                    }else {
-                        customViewHolder.wishlistImageView.setImageResource(R.drawable.wishlist_red);
-                        flag=true;
-                    }
+//                    if (flag){
+//                        customViewHolder.wishlistImageView.setImageResource(R.drawable.wishlist);
+//                        flag=false;
+//                    }else {
+//                        customViewHolder.wishlistImageView.setImageResource(R.drawable.wishlist_red);
+//                        flag=true;
+//                    }
+                    addToWishlist(holder.itemView, detailCatergories.get(position).product_id, Session.getInstance(context, TAG).getUserID());
                 }
 
             });
@@ -121,6 +129,20 @@ public class DetailCatergoriesRecyclerViewAdapter extends RecyclerView.Adapter {
             loadingViewHolder.progressBar.setIndeterminate(true);
         }
 
+    }
+
+    private void addToWishlist(View view, int product_id, String userID) {
+        WebServices.getInstance(context, TAG).addWishlist(ConstantValues.ADD_WISHLIST, userID, String.valueOf(product_id), new VolleyResponseListerner() {
+            @Override
+            public void onResponse(JSONObject response) throws JSONException {
+                CommonMethod.showSnackbar(view, response, context);
+            }
+
+            @Override
+            public void onError(String message, String title) {
+                CommonMethod.showSnackbar(view, message, context);
+            }
+        });
     }
 
 

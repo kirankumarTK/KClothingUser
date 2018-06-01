@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/_5sdp"
+    android:layout_margin="@dimen/_5sdp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -12,12 +12,17 @@
         android:orientation="horizontal"
         android:padding="@dimen/_5sdp">
 
-        <ImageView
-            android:layout_width="@dimen/_70sdp"
-            android:layout_height="@dimen/_80sdp"
-            android:layout_marginLeft="@dimen/_5sdp"
-            android:padding="@dimen/_5sdp"
-            android:src="@drawable/clothing" />
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/orderImageView"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:padding="@dimen/_5sdp" />
+        </android.support.v7.widget.CardView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,33 +35,71 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.7"
+                android:layout_weight="1.8"
                 android:gravity="center|start"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/orderProductName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="FLY FREE TOP"
                     android:textColor="#000"
                     android:textSize="@dimen/_12sdp" />
 
                 <TextView
+                    android:id="@+id/orderAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:text="Ordered on 07 - Apr - 2018"
                     android:textSize="@dimen/_10sdp" />
+
+                <TextView
+                    android:id="@+id/orderStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_10sdp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <Button
+                        android:id="@+id/orderMoveCart"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="#000"
+                        android:text="Move to cart"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <Space
+                        android:layout_width="@dimen/_5sdp"
+                        android:layout_height="match_parent" />
+
+                    <Button
+                        android:id="@+id/orderRemove"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="#000"
+                        android:text="Remove"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.3">
+                android:layout_weight="0.2">
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_30sdp"
+                    android:layout_height="@dimen/_25sdp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:padding="@dimen/_5sdp"

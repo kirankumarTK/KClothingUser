@@ -73,7 +73,7 @@ public class ProductCategoryActivity extends CommonNavignationDrawer implements 
         setCommonProgressBar(8);
         manager = new GridLayoutManager(this, 1);
         productListRecyclerView.setLayoutManager(manager);
-        detailCatergoriesRecyclerViewAdapter = new DetailCatergoriesRecyclerViewAdapter(this, productList, mainScrollView, "", category,this);
+        detailCatergoriesRecyclerViewAdapter = new DetailCatergoriesRecyclerViewAdapter(ProductCategoryActivity.this, productList, mainScrollView, "", category,this);
         productListRecyclerView.setAdapter(detailCatergoriesRecyclerViewAdapter);
         productListRecyclerView.setNestedScrollingEnabled(false);
         if (category.equalsIgnoreCase("new_arrivals"))

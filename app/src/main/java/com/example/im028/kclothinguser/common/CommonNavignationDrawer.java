@@ -21,11 +21,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.im028.kclothinguser.R;
+import com.example.im028.kclothinguser.activity.OrderActivity;
 import com.example.im028.kclothinguser.activity.ProfileUpdate;
 import com.example.im028.kclothinguser.adapter.NavigationAdapter.CommonNavignationAdapter;
 import com.example.im028.kclothinguser.dialog.SearchActivity;
 import com.example.im028.kclothinguser.model.CommonNavignationChild;
 import com.example.im028.kclothinguser.model.CommonNavignationHeader;
+import com.example.im028.kclothinguser.utlity.Constant.ConstantValues;
 import com.example.im028.kclothinguser.utlity.sharedPreferance.Session;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -42,9 +44,9 @@ public class CommonNavignationDrawer extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private int lastExpandedPosition = -1;
-    private ImageView search;
-    private TextView username,email;
-    private String TAG=CommonNavignationDrawer.class.getSimpleName();
+    private ImageView search, wishList;
+    private TextView username, email;
+    private String TAG = CommonNavignationDrawer.class.getSimpleName();
 
     FrameLayout frameLayout;
     private String catergories = "";
@@ -68,6 +70,7 @@ public class CommonNavignationDrawer extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setCatergories("");
         search = (ImageView) findViewById(R.id.searchCommonActivity);
+        wishList = (ImageView) findViewById(R.id.whishListCommonActivity);
         commonProgressBar = (AVLoadingIndicatorView) findViewById(R.id.avi);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ExpandableListView) findViewById(R.id.navList);
@@ -101,7 +104,7 @@ public class CommonNavignationDrawer extends AppCompatActivity {
 
         headerView = getLayoutInflater().inflate(R.layout.header_navigation_list_view, null, false);
         username = (TextView) headerView.findViewById(R.id.menuProfileHeaderName);
-        email= (TextView) headerView.findViewById(R.id.menuProfilemailTextview);
+        email = (TextView) headerView.findViewById(R.id.menuProfilemailTextview);
 
 
         ImageView profileedit = (ImageView) headerView.findViewById(R.id.profileEdit);
@@ -126,6 +129,16 @@ public class CommonNavignationDrawer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 CommonMethod.changeActivityWithParamsText(CommonNavignationDrawer.this, SearchActivity.class, catergories, "");
+            }
+        });
+        wishList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(CommonNavignationDrawer.this, OrderActivity.class);
+                i.putExtra("title", "My wishlist");
+                i.putExtra("url", ConstantValues.GET_WISHLIST);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
             }
         });
     }
@@ -175,10 +188,10 @@ public class CommonNavignationDrawer extends AppCompatActivity {
         super.onResume();
         updateMenu();
 
-        if(Session.getInstance(CommonNavignationDrawer.this,TAG).getIsLogin()){
-            username.setText(Session.getInstance(CommonNavignationDrawer.this,TAG).getFirst_name());
-            email.setText(Session.getInstance(CommonNavignationDrawer.this,TAG).getUser_email());
-        }else {
+        if (Session.getInstance(CommonNavignationDrawer.this, TAG).getIsLogin()) {
+            username.setText(Session.getInstance(CommonNavignationDrawer.this, TAG).getFirst_name());
+            email.setText(Session.getInstance(CommonNavignationDrawer.this, TAG).getUser_email());
+        } else {
             username.setText("Guest User");
             email.setText("");
         }

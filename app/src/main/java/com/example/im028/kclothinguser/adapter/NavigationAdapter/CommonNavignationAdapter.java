@@ -24,6 +24,7 @@ import com.example.im028.kclothinguser.activity.StoreLocatorActivity;
 import com.example.im028.kclothinguser.activity.Trunckshow;
 import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.model.CommonNavignationHeader;
+import com.example.im028.kclothinguser.utlity.Constant.ConstantValues;
 import com.example.im028.kclothinguser.utlity.sharedPreferance.Session;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class CommonNavignationAdapter extends BaseExpandableListAdapter {
     private Context context;
     private ArrayList<CommonNavignationHeader> commonNavignationHeaders;
     private DrawerLayout mDrawerLayout;
+    private Intent i;
 
     public CommonNavignationAdapter(Context context, ArrayList<CommonNavignationHeader> commonNavignationHeaders, DrawerLayout mDrawerLayout) {
         this.context = context;
@@ -150,18 +152,20 @@ public class CommonNavignationAdapter extends BaseExpandableListAdapter {
 
             case "My order":
                 mDrawerLayout.closeDrawers();
-                Intent i = new Intent(context, OrderActivity.class);
+                i = new Intent(context, OrderActivity.class);
                 i.putExtra("title", "My order");
+                i.putExtra("url", ConstantValues.MY_ORDER);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
                 break;
 
             case "My wishlist":
                 mDrawerLayout.closeDrawers();
-                Intent i1 = new Intent(context, OrderActivity.class);
-                i1.putExtra("title", "My wishlist");
-                i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(i1);
+                i = new Intent(context, OrderActivity.class);
+                i.putExtra("title", "My wishlist");
+                i.putExtra("url", ConstantValues.GET_WISHLIST);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(i);
                 break;
 
             case "More about you":
