@@ -83,7 +83,7 @@ public class OrderActivity extends BackCommonActivity {
                             for (int i = 0; i < response.optJSONArray("data").length(); i++)
                                 arrayList.add(new Gson().fromJson(response.optJSONArray("data").optJSONObject(i).toString(), ProductDetails.class));
 
-                            recycle.setAdapter(new WishlistAdapter(getApplicationContext(), arrayList));
+                            recycle.setAdapter(new WishlistAdapter(OrderActivity.this, arrayList));
                         } else
                             CommonMethod.showSnackbar(recycle, response, OrderActivity.this);
                     }

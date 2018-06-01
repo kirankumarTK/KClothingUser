@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.im028.kclothinguser.Interface.OnItemClickListener;
@@ -113,6 +114,8 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
     LinearLayout customValueLayout;
     @BindView(R.id.customSizeValue1)
     TextView customSizeValue1;
+    @BindView(R.id.scrolView)
+    ScrollView scrolView;
 
     private ArrayList<StandardSize> standardSizeArrayList = new ArrayList<>();
     private ArrayList<Custom_Size> custom_sizeArrayList = new ArrayList<>();
@@ -218,8 +221,8 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
 
                     productDetailRelatedProducts.setLayoutManager(new GridLayoutManager(ProductDetailsActivity.this, 2));
                     productDetailRelatedProducts.setNestedScrollingEnabled(false);
-                    productDetailRelatedProducts.setAdapter(new DetailCatergoriesRecyclerViewAdapter(ProductDetailsActivity.this, detailCategoriesArrayList, null, "similarProduct", "",ProductDetailsActivity.this));
-
+                    productDetailRelatedProducts.setAdapter(new DetailCatergoriesRecyclerViewAdapter(ProductDetailsActivity.this, detailCategoriesArrayList, null, "similarProduct", "", ProductDetailsActivity.this));
+                    scrolView.smoothScrollTo(0, 0);
                     hideCommonProgressBar();
                 } else {
                     hideCommonProgressBar();
@@ -305,7 +308,7 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
     }
 
     private void callAddToCartWebService(String product_id, String userID, String quantity, String sizeType, Map<String, String> size, String test) {
-        WebServices.getInstance(this, TAG).addToBag(ConstantValues.ADD_TO_CART, product_id, userID, quantity, sizeType, size, test,getIntent().getStringExtra("text1"), new VolleyResponseListerner() {
+        WebServices.getInstance(this, TAG).addToBag(ConstantValues.ADD_TO_CART, product_id, userID, quantity, sizeType, size, test, getIntent().getStringExtra("text1"), new VolleyResponseListerner() {
             @Override
             public void onResponse(JSONObject response) throws JSONException {
                 if (response.optString("resultcode").equalsIgnoreCase("200")) {
@@ -342,14 +345,14 @@ public class ProductDetailsActivity extends BackCommonActivity implements OnLoad
                     array.add(key);
 
                     if (array.size() != custom_size_map.size() && array.size() % 2 == 0)
-                        customSizeValue1.append(key.substring(0, 1).toUpperCase()+ key.substring(1).replace("_", " ") + " : " + value + "\n");
+                        customSizeValue1.append(key.substring(0, 1).toUpperCase() + key.substring(1).replace("_", " ") + " : " + value + "\n");
                     else if (array.size() != custom_size_map.size() && array.size() % 2 != 0)
-                        customSizeValue.append(key.substring(0, 1).toUpperCase()+ key.substring(1).replace("_", " ") + " : " + value + "\n");
+                        customSizeValue.append(key.substring(0, 1).toUpperCase() + key.substring(1).replace("_", " ") + " : " + value + "\n");
                     else {
                         if (array.size() % 2 != 0)
-                            customSizeValue.append(key.substring(0, 1).toUpperCase()+ key.substring(1).replace("_", " ") + " : " + value);
+                            customSizeValue.append(key.substring(0, 1).toUpperCase() + key.substring(1).replace("_", " ") + " : " + value);
                         else
-                            customSizeValue1.append(key.substring(0, 1).toUpperCase()+ key.substring(1).replace("_", " ") + " : " + value + "\n");
+                            customSizeValue1.append(key.substring(0, 1).toUpperCase() + key.substring(1).replace("_", " ") + " : " + value + "\n");
                     }
                 }
 

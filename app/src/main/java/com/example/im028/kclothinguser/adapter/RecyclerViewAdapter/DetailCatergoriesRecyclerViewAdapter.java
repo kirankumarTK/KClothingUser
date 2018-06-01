@@ -106,7 +106,8 @@ public class DetailCatergoriesRecyclerViewAdapter extends RecyclerView.Adapter {
             customViewHolder.catergoreisProductsImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    CommonMethod.changeActivityWithParamsText(context, ProductDetailsActivity.class, detailCatergories.get(position).getProduct_id() + "", categoryName);
+                    CommonMethod.changeActivityWithParamsText(context, ProductDetailsActivity.class,
+                            detailCatergories.get(position).getProduct_id() + "", categoryName);
                 }
             });
             customViewHolder.wishlistImageView.setOnClickListener(new View.OnClickListener() {

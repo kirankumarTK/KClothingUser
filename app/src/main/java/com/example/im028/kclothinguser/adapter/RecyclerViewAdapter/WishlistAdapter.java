@@ -1,6 +1,6 @@
 package com.example.im028.kclothinguser.adapter.RecyclerViewAdapter;
 
-import android.content.Context;
+import android.app.Activity;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.example.im028.kclothinguser.Interface.VolleyResponseListerner;
 import com.example.im028.kclothinguser.R;
+import com.example.im028.kclothinguser.activity.ProductDetailsActivity;
+import com.example.im028.kclothinguser.common.CommonMethod;
 import com.example.im028.kclothinguser.model.ProductDetails;
 import com.example.im028.kclothinguser.utlity.Constant.ConstantValues;
 import com.example.im028.kclothinguser.utlity.sharedPreferance.Session;
@@ -32,11 +34,11 @@ import butterknife.ButterKnife;
  */
 
 public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHolder> {
-    private Context context;
+    private Activity context;
     private ArrayList<ProductDetails> arrayList;
     private String TAG = WishlistAdapter.class.getSimpleName();
 
-    public WishlistAdapter(Context context, ArrayList<ProductDetails> arrayList) {
+    public WishlistAdapter(Activity context, ArrayList<ProductDetails> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -67,22 +69,25 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         holder.moveCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                CommonMethod.changeActivityWithParamsText(context, ProductDetailsActivity.class,
+                        arrayList.get(position).getProduct_id() + "", "");
             }
         });
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WebServices.getInstance(context, TAG).removeWishlist(ConstantValues.REMOVE_CART, Session.getInstance(context, TAG).getUserID(),
+                WebServices.getInstance(context, TAG).removeWishlist(ConstantValues.REMOVE_WISHLIST, Session.getInstance(context, TAG).getUserID(),
                         String.valueOf(arrayList.get(position).getProduct_id()), new VolleyResponseListerner() {
                             @Override
                             public void onResponse(JSONObject response) throws JSONException {
-
+                                CommonMethod.showSnackbar(holder.itemView, response, context);
+                                arrayList.remove(position);
+                                notifyDataSetChanged();
                             }
 
                             @Override
                             public void onError(String message, String title) {
-
+                                CommonMethod.showSnackbar(holder.itemView, message, context);
                             }
                         });
             }
