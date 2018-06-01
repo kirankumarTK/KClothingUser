@@ -54,7 +54,7 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
                     .load(arrayList.get(position).getOriginal_image())
                     .into(holder.imageView);
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
 
         if (!arrayList.get(position).getStandardsize().equalsIgnoreCase("")) {
