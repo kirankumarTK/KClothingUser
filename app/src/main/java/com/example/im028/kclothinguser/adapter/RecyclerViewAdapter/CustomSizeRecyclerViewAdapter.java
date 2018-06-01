@@ -49,7 +49,6 @@ public class CustomSizeRecyclerViewAdapter extends RecyclerView.Adapter<CustomSi
         holder.customSizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position1, long id) {
-//                custom_size_value.put(custom_sizes.get(position).getName(), Integer.valueOf(parent.getItemAtPosition(position).toString()));
                 custom_size_value.put(custom_sizes.get(position).getName(), parent.getItemAtPosition(position1).toString());
             }
 

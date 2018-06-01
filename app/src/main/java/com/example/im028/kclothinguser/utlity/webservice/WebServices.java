@@ -206,9 +206,9 @@ public class WebServices {
 
             if (sizeType.equalsIgnoreCase("customchecked")) {
                 if (cat_name.equalsIgnoreCase("pants")) {
-                    jsonObject.put("sizechart", 2);
+                    jsonObject.put("sizechart", "2");
                 } else {
-                    jsonObject.put("sizechart", 1);
+                    jsonObject.put("sizechart", "1");
                 }
             }
 

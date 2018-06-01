@@ -62,9 +62,7 @@ public class VolleyClass {
                         public void onResponse(JSONObject response) {
                             Log.d(TAG, "volleyPostData  response - " + response.toString());
                             try {
-
                                 listerner.onResponse(response);
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -93,10 +91,12 @@ public class VolleyClass {
             int MY_SOCKET_TIMEOUT_MS = 30000;
             jsonRequest.setRetryPolicy(new DefaultRetryPolicy(MY_SOCKET_TIMEOUT_MS, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             MyApp.getInstanse().addToRequestQueue(jsonRequest);
+
         } else {
             Log.d(TAG, "volleyPostData response - No Internet");
             listerner.onError(parseError, parseErrorTitle);
         }
+
     }
 
 
